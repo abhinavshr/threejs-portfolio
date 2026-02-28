@@ -2,6 +2,7 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import SoftSkills from "./components/SoftSkills";
+import Projects from "./components/Projects";
 import "./App.css";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <About />
       <Skills />
       <SoftSkills />
+      <Projects />
     </main>
   );
 }
