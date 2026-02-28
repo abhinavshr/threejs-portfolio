@@ -1,6 +1,7 @@
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
+import SoftSkills from "./components/SoftSkills";
 import "./App.css";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Hero />
       <About />
       <Skills />
+      <SoftSkills />
     </main>
   );
 }
