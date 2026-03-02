@@ -15,7 +15,7 @@ const backgroundTechs = [
 
 const Hero = () => {
     return (
-        <section className="relative w-full min-h-screen mx-auto overflow-hidden bg-slate-950 text-white flex items-center pt-20 pb-10">
+        <section id="hero" className="relative w-full min-h-screen mx-auto overflow-hidden bg-slate-950 text-white flex items-center pt-20 pb-10">
             {/* Background Floating Elements */}
             {backgroundTechs.map((tech, index) => (
                 <motion.div
