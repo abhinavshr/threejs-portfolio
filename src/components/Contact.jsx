@@ -137,16 +137,6 @@ const Contact = () => {
                 </div>
             </div>
 
-            {/* Footer Credits */}
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full mt-24 pt-12 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-6">
-                <p className="text-slate-500 text-sm">
-                    © {new Date().getFullYear()} Abhinav Shrestha. All Rights Reserved.
-                </p>
-                <div className="flex gap-8 text-slate-500 text-sm">
-                    <span className="hover:text-slate-300 cursor-default transition-colors">Built with React + Three.js</span>
-                    <span className="hover:text-slate-300 cursor-default transition-colors">Styled with Tailwind</span>
-                </div>
-            </div>
         </section>
     );
 };
