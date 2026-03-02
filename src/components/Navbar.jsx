@@ -5,6 +5,7 @@ import NavbarLogoCanvas from "./canvas/NavbarLogoCanvas";
 import NavbarBackgroundCanvas from "./canvas/NavbarBackground";
 
 const navLinks = [
+    { id: "hero", title: "Home" },
     { id: "about", title: "About" },
     { id: "skills", title: "Skills" },
     { id: "experience", title: "Experience" },
@@ -67,10 +68,6 @@ const Navbar = () => {
                         setToggle(false);
                     }}
                 >
-                    <div className="relative transform group-hover:scale-110 transition-transform duration-500">
-                        <NavbarLogoCanvas />
-                        <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
 
                     <div className="hidden md:flex flex-col">
                         <div className="flex gap-1.5 items-baseline">
