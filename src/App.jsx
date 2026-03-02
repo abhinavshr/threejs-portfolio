@@ -4,6 +4,7 @@ import Skills from "./components/Skills";
 import SoftSkills from "./components/SoftSkills";
 import Experience from "./components/Experience";
 import Education from "./components/Education";
+import Certifications from "./components/Certifications";
 import Projects from "./components/Projects";
 import "./App.css";
 
@@ -16,6 +17,7 @@ function App() {
       <SoftSkills />
       <Experience />
       <Education />
+      <Certifications />
       <Projects />
     </main>
   );
