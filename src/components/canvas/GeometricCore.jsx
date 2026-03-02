@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Float, Sphere, MeshDistortMaterial, Edges, Wireframe } from "@react-three/drei";
 import * as THREE from "three";
@@ -70,11 +70,32 @@ const CoreShape = () => {
     );
 };
 
+
 const GeometricCoreCanvas = () => {
+    const [cameraPosition, setCameraPosition] = useState([0, 0, 8]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setCameraPosition([0, 0, 15]);
+            } else if (window.innerWidth < 1024) {
+                setCameraPosition([0, 0, 10]);
+            } else {
+                setCameraPosition([0, 0, 8]);
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Initial call
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     return (
-        <div className="w-full h-[50vh] lg:h-full lg:min-h-[600px] z-10 relative">
+        <div className="w-full h-full z-10 relative">
             <Canvas
-                camera={{ position: [0, 0, 8], fov: 45 }}
+                camera={{ position: cameraPosition, fov: 45 }}
+                key={cameraPosition.join(",")} // Force re-render camera if needed, or better just use the prop
                 gl={{ antialias: true, alpha: true }}
             >
                 <ambientLight intensity={0.5} />

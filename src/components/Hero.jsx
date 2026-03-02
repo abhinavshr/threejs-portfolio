@@ -15,12 +15,12 @@ const backgroundTechs = [
 
 const Hero = () => {
     return (
-        <section id="hero" className="relative w-full min-h-screen mx-auto overflow-hidden bg-slate-950 text-white flex items-center pt-20 pb-10">
+        <section id="hero" className="relative w-full min-h-screen mx-auto overflow-hidden bg-slate-950 text-white flex items-center pt-32 sm:pt-40 lg:pt-20 pb-10">
             {/* Background Floating Elements */}
             {backgroundTechs.map((tech, index) => (
                 <motion.div
                     key={index}
-                    className="absolute text-slate-800 font-mono text-sm sm:text-lg md:text-xl font-bold opacity-30 select-none pointer-events-none"
+                    className={`absolute text-slate-800 font-mono text-sm sm:text-lg md:text-xl font-bold opacity-30 select-none pointer-events-none ${index % 2 === 0 ? "hidden xs:block" : ""}`}
                     initial={{ x: tech.x, y: tech.y, yOffset: 0 }}
                     animate={{
                         y: ["0%", "-30%", "0%"],
@@ -38,10 +38,10 @@ const Hero = () => {
                 </motion.div>
             ))}
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 w-full z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 w-full z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-5 items-center">
 
                 {/* Text Content */}
-                <div className="flex flex-col justify-center order-1 pt-10 lg:pt-0 pb-12">
+                <div className="flex flex-col justify-center items-center text-center lg:items-start lg:text-left order-1 lg:pt-0 pb-8 sm:pb-12">
 
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -49,7 +49,7 @@ const Hero = () => {
                         transition={{ duration: 0.8 }}
                     >
                         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-white mb-4">
-                            Hi, I'm <br className="hidden md:block" />
+                            Hi, I'm <br className="hidden lg:block" />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
                                 Abhinav Shrestha
                             </span>
@@ -61,7 +61,7 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-300 mb-6">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-300 mb-6 max-w-xl lg:max-w-none">
                             Full Stack Developer Specializing in{" "}
                             <span className="text-blue-400">Laravel</span> and{" "}
                             <span className="text-purple-400">Backend Systems</span>
@@ -79,7 +79,7 @@ const Hero = () => {
 
                     {/* Action Buttons */}
                     <motion.div
-                        className="flex flex-col sm:flex-row gap-5"
+                        className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
@@ -107,11 +107,9 @@ const Hero = () => {
                     </motion.div>
                 </div>
 
-                {/* 3D Scene (Right on Large, Bottom on Mobile - wait user asked for 3d model above text on mobile? "On mobile devices, the text should appear first and the 3D scene should move below it", so text is order-2? Ah, if text appears first on mobile: order-1? Wait, flex-col on mobile.
-        My code: text has order-2 lg:order-1. So text is below on mobile. Let's fix that! */}
-
+                {/* 3D Scene */}
                 <motion.div
-                    className="w-full h-[50vh] min-h-[400px] lg:h-full lg:min-h-[600px] order-2 relative flex items-center justify-center"
+                    className="w-full h-[300px] sm:h-[400px] lg:h-[600px] order-2 relative flex items-center justify-center"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1.2, delay: 0.5 }}
