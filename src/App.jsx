@@ -3,6 +3,7 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import SoftSkills from "./components/SoftSkills";
 import Experience from "./components/Experience";
+import Education from "./components/Education";
 import Projects from "./components/Projects";
 import "./App.css";
 
@@ -14,6 +15,7 @@ function App() {
       <Skills />
       <SoftSkills />
       <Experience />
+      <Education />
       <Projects />
     </main>
   );
