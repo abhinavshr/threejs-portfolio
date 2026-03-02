@@ -48,13 +48,12 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 px-4 sm:px-10 py-6 flex justify-center
-                ${scrolled ? "translate-y-0" : "translate-y-0"}`}
+            className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 px-2 sm:px-10 py-4 sm:py-6 flex justify-center`}
         >
             <div
-                className={`max-w-7xl w-full flex items-center justify-between px-8 py-3 rounded-[3rem] transition-all duration-700 border relative overflow-hidden
+                className={`max-w-7xl w-full flex items-center justify-between px-4 sm:px-8 py-2 sm:py-3 rounded-2xl sm:rounded-[3rem] transition-all duration-700 border relative overflow-hidden
                     ${scrolled
-                        ? "bg-slate-950/40 backdrop-blur-2xl border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-2.5 scale-95 md:scale-100"
+                        ? "bg-slate-950/40 backdrop-blur-2xl border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-2 sm:py-2.5 scale-[0.97] md:scale-100"
                         : "bg-transparent border-transparent"}`}
             >
                 {/* Three.js Background inside Navbar */}
@@ -63,7 +62,10 @@ const Navbar = () => {
                 {/* Left Side: Logo & Brand */}
                 <div
                     className="flex items-center gap-4 cursor-pointer group z-10"
-                    onClick={() => handleNavClick("hero")}
+                    onClick={() => {
+                        handleNavClick("hero");
+                        setToggle(false);
+                    }}
                 >
                     <div className="relative transform group-hover:scale-110 transition-transform duration-500">
                         <NavbarLogoCanvas />
@@ -86,8 +88,8 @@ const Navbar = () => {
                 </div>
 
                 {/* Center: Navigation Links */}
-                <div className="hidden xl:flex items-center gap-1.5 z-10">
-                    <ul className="flex items-center gap-1 bg-white/5 backdrop-blur-md rounded-full p-1 border border-white/5">
+                <div className="hidden lg:flex items-center gap-1.5 z-10">
+                    <ul className="flex items-center gap-0.5 bg-white/5 backdrop-blur-md rounded-full p-1 border border-white/5">
                         {navLinks.map((link) => (
                             <li key={link.id}>
                                 <a
@@ -96,7 +98,7 @@ const Navbar = () => {
                                         e.preventDefault();
                                         handleNavClick(link.id);
                                     }}
-                                    className={`relative px-5 py-2 text-[10px] font-black uppercase tracking-[0.1em] transition-all duration-500 rounded-full flex items-center gap-2
+                                    className={`relative px-3 xl:px-5 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.1em] transition-all duration-500 rounded-full flex items-center gap-2
                                         ${active === link.id ? "text-white" : "text-slate-400 hover:text-white hover:bg-white/5"}
                                     `}
                                 >
@@ -156,7 +158,7 @@ const Navbar = () => {
                 {/* Mobile Menu Trigger */}
                 <button
                     onClick={() => setToggle(!toggle)}
-                    className="xl:hidden z-20 w-12 h-12 flex items-center justify-center bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl text-white group overflow-hidden"
+                    className="lg:hidden z-20 w-10 h-10 flex items-center justify-center bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl text-white group overflow-hidden"
                 >
                     <AnimatePresence mode="wait">
                         {toggle ? (
@@ -184,8 +186,16 @@ const Navbar = () => {
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: "100%", opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 150 }}
-                            className="fixed top-0 bottom-0 right-0 w-full sm:w-[450px] bg-slate-900/50 border-l border-white/10 p-10 pt-32 z-50 flex flex-col justify-between"
+                            className="fixed top-0 bottom-0 right-0 w-full sm:w-[400px] bg-slate-900/60 backdrop-blur-3xl border-l border-white/10 p-6 sm:p-10 pt-24 sm:pt-32 z-50 flex flex-col justify-between shadow-2xl"
                         >
+                            {/* Close Button Inside Menu */}
+                            <button
+                                onClick={() => setToggle(false)}
+                                className="absolute top-8 right-8 w-12 h-12 flex items-center justify-center bg-white/5 border border-white/10 rounded-2xl text-white hover:bg-white/10 transition-colors"
+                            >
+                                <X className="w-6 h-6" />
+                            </button>
+
                             <div className="flex flex-col gap-4">
                                 <span className="text-[10px] text-blue-500 font-black uppercase tracking-[0.5em] mb-4">Navigation</span>
                                 {navLinks.map((link, index) => (
@@ -197,11 +207,12 @@ const Navbar = () => {
                                     >
                                         <a
                                             href={`#${link.id}`}
-                                            className={`text-4xl sm:text-5xl font-black uppercase tracking-tighter flex items-center justify-between group
-                                                ${active === link.id ? "text-white" : "text-slate-600 hover:text-white"}
+                                            className={`text-3xl sm:text-5xl font-black uppercase tracking-tighter flex items-center justify-between group
+                                                ${active === link.id ? "text-white" : "text-slate-500 hover:text-white"}
                                             `}
                                             onClick={(e) => {
                                                 e.preventDefault();
+                                                setToggle(false);
                                                 handleNavClick(link.id);
                                             }}
                                         >
@@ -221,12 +232,27 @@ const Navbar = () => {
                                 <div className="h-[1px] bg-white/10 w-full" />
                                 <div className="flex flex-col gap-6">
                                     <div className="flex gap-4">
-                                        <a href="https://github.com/abhinavshr" target="_blank" className="p-4 bg-white/5 border border-white/10 rounded-2xl text-white hover:bg-blue-600 transition-colors"><Github className="w-6 h-6" /></a>
-                                        <a href="https://www.linkedin.com/in/abhinav-shrestha-9a8786255/" target="_blank" className="p-4 bg-white/5 border border-white/10 rounded-2xl text-white hover:bg-blue-600 transition-colors"><Linkedin className="w-6 h-6" /></a>
+                                        <a
+                                            href="https://github.com/abhinavshr"
+                                            target="_blank"
+                                            onClick={() => setToggle(false)}
+                                            className="p-4 bg-white/5 border border-white/10 rounded-2xl text-white hover:bg-blue-600 transition-colors"
+                                        >
+                                            <Github className="w-6 h-6" />
+                                        </a>
+                                        <a
+                                            href="https://www.linkedin.com/in/abhinav-shrestha-9a8786255/"
+                                            target="_blank"
+                                            onClick={() => setToggle(false)}
+                                            className="p-4 bg-white/5 border border-white/10 rounded-2xl text-white hover:bg-blue-600 transition-colors"
+                                        >
+                                            <Linkedin className="w-6 h-6" />
+                                        </a>
                                     </div>
                                     <a
                                         href="/resume.pdf"
-                                        className="w-full py-6 bg-blue-600 text-white rounded-[2rem] font-black text-center text-xl uppercase tracking-[0.2em] shadow-[0_20px_40px_rgba(37,99,235,0.3)] active:scale-95 transition-all"
+                                        onClick={() => setToggle(false)}
+                                        className="w-full py-4 sm:py-6 bg-blue-600 text-white rounded-2xl sm:rounded-[2rem] font-black text-center text-lg sm:text-xl uppercase tracking-[0.2em] shadow-[0_20px_40px_rgba(37,99,235,0.3)] active:scale-95 transition-all"
                                     >
                                         Download Resume
                                     </a>
