@@ -74,11 +74,15 @@ const CoreShape = () => {
 
 const AboutCoreCanvas = () => {
     return (
-        <div className="w-full h-[400px] lg:h-full min-h-[400px] relative">
+        <div className="w-full h-[300px] md:h-[450px] lg:h-full min-h-[300px] md:min-h-[450px] relative">
             {/* Subtle glow behind the 3D shape */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-purple-500/10 blur-[80px] rounded-full pointer-events-none" />
 
-            <Canvas camera={{ position: [0, 0, 6], fov: 50 }} gl={{ antialias: true, alpha: true }}>
+            <Canvas
+                camera={{ position: [0, 0, 7], fov: 45 }}
+                gl={{ antialias: true, alpha: true }}
+                style={{ touchAction: 'none' }}
+            >
                 <ambientLight intensity={0.6} />
                 <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffffff" />
                 <directionalLight position={[-10, -10, -5]} intensity={1} color="#8b5cf6" />
