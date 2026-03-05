@@ -40,11 +40,11 @@ const Contact = () => {
     ];
 
     return (
-        <section id="contact" className="relative w-full py-24 bg-slate-950 overflow-hidden flex flex-col justify-center">
+        <section id="contact" className="relative w-full py-16 md:py-24 bg-slate-950 overflow-hidden flex flex-col justify-center">
 
             <ContactCanvas />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full mb-16">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full mb-10 md:mb-16">
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
@@ -52,18 +52,18 @@ const Contact = () => {
                     variants={fadeUp}
                     className="text-center"
                 >
-                    <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-white">
+                    <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 md:mb-6 text-white">
                         Let's Create <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">Something Amazing</span>
                     </h2>
-                    <p className="text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">
+                    <p className="text-slate-400 max-w-3xl mx-auto text-sm md:text-lg leading-relaxed mb-6">
                         I am always open to new opportunities, collaborations, and innovative projects that challenge my skills and allow me to grow as a developer.
                     </p>
-                    <div className="w-24 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
+                    <div className="w-20 md:w-24 h-1 md:h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
                 </motion.div>
             </div>
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
 
                     {/* Outreach Content */}
                     <motion.div
@@ -71,17 +71,17 @@ const Contact = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="flex flex-col justify-center space-y-8"
+                        className="flex flex-col justify-center space-y-6 md:space-y-8"
                     >
-                        <div className="bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-3xl p-8 md:p-10 shadow-xl relative overflow-hidden group">
+                        <div className="bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-3xl p-6 md:p-10 shadow-xl relative overflow-hidden group">
                             <div className="absolute top-0 left-0 w-32 h-32 bg-blue-500/5 blur-[50px] pointer-events-none group-hover:bg-blue-500/10 transition-colors duration-700" />
 
-                            <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                            <h3 className="text-xl md:text-2xl font-bold text-white mb-6 flex items-center gap-3">
                                 <MessageSquare className="w-6 h-6 text-blue-400" />
                                 Professional Outreach
                             </h3>
 
-                            <div className="space-y-6 text-slate-300 leading-relaxed text-sm md:text-base">
+                            <div className="space-y-4 md:space-y-6 text-slate-300 leading-relaxed text-sm md:text-base">
                                 <p>
                                     Whether you are looking for a dedicated <span className="text-blue-400 font-semibold">mobile application developer</span>, a <span className="text-indigo-400 font-semibold">backend Laravel developer</span>, or someone who can build <span className="text-purple-400 font-semibold">immersive web experiences using Three.js</span>, I would be excited to connect and discuss how I can contribute to your project or organization.
                                 </p>
@@ -95,9 +95,9 @@ const Contact = () => {
                         </div>
 
                         {/* Availability Snippet */}
-                        <div className="bg-slate-900/30 border border-slate-800 rounded-2xl p-6 flex items-center gap-4">
-                            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-                            <p className="text-slate-400 text-sm font-medium">Available for new opportunities and collaborations</p>
+                        <div className="bg-slate-900/30 border border-slate-800 rounded-2xl p-4 md:p-6 flex items-center gap-4">
+                            <div className="w-2.5 h-2.5 md:w-3 md:h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+                            <p className="text-slate-400 text-xs md:text-sm font-medium">Available for new opportunities and collaborations</p>
                         </div>
                     </motion.div>
 
@@ -115,20 +115,20 @@ const Contact = () => {
                                 href={link.href}
                                 target={link.href.startsWith("http") ? "_blank" : "_self"}
                                 rel="noopener noreferrer"
-                                className="group relative bg-slate-900/40 backdrop-blur-md border border-slate-800 p-8 rounded-3xl hover:border-blue-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 flex flex-col justify-between overflow-hidden"
+                                className="group relative bg-slate-900/40 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-3xl hover:border-blue-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 flex flex-col justify-between overflow-hidden"
                             >
                                 <div className={`absolute top-0 right-0 w-24 h-24 bg-${link.color}-500/5 blur-[40px] pointer-events-none group-hover:bg-${link.color}-500/10 transition-colors`} />
 
                                 <div className="flex justify-between items-start relative z-10">
-                                    <div className={`p-4 rounded-2xl bg-slate-800 group-hover:bg-slate-700 text-${link.color}-400 group-hover:scale-110 transition-all duration-300`}>
+                                    <div className={`p-3 md:p-4 rounded-xl md:rounded-2xl bg-slate-800 group-hover:bg-slate-700 text-${link.color}-400 group-hover:scale-110 transition-all duration-300`}>
                                         {link.icon}
                                     </div>
                                     <ExternalLink className="w-5 h-5 text-slate-600 group-hover:text-slate-300 transition-colors" />
                                 </div>
 
-                                <div className="mt-8 relative z-10">
-                                    <p className="text-slate-500 text-xs uppercase tracking-widest font-extrabold mb-1">{link.label}</p>
-                                    <p className="text-lg md:text-xl font-bold text-white group-hover:text-blue-400 transition-colors break-words">{link.value}</p>
+                                <div className="mt-6 md:mt-8 relative z-10">
+                                    <p className="text-slate-500 text-[10px] md:text-xs uppercase tracking-widest font-extrabold mb-1">{link.label}</p>
+                                    <p className="text-base md:text-xl font-bold text-white group-hover:text-blue-400 transition-colors break-words line-clamp-2">{link.value}</p>
                                 </div>
                             </a>
                         ))}

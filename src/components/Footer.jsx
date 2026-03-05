@@ -7,12 +7,12 @@ const Footer = () => {
     };
 
     return (
-        <footer className="relative w-full bg-slate-950 pt-20 pb-10 overflow-hidden border-t border-slate-900">
+        <footer className="relative w-full bg-slate-950 pt-16 md:pt-20 pb-10 overflow-hidden border-t border-slate-900">
             {/* Ambient Background Glow */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[150px] md:h-[300px] bg-blue-600/5 blur-[80px] md:blur-[120px] rounded-full pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 mb-10 md:mb-16">
 
                     {/* Brand & Identity Summary */}
                     <div className="flex flex-col space-y-6">
