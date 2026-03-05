@@ -57,12 +57,12 @@ const Projects = () => {
     };
 
     return (
-        <section id="projects" className="relative w-full min-h-screen bg-slate-950 py-24 overflow-hidden flex flex-col justify-center">
+        <section id="projects" className="relative w-full min-h-screen bg-slate-950 py-16 md:py-24 overflow-hidden flex flex-col justify-center">
 
             {/* 3D Network Background Canvas */}
             <ProjectsCanvas />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full mb-16">
+            <div className="max-w-7xl mx-auto px-4 md:px-12 xl:px-20 relative z-10 w-full mb-10 md:mb-16">
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
@@ -70,7 +70,7 @@ const Projects = () => {
                     variants={fadeUp}
                     className="text-center"
                 >
-                    <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-white">
+                    <h2 className="text-2xl md:text-5xl font-extrabold tracking-tight mb-4 md:mb-6 text-white text-balance">
                         Production & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">Live Architecture</span>
                     </h2>
                     <p className="text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">
@@ -80,7 +80,7 @@ const Projects = () => {
                 </motion.div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full">
+            <div className="max-w-7xl mx-auto px-4 md:px-12 xl:px-20 relative z-10 w-full">
                 {/* Featured Project */}
                 {projectsList.filter(p => p.featured).map((project) => (
                     <motion.div
@@ -89,14 +89,14 @@ const Projects = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="group flex flex-col lg:flex-row gap-8 lg:gap-12 bg-slate-900/60 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-8 md:p-12 shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-400/60 transition-colors mb-10 overflow-hidden relative"
+                        className="group flex flex-col lg:flex-row gap-8 lg:gap-12 bg-slate-900/60 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 md:p-12 shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-400/60 transition-colors mb-10 overflow-hidden relative"
                     >
                         {/* Glow ambient background */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-3xl pointer-events-none rounded-full" />
 
                         <div className="flex-1 flex flex-col justify-center relative z-10">
                             <span className="text-blue-400 font-bold tracking-wider uppercase text-sm mb-2">Primary Highlight</span>
-                            <h3 className="text-2xl md:text-4xl font-bold text-white mb-4">{project.title}</h3>
+                            <h3 className="text-xl md:text-4xl font-bold text-white mb-4">{project.title}</h3>
                             <div className="flex flex-wrap gap-2 mb-6">
                                 {project.techStack.map((tech, i) => (
                                     <span key={i} className="px-3 py-1 bg-slate-800 border border-slate-700 rounded-full text-xs md:text-sm text-slate-300 font-mono">
@@ -109,15 +109,15 @@ const Projects = () => {
                                 {project.description}
                             </p>
 
-                            <div className="grid grid-cols-2 gap-4 mt-auto">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mt-auto">
                                 {Array.isArray(project.github) ? (
                                     project.github.map((repo, idx) => (
-                                        <a key={idx} href={repo.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white py-3 px-6 rounded-lg transition-colors font-semibold border border-slate-700 hover:border-slate-500 text-sm">
+                                        <a key={idx} href={repo.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white py-2 md:py-3 px-4 md:px-6 rounded-lg transition-colors font-semibold border border-slate-700 hover:border-slate-500 text-xs md:text-sm">
                                             <Github className="w-5 h-5" /> {repo.label}
                                         </a>
                                     ))
                                 ) : project.github && (
-                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white py-3 px-6 rounded-lg transition-colors font-semibold border border-slate-700 hover:border-slate-500">
+                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white py-2 md:py-3 px-4 md:px-6 rounded-lg transition-colors font-semibold border border-slate-700 hover:border-slate-500 text-xs md:text-sm">
                                         <Github className="w-5 h-5" /> GitHub Repo
                                     </a>
                                 )}
@@ -136,12 +136,12 @@ const Projects = () => {
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.6, delay: index * 0.15 }}
                             whileHover={{ y: -5 }}
-                            className="bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-8 flex flex-col relative overflow-hidden group hover:bg-slate-900/70 hover:border-slate-700 transition-all shadow-lg hover:shadow-[0_20px_40px_-20px_rgba(99,102,241,0.2)]"
+                            className="bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 md:p-8 flex flex-col relative overflow-hidden group hover:bg-slate-900/70 hover:border-slate-700 transition-all shadow-lg hover:shadow-[0_20px_40px_-20px_rgba(99,102,241,0.2)]"
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 blur-[50px] pointer-events-none group-hover:bg-purple-500/10 transition-colors" />
 
                             <div className="flex justify-between items-start mb-4 relative z-10">
-                                <h3 className="text-xl md:text-2xl font-bold text-slate-100 group-hover:text-blue-300 transition-colors">
+                                <h3 className="text-lg md:text-2xl font-bold text-slate-100 group-hover:text-blue-300 transition-colors">
                                     {project.title}
                                 </h3>
                                 <div className="flex gap-3 text-slate-400">
