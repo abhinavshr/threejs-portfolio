@@ -138,7 +138,8 @@ const Navbar = () => {
                     <div className="h-8 w-[1px] bg-white/10" />
 
                     <motion.a
-                        href="/resume.pdf"
+                        href="/CV/Abhinav_Shrestha.html"
+                        download="Abhinav_Shrestha_Resume.html"
                         target="_blank"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -247,7 +248,9 @@ const Navbar = () => {
                                         </a>
                                     </div>
                                     <a
-                                        href="/resume.pdf"
+                                        href="/CV/Abhinav_Shrestha.html"
+                                        download="Abhinav_Shrestha_Resume.html"
+                                        target="_blank"
                                         onClick={() => setToggle(false)}
                                         className="w-full py-4 sm:py-6 bg-blue-600 text-white rounded-2xl sm:rounded-[2rem] font-black text-center text-lg sm:text-xl uppercase tracking-[0.2em] shadow-[0_20px_40px_rgba(37,99,235,0.3)] active:scale-95 transition-all"
                                     >
