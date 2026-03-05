@@ -34,7 +34,7 @@ const Education = () => {
     };
 
     return (
-        <section id="education" className="relative w-full min-h-screen bg-slate-950 py-24 overflow-hidden flex flex-col justify-center">
+        <section id="education" className="relative w-full min-h-screen bg-slate-950 py-20 md:py-24 overflow-hidden flex flex-col justify-center">
 
             {/* 3D Knowledge Background Canvas */}
             <EducationCanvas />
@@ -66,22 +66,22 @@ const Education = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.8, delay: index * 0.2 }}
-                            className="relative flex flex-col md:flex-row gap-6 md:gap-10 items-start group"
+                            className="relative flex flex-row gap-4 md:gap-10 items-start group"
                         >
-                            {/* Animated Timeline Connector (hidden on mobile, visible on md+) */}
+                            {/* Animated Timeline Connector */}
                             {index !== educationDetails.length - 1 && (
-                                <div className="hidden md:block absolute left-[3.25rem] top-24 bottom-[-3rem] w-0.5 bg-gradient-to-b from-slate-700 to-transparent" />
+                                <div className="absolute left-8 md:left-[3.25rem] top-20 md:top-24 bottom-[-3.5rem] md:bottom-[-3rem] w-0.5 bg-gradient-to-b from-slate-700 to-transparent" />
                             )}
 
                             {/* Icon Pillar */}
-                            <div className="relative z-10 hidden md:flex shrink-0 w-28 flex-col items-center">
-                                <div className={`w-20 h-20 rounded-2xl bg-slate-900 border border-slate-800 shadow-lg flex items-center justify-center shrink-0 group-hover:bg-slate-800 transition-colors group-hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] group-hover:-translate-y-1 transform duration-500`}>
+                            <div className="relative z-10 flex shrink-0 w-16 md:w-28 flex-col items-center">
+                                <div className={`w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-slate-900 border border-slate-800 shadow-lg flex items-center justify-center shrink-0 group-hover:bg-slate-800 transition-colors group-hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] group-hover:-translate-y-1 transform duration-500 [&>svg]:w-6 [&>svg]:h-6 md:[&>svg]:w-8 md:[&>svg]:h-8`}>
                                     {edu.icon}
                                 </div>
                             </div>
 
                             {/* Content Panel */}
-                            <div className={`flex-1 bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-8 hover:border-${edu.color}-500/30 transition-all shadow-lg relative overflow-hidden group-hover:shadow-[0_10px_30px_-15px_rgba(99,102,241,0.2)] w-full`}>
+                            <div className={`flex-1 bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-6 md:p-8 hover:border-${edu.color}-500/30 transition-all shadow-lg relative overflow-hidden group-hover:shadow-[0_10px_30px_-15px_rgba(99,102,241,0.2)] w-full`}>
                                 <div className={`absolute top-0 right-0 w-48 h-48 bg-${edu.color}-500/5 blur-[60px] pointer-events-none group-hover:bg-${edu.color}-500/10 transition-colors duration-700`} />
 
                                 {/* Mobile Header structure to show Icon inline on small screens */}
@@ -118,7 +118,7 @@ const Education = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.8, delay: 0.6 }}
-                    className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-indigo-500/20 rounded-2xl p-6 md:p-8 flex items-start gap-4 md:gap-6 backdrop-blur-sm"
+                    className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-indigo-500/20 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6 backdrop-blur-sm"
                 >
                     <div className="shrink-0 bg-slate-900 p-3 rounded-full hidden sm:block border border-slate-800">
                         <ScrollText className="w-6 h-6 text-purple-400" />
