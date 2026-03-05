@@ -64,7 +64,7 @@ const Certifications = () => {
     };
 
     return (
-        <section id="certifications" className="relative w-full min-h-screen bg-slate-950 py-24 overflow-hidden flex flex-col justify-center">
+        <section id="certifications" className="relative w-full min-h-screen bg-slate-950 py-20 md:py-24 overflow-hidden flex flex-col justify-center">
 
             <CertificationsCanvas />
 
@@ -95,13 +95,13 @@ const Certifications = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.8 }}
-                            className="bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl p-8 shadow-xl"
+                            className="bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl"
                         >
-                            <div className="flex items-center gap-4 mb-8">
-                                <div className="bg-slate-800 p-3 rounded-2xl ring-1 ring-slate-700 shadow-inner">
-                                    {category.icon}
+                            <div className="flex items-center gap-4 mb-6 md:mb-8">
+                                <div className="bg-slate-800 p-2.5 md:p-3 rounded-2xl ring-1 ring-slate-700 shadow-inner shrink-0">
+                                    <span className="[&>svg]:w-5 [&>svg]:h-5 md:[&>svg]:w-6 md:[&>svg]:h-6">{category.icon}</span>
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+                                <h3 className="text-lg md:text-2xl font-bold text-white tracking-tight leading-tight">
                                     {category.title}
                                 </h3>
                             </div>
@@ -110,7 +110,7 @@ const Certifications = () => {
                                 {category.certs.map((cert, certIndex) => (
                                     <div
                                         key={certIndex}
-                                        className="group relative bg-slate-800/20 border border-slate-800/50 rounded-2xl p-6 hover:border-blue-500/30 transition-all duration-300"
+                                        className="group relative bg-slate-800/20 border border-slate-800/50 rounded-2xl p-5 md:p-6 hover:border-blue-500/30 transition-all duration-300"
                                     >
                                         <div className="flex justify-between items-start mb-2">
                                             <h4 className="text-slate-100 font-bold text-base md:text-lg group-hover:text-blue-400 transition-colors">
@@ -121,9 +121,9 @@ const Certifications = () => {
                                                     href={cert.url}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="text-slate-500 hover:text-white transition-colors p-1"
+                                                    className="text-slate-500 hover:text-white transition-colors p-1 shrink-0"
                                                 >
-                                                    <ExternalLink className="w-5 h-5" />
+                                                    <ExternalLink className="w-4 h-4 md:w-5 md:h-5" />
                                                 </a>
                                             )}
                                         </div>
@@ -160,7 +160,7 @@ const Certifications = () => {
                 </div>
             </motion.div>
 
-        </section>
+        </section >
     );
 };
 

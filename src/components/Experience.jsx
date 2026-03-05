@@ -38,7 +38,7 @@ const Experience = () => {
     };
 
     return (
-        <section id="experience" className="relative w-full py-24 bg-slate-950 overflow-hidden flex flex-col items-center">
+        <section id="experience" className="relative w-full py-20 md:py-24 bg-slate-950 overflow-hidden flex flex-col items-center">
             {/* 3D Background */}
             <ExperienceCanvas />
 
@@ -66,7 +66,7 @@ const Experience = () => {
 
             <div className="max-w-4xl mx-auto px-6 lg:px-12 w-full relative z-10">
                 {/* Central Timeline Line */}
-                <div className="absolute left-[39px] md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-slate-700 to-transparent transform md:-translate-x-1/2" />
+                <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-slate-700 to-transparent transform -translate-x-1/2" />
 
                 <div className="space-y-16">
                     {experienceData.map((exp, index) => (
@@ -80,7 +80,7 @@ const Experience = () => {
                                 }`}
                         >
                             {/* Timeline Node/Icon */}
-                            <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+                            <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center">
                                 <span className={`relative flex h-14 w-14 items-center justify-center rounded-full bg-slate-900 border-2 border-slate-700 z-10 ${exp.borderFocus} transition-colors duration-500`}>
                                     {/* Pulse effect */}
                                     <span className={`absolute inline-flex h-full w-full rounded-full bg-gradient-to-r ${exp.color} opacity-20 group-hover:animate-ping`} />
@@ -91,19 +91,19 @@ const Experience = () => {
                             </div>
 
                             {/* Content Card container */}
-                            <div className={`w-full md:w-5/12 ml-20 md:ml-0 ${index % 2 === 0 ? "md:pl-10 text-left md:text-left" : "md:pr-10 text-left md:text-right"
+                            <div className={`w-full md:w-5/12 pl-20 md:pl-0 ${index % 2 === 0 ? "md:pl-10 text-left md:text-left" : "md:pr-10 text-left md:text-right"
                                 }`}>
                                 <div className={`relative bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-2xl p-6 md:p-8 hover:bg-slate-900/80 transition-all duration-500 hover:shadow-lg ${exp.borderFocus}`}>
                                     {/* Content inside card */}
                                     <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
                                         {exp.role}
                                     </h3>
-                                    <div className={`flex items-center gap-2 mb-4 text-sm font-medium text-slate-400 ${index % 2 === 0 ? "md:justify-start" : "md:justify-end"}`}>
+                                    <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 mb-4 text-sm font-medium text-slate-400 ${index % 2 === 0 ? "md:justify-start" : "md:justify-end"}`}>
                                         <span className={`text-transparent bg-clip-text bg-gradient-to-r ${exp.color} uppercase tracking-wider font-bold`}>
                                             {exp.company}
                                         </span>
-                                        <span className="hidden md:inline">•</span>
-                                        <span>{exp.date}</span>
+                                        <span className="hidden sm:inline opacity-50">•</span>
+                                        <span className="text-slate-500">{exp.date}</span>
                                     </div>
                                     <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-4 text-left">
                                         {exp.description}
