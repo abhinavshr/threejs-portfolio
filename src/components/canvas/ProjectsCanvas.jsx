@@ -48,7 +48,7 @@ const ConstellationNodes = () => {
 
 const ProjectsCanvas = () => {
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-20 md:opacity-40">
             <Canvas camera={{ position: [0, 0, 8], fov: 60 }} gl={{ antialias: true, alpha: true }}>
                 <ambientLight intensity={1} />
                 <ConstellationNodes />
