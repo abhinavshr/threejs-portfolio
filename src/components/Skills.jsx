@@ -120,9 +120,9 @@ const Skills = () => {
                             }}
                             className="bg-slate-900/40 backdrop-blur-md border border-slate-800/50 rounded-2xl p-6 md:p-8 flex flex-col relative overflow-hidden group shadow-xl hover:shadow-[0_20px_50px_-15px_rgba(79,70,229,0.3)] hover:border-indigo-500/50 transition-all duration-500"
                         >
-                            {/* Subtle Ambient Glow On Hover */}
-                            <div className="absolute -top-16 -right-16 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-all duration-700 pointer-events-none z-0" />
-                            <div className="absolute -bottom-16 -left-16 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl group-hover:bg-purple-500/15 transition-all duration-700 pointer-events-none z-0" />
+                            {/* Subtle Ambient Glow On Hover (Optimized with radial gradients) */}
+                            <div className="absolute -top-16 -right-16 w-48 h-48 bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] rounded-full group-hover:bg-[radial-gradient(circle,rgba(99,102,241,0.25)_0%,transparent_70%)] transition-all duration-700 pointer-events-none z-0" />
+                            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-[radial-gradient(circle,rgba(168,85,247,0.1)_0%,transparent_70%)] rounded-full group-hover:bg-[radial-gradient(circle,rgba(168,85,247,0.2)_0%,transparent_70%)] transition-all duration-700 pointer-events-none z-0" />
 
                             <h3 className="text-xl md:text-2xl font-bold text-white mb-8 flex items-center gap-4 relative z-10">
                                 <div className="flex-shrink-0 p-2.5 bg-slate-800/90 rounded-xl border border-slate-700/50 shadow-lg group-hover:scale-110 group-hover:border-indigo-500/50 transition-all duration-500">
