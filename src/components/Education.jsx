@@ -82,7 +82,7 @@ const Education = () => {
 
                             {/* Content Panel */}
                             <div className={`flex-1 bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-6 md:p-8 hover:border-${edu.color}-500/30 transition-all shadow-lg relative overflow-hidden group-hover:shadow-[0_10px_30px_-15px_rgba(99,102,241,0.2)] w-full`}>
-                                <div className={`absolute top-0 right-0 w-48 h-48 bg-${edu.color}-500/5 blur-[60px] pointer-events-none group-hover:bg-${edu.color}-500/10 transition-colors duration-700`} />
+                                <div className={`absolute -top-24 -right-24 w-64 h-64 bg-[radial-gradient(circle,rgba(59,130,246,0.1)_0%,transparent_70%)] rounded-full pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] transition-colors duration-700`} />
 
                                 {/* Mobile Header structure to show Icon inline on small screens */}
                                 <div className="flex items-start justify-between mb-4 flex-col sm:flex-row sm:items-center gap-4">
