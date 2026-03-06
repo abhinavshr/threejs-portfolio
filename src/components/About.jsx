@@ -18,9 +18,9 @@ const About = () => {
 
     return (
         <section id="about" className="relative w-full min-h-screen bg-slate-950 text-white flex flex-col justify-center py-16 md:py-24 overflow-hidden">
-            {/* Background glowing effects */}
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none" />
+            {/* Background glowing effects (Optimized with radial gradients instead of expensive CSS blur) */}
+            <div className="absolute top-1/4 left-1/4 w-[40rem] h-[40rem] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,rgba(30,58,138,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
+            <div className="absolute bottom-1/4 right-1/4 w-[50rem] h-[50rem] translate-x-1/4 translate-y-1/4 bg-[radial-gradient(circle,rgba(88,28,135,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-5 md:px-12 xl:px-20 w-full z-10 flex flex-col items-center">
 
