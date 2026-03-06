@@ -42,9 +42,9 @@ const Experience = () => {
             {/* 3D Background */}
             <ExperienceCanvas />
 
-            {/* Background Ambient Glows */}
-            <div className="absolute top-1/3 left-10 w-96 h-96 bg-blue-900/10 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-1/3 right-10 w-[30rem] h-[30rem] bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none" />
+            {/* Background Ambient Glows (Optimized with radial gradients) */}
+            <div className="absolute top-1/3 left-10 w-[40rem] h-[40rem] bg-[radial-gradient(circle,rgba(30,58,138,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
+            <div className="absolute bottom-1/3 right-10 w-[40rem] h-[40rem] bg-[radial-gradient(circle,rgba(6,95,70,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full mb-16">
                 <motion.div
