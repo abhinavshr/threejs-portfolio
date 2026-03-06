@@ -1,11 +1,11 @@
-import { useRef } from "react";
+import { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { PointMaterial, Points } from "@react-three/drei";
+import { PointMaterial, Points, Preload } from "@react-three/drei";
 
-// Generate random points in a sphere to simulate "connected thoughts" and "systems"
-const count = 350;
-const initialPositions = new Float32Array(count * 3);
-for (let i = 0; i < count; i++) {
+// Pre-compute the static positions outside of the component to avoid impure function calls during render
+const particleCount = 250;
+const initialPositions = new Float32Array(particleCount * 3);
+for (let i = 0; i < particleCount; i++) {
     const r = 4 + Math.random() * 3;
     const theta = 2 * Math.PI * Math.random();
     const phi = Math.acos(2 * Math.random() - 1);
@@ -18,13 +18,13 @@ for (let i = 0; i < count; i++) {
 const ParticleSystem = () => {
     const pointsRef = useRef();
 
-    // Use the static pre-calculated array instead of calling Math.random in render mapping
+    // Use the statically generated positions array
     const positions = initialPositions;
 
     useFrame((state, delta) => {
         if (pointsRef.current) {
-            pointsRef.current.rotation.y += delta * 0.04;
-            pointsRef.current.rotation.x += delta * 0.02;
+            pointsRef.current.rotation.y += delta * 0.03; // Slower, smoother rotation
+            pointsRef.current.rotation.x += delta * 0.015;
         }
     });
 
@@ -40,10 +40,22 @@ const ParticleSystem = () => {
 const SoftSkillsCanvas = () => {
     return (
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-            <Canvas camera={{ position: [0, 0, 8], fov: 60 }} gl={{ antialias: false, alpha: true }}>
-                <ambientLight intensity={0.5} />
-                <ParticleSystem />
-            </Canvas>
+            <Suspense fallback={null}>
+                <Canvas
+                    camera={{ position: [0, 0, 8], fov: 60 }}
+                    gl={{
+                        antialias: false, // Turn off antialiasing since it's blurred anyway
+                        alpha: true,
+                        powerPreference: "high-performance"
+                    }}
+                    dpr={[1, 1.5]} // Limit pixel ratio to prevent heavy computation
+                    performance={{ min: 0.5 }}
+                >
+                    <ambientLight intensity={0.5} />
+                    <ParticleSystem />
+                    <Preload all />
+                </Canvas>
+            </Suspense>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,0.9)_100%)]" />
         </div>
     );
