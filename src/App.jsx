@@ -1,9 +1,10 @@
-import React, { Suspense, lazy, useEffect } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import React, { Suspense, lazy, useEffect, useState } from "react";
+import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import LoadingScreen from "./components/LoadingScreen";
 import "./App.css";
 
 // Lazy load components that are not immediately visible
@@ -41,6 +42,7 @@ const RevealSection = ({ children }) => (
 );
 
 function App() {
+  const [loadingComplete, setLoadingComplete] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -75,6 +77,12 @@ function App() {
 
   return (
     <main className="bg-slate-950 min-h-screen text-slate-100 font-sans relative">
+      <AnimatePresence mode="wait">
+        {!loadingComplete && (
+          <LoadingScreen key="loading" onComplete={() => setLoadingComplete(true)} />
+        )}
+      </AnimatePresence>
+
       {/* Global Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 origin-left z-50"
