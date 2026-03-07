@@ -1,4 +1,5 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
@@ -17,6 +18,7 @@ const Certifications = lazy(() => import("./components/Certifications"));
 const Projects = lazy(() => import("./components/Projects"));
 const Contact = lazy(() => import("./components/Contact"));
 const Footer = lazy(() => import("./components/Footer"));
+const NotFound = lazy(() => import("./components/NotFound"));
 
 // A simple loading fallback
 const SectionLoader = () => (
@@ -41,7 +43,7 @@ const RevealSection = ({ children }) => (
   </motion.div>
 );
 
-function App() {
+function Home() {
   const [loadingComplete, setLoadingComplete] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -102,6 +104,17 @@ function App() {
         <RevealSection><Footer /></RevealSection>
       </Suspense>
     </main>
+  );
+}
+
+function App() {
+  return (
+    <Suspense fallback={<SectionLoader />}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
   );
 }
 
