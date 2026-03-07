@@ -1,4 +1,7 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import "./App.css";
@@ -21,21 +24,74 @@ const SectionLoader = () => (
   </div>
 );
 
+// High-end section reveal wrapper for premium scroll effect
+const RevealSection = ({ children }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 80, scale: 0.95 }}
+    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+    viewport={{ once: true, margin: "-10%" }}
+    transition={{
+      duration: 1.2,
+      ease: [0.16, 1, 0.3, 1] // Custom refined spring-like easing 
+    }}
+    className="w-full relative z-10"
+  >
+    {children}
+  </motion.div>
+);
+
 function App() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
-    <main className="bg-slate-950 min-h-screen text-slate-100 font-sans">
+    <main className="bg-slate-950 min-h-screen text-slate-100 font-sans relative">
+      {/* Global Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 origin-left z-50"
+        style={{ scaleX }}
+      />
       <Navbar />
       <Hero />
       <Suspense fallback={<SectionLoader />}>
-        <About />
-        <Skills />
-        <SoftSkills />
-        <Experience />
-        <Education />
-        <Certifications />
-        <Projects />
-        <Contact />
-        <Footer />
+        <RevealSection><About /></RevealSection>
+        <RevealSection><Skills /></RevealSection>
+        <RevealSection><SoftSkills /></RevealSection>
+        <RevealSection><Experience /></RevealSection>
+        <RevealSection><Education /></RevealSection>
+        <RevealSection><Certifications /></RevealSection>
+        <RevealSection><Projects /></RevealSection>
+        <RevealSection><Contact /></RevealSection>
+        <RevealSection><Footer /></RevealSection>
       </Suspense>
     </main>
   );
