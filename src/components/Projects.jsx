@@ -91,8 +91,8 @@ const Projects = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="group flex flex-col lg:flex-row gap-8 lg:gap-12 bg-slate-900/60 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 md:p-12 shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-400/60 transition-colors mb-10 overflow-hidden relative"
                     >
-                        {/* Glow ambient background */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-3xl pointer-events-none rounded-full" />
+                        {/* Glow ambient background (Optimized with radial gradients) */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] rounded-full pointer-events-none" />
 
                         <div className="flex-1 flex flex-col justify-center relative z-10">
                             <span className="text-blue-400 font-bold tracking-wider uppercase text-sm mb-2">Primary Highlight</span>
@@ -138,7 +138,8 @@ const Projects = () => {
                             whileHover={{ y: -5 }}
                             className="bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 md:p-8 flex flex-col relative overflow-hidden group hover:bg-slate-900/70 hover:border-slate-700 transition-all shadow-lg hover:shadow-[0_20px_40px_-20px_rgba(99,102,241,0.2)]"
                         >
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 blur-[50px] pointer-events-none group-hover:bg-purple-500/10 transition-colors" />
+                            {/* Glow element (Optimized) */}
+                            <div className="absolute top-0 right-0 w-48 h-48 bg-[radial-gradient(circle,rgba(168,85,247,0.1)_0%,transparent_70%)] rounded-full pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(168,85,247,0.15)_0%,transparent_70%)] transition-colors" />
 
                             <div className="flex justify-between items-start mb-4 relative z-10">
                                 <h3 className="text-lg md:text-2xl font-bold text-slate-100 group-hover:text-blue-300 transition-colors">
