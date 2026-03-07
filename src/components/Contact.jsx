@@ -74,7 +74,7 @@ const Contact = () => {
                         className="flex flex-col justify-center space-y-6 md:space-y-8"
                     >
                         <div className="bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-3xl p-6 md:p-10 shadow-xl relative overflow-hidden group">
-                            <div className="absolute top-0 left-0 w-32 h-32 bg-blue-500/5 blur-[50px] pointer-events-none group-hover:bg-blue-500/10 transition-colors duration-700" />
+                            <div className="absolute top-0 left-0 w-32 h-32 bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] rounded-full pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(59,130,246,0.2)_0%,transparent_70%)] transition-colors duration-700" />
 
                             <h3 className="text-xl md:text-2xl font-bold text-white mb-6 flex items-center gap-3">
                                 <MessageSquare className="w-6 h-6 text-blue-400" />
@@ -117,7 +117,7 @@ const Contact = () => {
                                 rel="noopener noreferrer"
                                 className="group relative bg-slate-900/40 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-3xl hover:border-blue-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 flex flex-col justify-between overflow-hidden"
                             >
-                                <div className={`absolute top-0 right-0 w-24 h-24 bg-${link.color}-500/5 blur-[40px] pointer-events-none group-hover:bg-${link.color}-500/10 transition-colors`} />
+                                <div className={`absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle,rgba(59,130,246,0.1)_0%,transparent_70%)] rounded-full pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] transition-colors`} />
 
                                 <div className="flex justify-between items-start relative z-10">
                                     <div className={`p-3 md:p-4 rounded-xl md:rounded-2xl bg-slate-800 group-hover:bg-slate-700 text-${link.color}-400 group-hover:scale-110 transition-all duration-300`}>
