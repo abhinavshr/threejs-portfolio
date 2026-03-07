@@ -8,30 +8,37 @@ const LoadingScreen = ({ onComplete }) => {
         // Prevent scrolling while loading
         document.body.style.overflow = "hidden";
 
-        // Simulate loading progress
         const duration = 2500; // 2.5 seconds total
-        const intervalTime = 20;
-        const steps = duration / intervalTime;
-        let currentStep = 0;
+        let animationFrameId;
+        let startTime = null;
 
-        const interval = setInterval(() => {
-            currentStep++;
-            // Custom easing function for smooth initial burst and slower end
-            const progressValue = 1 - Math.pow(1 - currentStep / steps, 3);
-            const nextProgress = Math.min(Math.round(progressValue * 100), 100);
-            setProgress(nextProgress);
+        const animateProgress = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
 
-            if (currentStep >= steps) {
-                clearInterval(interval);
+            // Calculate progress (0 to 1)
+            const p = Math.min(elapsed / duration, 1);
+
+            // Custom easeOutQuart function: 1 - (1 - x)^4 for very smooth deceleration
+            const easeOutProgress = 1 - Math.pow(1 - p, 4);
+            const currentPercentage = Math.min(Math.round(easeOutProgress * 100), 100);
+
+            setProgress(currentPercentage);
+
+            if (p < 1) {
+                animationFrameId = requestAnimationFrame(animateProgress);
+            } else {
                 setTimeout(() => {
                     document.body.style.overflow = "unset";
                     onComplete();
-                }, 300); // brief pause at 100%
+                }, 400); // slightly longer pause at 100% for user to see it
             }
-        }, intervalTime);
+        };
+
+        animationFrameId = requestAnimationFrame(animateProgress);
 
         return () => {
-            clearInterval(interval);
+            cancelAnimationFrame(animationFrameId);
             document.body.style.overflow = "unset";
         };
     }, [onComplete]);
@@ -50,38 +57,43 @@ const LoadingScreen = ({ onComplete }) => {
             <div className="relative z-10 flex flex-col items-center w-full max-w-[280px] sm:max-w-sm">
                 {/* Title */}
                 <motion.h1
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                    className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-1"
+                    transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-1 tracking-wide"
                 >
                     Abhinav Shrestha
                 </motion.h1>
 
                 {/* Subtitle */}
                 <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-slate-400 text-[11px] sm:text-xs tracking-wider mb-8"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="text-slate-400 text-[11px] sm:text-xs tracking-[0.2em] mb-8 uppercase"
                 >
                     Loading Portfolio...
                 </motion.p>
 
                 {/* Progress track */}
-                <div className="w-full h-[3px] bg-white/10 rounded-full overflow-hidden mb-3 relative">
+                <motion.div
+                    initial={{ opacity: 0, scaleX: 0 }}
+                    animate={{ opacity: 1, scaleX: 1 }}
+                    transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full h-[3px] bg-white/10 rounded-full overflow-hidden mb-3 relative origin-left"
+                >
                     <motion.div
-                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-indigo-500"
+                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-indigo-500 shadow-[0_0_15px_rgba(168,85,247,0.5)]"
                         style={{ width: `${progress}%` }}
                     />
-                </div>
+                </motion.div>
 
                 {/* Percentage text */}
                 <motion.div
                     className="text-slate-500 text-[10px] sm:text-xs font-mono font-medium tracking-widest"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
                 >
                     {progress}%
                 </motion.div>
