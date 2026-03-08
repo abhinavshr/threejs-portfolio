@@ -1,41 +1,122 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Home, ArrowLeft } from 'lucide-react';
+import { Canvas } from '@react-three/fiber';
+import {
+    Stars,
+    Float,
+    Text,
+    Sparkles,
+    MeshDistortMaterial,
+    TorusKnot,
+    Sphere
+} from '@react-three/drei';
+
+function AnimatedShapes() {
+    return (
+        <>
+            <Float speed={2} rotationIntensity={1.5} floatIntensity={2}>
+                <Sphere args={[1, 64, 64]} position={[-3, 1, -2]}>
+                    <MeshDistortMaterial
+                        color="#4f46e5"
+                        attach="material"
+                        distort={0.5}
+                        speed={2}
+                        roughness={0.2}
+                        metalness={0.8}
+                    />
+                </Sphere>
+            </Float>
+
+            <Float speed={1.5} rotationIntensity={2} floatIntensity={1.5}>
+                <TorusKnot args={[0.8, 0.3, 128, 16]} position={[3, -1, -5]}>
+                    <meshStandardMaterial
+                        color="#8b5cf6"
+                        roughness={0.1}
+                        metalness={0.8}
+                    />
+                </TorusKnot>
+            </Float>
+
+            <Float speed={3} rotationIntensity={1} floatIntensity={2}>
+                <Sphere args={[0.5, 32, 32]} position={[0, -3, 2]}>
+                    <MeshDistortMaterial
+                        color="#ec4899"
+                        attach="material"
+                        distort={0.6}
+                        speed={3}
+                        roughness={0.3}
+                        metalness={0.5}
+                    />
+                </Sphere>
+            </Float>
+        </>
+    );
+}
+
+function Scene() {
+    return (
+        <>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[10, 10, 10]} intensity={1} color="#ffffff" />
+            <pointLight position={[-10, -10, -10]} intensity={0.5} color="#4f46e5" />
+            <pointLight position={[10, -10, 10]} intensity={0.5} color="#8b5cf6" />
+
+            <Stars radius={100} depth={50} count={4000} factor={4} saturation={0} fade speed={1} />
+            <Sparkles count={100} scale={12} size={2} speed={0.4} opacity={0.5} color="#c084fc" />
+
+            <AnimatedShapes />
+
+            <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
+                <Text
+                    fontSize={6}
+                    maxWidth={200}
+                    lineHeight={1}
+                    letterSpacing={0.02}
+                    textAlign={'center'}
+                    anchorX="center"
+                    anchorY="middle"
+                    position={[0, 0.5, 0]}
+                >
+                    404
+                    <meshStandardMaterial color="#ffffff" roughness={0.1} metalness={0.4} />
+                </Text>
+            </Float>
+        </>
+    );
+}
 
 const NotFound = () => {
     return (
         <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-slate-100 relative overflow-hidden">
-            {/* Background ambient lighting */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+            {/* 3D Background */}
+            <div className="absolute inset-0 z-0 opacity-80 w-full h-full pointer-events-none">
+                <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
+                    <Suspense fallback={null}>
+                        <Scene />
+                    </Suspense>
+                </Canvas>
+            </div>
 
+            {/* Foreground Content */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="relative z-10 flex flex-col items-center text-center px-6"
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                className="relative z-10 flex flex-col items-center text-center px-6 mt-[40vh] pointer-events-none"
             >
-                <motion.h1
-                    className="text-[12rem] md:text-[18rem] font-bold leading-none tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-blue-400 via-purple-500 to-indigo-600 drop-shadow-sm"
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.2, type: "spring", stiffness: 100 }}
-                >
-                    404
-                </motion.h1>
-
                 <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="mt-4 mb-10"
+                    className="mb-8"
                 >
-                    <h2 className="text-3xl md:text-5xl font-semibold mb-4 tracking-tight">
+                    <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600 drop-shadow-sm">
                         Lost in Space
                     </h2>
-                    <p className="text-slate-400 text-lg md:text-xl max-w-md mx-auto">
-                        The page you're looking for doesn't exist or has been moved to another universe.
+                    <p className="text-slate-300 text-lg md:text-xl max-w-md mx-auto font-light">
+                        The page you're looking for has drifted off into another dimension.
                     </p>
                 </motion.div>
 
@@ -43,53 +124,29 @@ const NotFound = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}
-                    className="flex flex-col sm:flex-row gap-4"
+                    className="flex flex-col sm:flex-row gap-4 pointer-events-auto"
                 >
                     <Link
                         to="/"
-                        className="group relative px-8 py-4 bg-white text-slate-950 rounded-full font-medium text-lg flex items-center justify-center gap-2 overflow-hidden transition-transform hover:scale-105"
+                        className="group relative px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full font-medium text-lg flex items-center justify-center gap-2 overflow-hidden transition-all hover:scale-105 hover:bg-white/20 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-purple-100 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <Home className="w-5 h-5 relative z-10" />
-                        <span className="relative z-10">Back to Home</span>
+                        <Home className="w-5 h-5 relative z-10 transition-transform group-hover:-translate-y-1 group-hover:scale-110" />
+                        <span className="relative z-10">Back to Earth</span>
                     </Link>
 
                     <button
                         onClick={() => window.history.back()}
-                        className="px-8 py-4 text-slate-300 hover:text-white border border-slate-800 hover:border-slate-600 rounded-full font-medium text-lg flex items-center justify-center gap-2 transition-all hover:bg-slate-900"
+                        className="group px-8 py-4 text-slate-300 hover:text-white border border-slate-800 hover:border-slate-600 rounded-full font-medium text-lg flex items-center justify-center gap-2 transition-all hover:bg-slate-900/50 backdrop-blur-sm"
                     >
-                        <ArrowLeft className="w-5 h-5" />
+                        <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
                         <span>Go Back</span>
                     </button>
                 </motion.div>
             </motion.div>
 
-            {/* Floating particles/stars effect (optional micro-animation) */}
-            <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
-                {[...Array(20)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute bg-white rounded-full"
-                        style={{
-                            width: Math.random() * 4 + 1 + 'px',
-                            height: Math.random() * 4 + 1 + 'px',
-                            top: Math.random() * 100 + '%',
-                            left: Math.random() * 100 + '%',
-                        }}
-                        animate={{
-                            y: [0, -20, 0],
-                            opacity: [0.2, 1, 0.2],
-                            scale: [1, 1.5, 1],
-                        }}
-                        transition={{
-                            duration: Math.random() * 3 + 2,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: Math.random() * 2,
-                        }}
-                    />
-                ))}
-            </div>
+            {/* Decorative gradients */}
+            <div className="absolute bottom-0 left-0 w-full h-[40vh] bg-gradient-to-t from-slate-950 to-transparent z-0 pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-[150px] pointer-events-none mix-blend-screen" />
         </div>
     );
 };
