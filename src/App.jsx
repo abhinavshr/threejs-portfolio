@@ -19,6 +19,7 @@ const Projects = lazy(() => import("./components/Projects"));
 const Contact = lazy(() => import("./components/Contact"));
 const Footer = lazy(() => import("./components/Footer"));
 const NotFound = lazy(() => import("./components/NotFound"));
+const Offline = lazy(() => import("./components/Offline"));
 
 // A simple loading fallback
 const SectionLoader = () => (
@@ -108,6 +109,29 @@ function Home() {
 }
 
 function App() {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
+
+  if (!isOnline) {
+    return (
+      <Suspense fallback={<SectionLoader />}>
+        <Offline />
+      </Suspense>
+    );
+  }
+
   return (
     <Suspense fallback={<SectionLoader />}>
       <Routes>
