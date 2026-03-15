@@ -1,104 +1,154 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
 
 const LoadingScreen = ({ onComplete }) => {
     const [progress, setProgress] = useState(0);
+    const barRef = useRef(null);
 
     useEffect(() => {
-        // Prevent scrolling while loading
         document.body.style.overflow = "hidden";
 
-        const duration = 2500; // 2.5 seconds total
-        let animationFrameId;
-        let startTime = null;
+        const duration = 2500;
+        const start = performance.now();
 
-        const animateProgress = (timestamp) => {
-            if (!startTime) startTime = timestamp;
-            const elapsed = timestamp - startTime;
-
-            // Calculate progress (0 to 1)
-            const p = Math.min(elapsed / duration, 1);
-
-            // Custom easeOutQuart function: 1 - (1 - x)^4 for very smooth deceleration
-            const easeOutProgress = 1 - Math.pow(1 - p, 4);
-            const currentPercentage = Math.min(Math.round(easeOutProgress * 100), 100);
-
-            setProgress(currentPercentage);
-
+        // Update bar via transform (compositor thread, no layout)
+        let rafId;
+        const tick = (now) => {
+            const p = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 4);
+            if (barRef.current) {
+                barRef.current.style.transform = `scaleX(${eased})`;
+            }
             if (p < 1) {
-                animationFrameId = requestAnimationFrame(animateProgress);
-            } else {
-                setTimeout(() => {
-                    document.body.style.overflow = "unset";
-                    onComplete();
-                }, 400); // slightly longer pause at 100% for user to see it
+                rafId = requestAnimationFrame(tick);
             }
         };
+        rafId = requestAnimationFrame(tick);
 
-        animationFrameId = requestAnimationFrame(animateProgress);
+        // Percentage counter — low-frequency interval, not rAF
+        const interval = setInterval(() => {
+            const p = Math.min((performance.now() - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 4);
+            setProgress(Math.round(eased * 100));
+            if (p >= 1) clearInterval(interval);
+        }, 50);
+
+        const timeout = setTimeout(() => {
+            document.body.style.overflow = "unset";
+            onComplete();
+        }, duration + 400);
 
         return () => {
-            cancelAnimationFrame(animationFrameId);
+            cancelAnimationFrame(rafId);
+            clearInterval(interval);
+            clearTimeout(timeout);
             document.body.style.overflow = "unset";
         };
     }, [onComplete]);
 
     return (
-        <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="fixed inset-0 z-[9999] bg-[#030303] flex flex-col items-center justify-center overflow-hidden"
-        >
-            {/* Background Blobs for that subtle dark space glow resembling the reference image */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-[90%] -translate-y-[60%] w-[60vw] sm:w-[500px] h-[60vw] sm:h-[500px] bg-purple-900/15 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/4 -translate-y-1/2 w-[55vw] sm:w-[450px] h-[55vw] sm:h-[450px] bg-indigo-900/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
+        <div className="loading-root">
+            <style>{`
+        .loading-root {
+          position: fixed; inset: 0; z-index: 9999;
+          background: #030303;
+          display: flex; flex-direction: column;
+          align-items: center; justify-content: center;
+          overflow: hidden;
+          contain: strict;
+          animation: fadeInScreen 0.4s ease both;
+        }
+        @keyframes fadeInScreen { from { opacity: 0 } to { opacity: 1 } }
 
-            <div className="relative z-10 flex flex-col items-center w-full max-w-[280px] sm:max-w-sm">
-                {/* Title */}
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-1 tracking-wide"
-                >
-                    Abhinav Shrestha
-                </motion.h1>
+        .blob {
+          position: absolute; border-radius: 9999px;
+          pointer-events: none; mix-blend-mode: screen;
+          will-change: transform; transform: translateZ(0);
+        }
+        .blob-1 {
+          top: 50%; left: 50%;
+          width: min(60vw, 500px); height: min(60vw, 500px);
+          background: rgba(88, 28, 135, 0.15);
+          filter: blur(120px);
+          translate: -90% -60%;
+        }
+        .blob-2 {
+          top: 50%; left: 50%;
+          width: min(55vw, 450px); height: min(55vw, 450px);
+          background: rgba(49, 46, 129, 0.10);
+          filter: blur(120px);
+          translate: -25% -50%;
+        }
 
-                {/* Subtitle */}
-                <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-slate-400 text-[11px] sm:text-xs tracking-[0.2em] mb-8 uppercase"
-                >
-                    Loading Portfolio...
-                </motion.p>
+        .content {
+          position: relative; z-index: 10;
+          display: flex; flex-direction: column; align-items: center;
+          width: 100%; max-width: min(280px, 90vw);
+        }
+        @media (min-width: 640px) { .content { max-width: 384px; } }
 
-                {/* Progress track */}
-                <motion.div
-                    initial={{ opacity: 0, scaleX: 0 }}
-                    animate={{ opacity: 1, scaleX: 1 }}
-                    transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full h-[3px] bg-white/10 rounded-full overflow-hidden mb-3 relative origin-left"
-                >
-                    <motion.div
-                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-indigo-500 shadow-[0_0_15px_rgba(168,85,247,0.5)]"
-                        style={{ width: `${progress}%` }}
-                    />
-                </motion.div>
+        .title {
+          color: #fff;
+          font-size: clamp(1rem, 2.5vw, 1.5rem);
+          font-weight: 600; letter-spacing: 0.05em;
+          margin-bottom: 4px;
+          animation: slideUp 0.8s 0.1s cubic-bezier(0.16,1,0.3,1) both;
+        }
+        .subtitle {
+          color: #94a3b8;
+          font-size: clamp(10px, 1.5vw, 12px);
+          letter-spacing: 0.2em; text-transform: uppercase;
+          margin-bottom: 32px;
+          animation: slideUp 0.8s 0.3s cubic-bezier(0.16,1,0.3,1) both;
+        }
+        @keyframes slideUp {
+          from { opacity: 0; translate: 0 16px }
+          to   { opacity: 1; translate: 0 0 }
+        }
 
-                {/* Percentage text */}
-                <motion.div
-                    className="text-slate-500 text-[10px] sm:text-xs font-mono font-medium tracking-widest"
-                    initial={{ opacity: 0, y: -5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
-                >
-                    {progress}%
-                </motion.div>
+        .track {
+          width: 100%; height: 3px;
+          background: rgba(255,255,255,0.1);
+          border-radius: 9999px; overflow: hidden;
+          margin-bottom: 12px;
+          animation: expandTrack 0.8s 0.4s cubic-bezier(0.16,1,0.3,1) both;
+          transform-origin: left;
+        }
+        @keyframes expandTrack {
+          from { opacity: 0; transform: scaleX(0) }
+          to   { opacity: 1; transform: scaleX(1) }
+        }
+
+        .bar {
+          height: 100%;
+          background: linear-gradient(to right, #a855f7, #d946ef, #6366f1);
+          box-shadow: 0 0 15px rgba(168,85,247,0.5);
+          transform-origin: left;
+          transform: scaleX(0);
+          will-change: transform;
+        }
+
+        .pct {
+          color: #64748b;
+          font-size: clamp(10px, 1.5vw, 12px);
+          font-family: ui-monospace, monospace;
+          font-weight: 500; letter-spacing: 0.15em;
+          animation: fadeIn 0.5s 0.6s ease both;
+        }
+        @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+      `}</style>
+
+            <div className="blob blob-1" />
+            <div className="blob blob-2" />
+
+            <div className="content">
+                <h1 className="title">Abhinav Shrestha</h1>
+                <p className="subtitle">Loading Portfolio...</p>
+                <div className="track">
+                    <div className="bar" ref={barRef} />
+                </div>
+                <span className="pct">{progress}%</span>
             </div>
-        </motion.div>
+        </div>
     );
 };
 
