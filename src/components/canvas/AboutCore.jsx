@@ -2,20 +2,53 @@ import { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Float, Sphere, MeshDistortMaterial, Text, Preload } from "@react-three/drei";
 
+// ── Canvas config constants — stable R3F references ───────────────────────────
+const CAMERA = { position: [0, 0, 7], fov: 45 };
+const GL = { antialias: true, alpha: true, powerPreference: "high-performance" };
+const DPR = [1, 2];
+const PERF = { min: 0.5 };
+const STYLE = { touchAction: "none" };
+
+// ── Light positions — stable arrays ──────────────────────────────────────────
+const DIR_LIGHT_1_POS = [10, 10, 5];
+const DIR_LIGHT_2_POS = [-10, -10, -5];
+
+// ── Geometry args — stable, defined once ─────────────────────────────────────
+const SPHERE_INNER_ARGS = [1.2, 32, 32];
+const SPHERE_MID_ARGS = [1.7, 24, 24];
+const SPHERE_OUTER_ARGS = [2.0, 10, 10];
+
+// ── Float props — stable objects per label ────────────────────────────────────
+const FLOAT_OUTER = { speed: 2, rotationIntensity: 0.5, floatIntensity: 1 };
+// rotationIntensity={0} on text floats prevents unwanted text tumbling
+const FLOAT_TEXT_BASE = { rotationIntensity: 0, floatIntensity: 0.5 };
+
+// ── OrbitControls props — stable object ──────────────────────────────────────
+const ORBIT_PROPS = { enableZoom: false, enablePan: false, autoRotate: true, autoRotateSpeed: 0.8 };
+
+// ── Shared font URL — defined once, not duplicated per Text node ──────────────
+const FONT_URL = "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf";
+
+// ── Text label data — defined once, not inline ───────────────────────────────
+const LABELS = [
+    { text: "Structured", color: "#60a5fa", fontSize: 0.30, position: [1.5, 1.2, 0], speed: 2.0 },
+    { text: "Secure", color: "#c084fc", fontSize: 0.25, position: [-1.7, -1.0, 0.5], speed: 2.5 },
+    { text: "Scalable", color: "#93c5fd", fontSize: 0.30, position: [0, -2.0, 1], speed: 1.5 },
+];
+
+// ── CoreShape ─────────────────────────────────────────────────────────────────
+
 const CoreShape = () => {
     const groupRef = useRef();
 
-    useFrame((state, delta) => {
-        if (groupRef.current) {
-            groupRef.current.rotation.y += delta * 0.12; // Slightly slower for elegance
-            groupRef.current.rotation.x += delta * 0.08;
-        }
+    useFrame((_, delta) => {
+        groupRef.current.rotation.y += delta * 0.12;
+        groupRef.current.rotation.x += delta * 0.08;
     });
 
     return (
         <group ref={groupRef}>
-            {/* Inner distorted sphere representing dynamic core logic */}
-            <Sphere args={[1.2, 32, 32]}> {/* Reduced segments from 64 to 32 */}
+            <Sphere args={SPHERE_INNER_ARGS}>
                 <MeshDistortMaterial
                     color="#1e3a8a"
                     distort={0.4}
@@ -25,86 +58,52 @@ const CoreShape = () => {
                 />
             </Sphere>
 
-            {/* Outer wireframe sphere indicating "structure & architecture" */}
-            <Sphere args={[1.7, 24, 24]}> {/* Reduced segments */}
+            <Sphere args={SPHERE_MID_ARGS}>
                 <meshStandardMaterial color="#3b82f6" wireframe transparent opacity={0.3} />
             </Sphere>
 
-            {/* Outer geometric frame for "security & scalable" bounds */}
-            <Sphere args={[2.0, 10, 10]}> {/* Reduced segments */}
+            <Sphere args={SPHERE_OUTER_ARGS}>
                 <meshStandardMaterial color="#8b5cf6" wireframe transparent opacity={0.15} />
             </Sphere>
 
-            {/* Orbiting text highlighting core values */}
-            <Float speed={2} rotationIntensity={0} floatIntensity={0.5} position={[1.5, 1.2, 0]}>
-                <Text
-                    fontSize={0.3}
-                    font="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf"
-                    color="#60a5fa"
-                    anchorX="center"
-                    anchorY="middle"
-                >
-                    Structured
-                </Text>
-            </Float>
-            <Float speed={2.5} rotationIntensity={0} floatIntensity={0.5} position={[-1.7, -1.0, 0.5]}>
-                <Text
-                    fontSize={0.25}
-                    font="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf"
-                    color="#c084fc"
-                    anchorX="center"
-                    anchorY="middle"
-                >
-                    Secure
-                </Text>
-            </Float>
-            <Float speed={1.5} rotationIntensity={0} floatIntensity={0.5} position={[0, -2.0, 1]}>
-                <Text
-                    fontSize={0.3}
-                    font="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf"
-                    color="#93c5fd"
-                    anchorX="center"
-                    anchorY="middle"
-                >
-                    Scalable
-                </Text>
-            </Float>
+            {LABELS.map((l) => (
+                <Float key={l.text} {...FLOAT_TEXT_BASE} speed={l.speed} position={l.position}>
+                    <Text
+                        fontSize={l.fontSize}
+                        font={FONT_URL}
+                        color={l.color}
+                        anchorX="center"
+                        anchorY="middle"
+                    >
+                        {l.text}
+                    </Text>
+                </Float>
+            ))}
         </group>
     );
 };
 
-const AboutCoreCanvas = () => {
-    return (
-        <div className="w-full h-[300px] md:h-[450px] lg:h-full min-h-[300px] md:min-h-[450px] relative">
-            {/* Subtle glow behind the 3D shape (Optimized with radial gradient) */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-[radial-gradient(circle,rgba(168,85,247,0.15)_0%,transparent_50%)] rounded-full pointer-events-none" />
+// ── AboutCoreCanvas ───────────────────────────────────────────────────────────
 
-            <Suspense fallback={null}>
-                <Canvas
-                    camera={{ position: [0, 0, 7], fov: 45 }}
-                    gl={{
-                        antialias: true,
-                        alpha: true,
-                        powerPreference: "high-performance"
-                    }}
-                    dpr={[1, 2]} // Cap pixel ratio
-                    performance={{ min: 0.5 }}
-                    style={{ touchAction: 'none' }}
-                >
-                    <ambientLight intensity={0.6} />
-                    <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffffff" />
-                    <directionalLight position={[-10, -10, -5]} intensity={1} color="#8b5cf6" />
+const AboutCoreCanvas = () => (
+    <div className="w-full h-[300px] md:h-[450px] lg:h-full min-h-[300px] md:min-h-[450px] relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-[radial-gradient(circle,rgba(168,85,247,0.15)_0%,transparent_50%)] rounded-full pointer-events-none" />
 
-                    <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-                        <CoreShape />
-                    </Float>
+        <Suspense fallback={null}>
+            <Canvas camera={CAMERA} gl={GL} dpr={DPR} performance={PERF} style={STYLE}>
+                <ambientLight intensity={0.6} />
+                <directionalLight position={DIR_LIGHT_1_POS} intensity={1.5} color="#ffffff" />
+                <directionalLight position={DIR_LIGHT_2_POS} intensity={1} color="#8b5cf6" />
 
-                    <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.8} />
-                    <Preload all />
-                </Canvas>
-            </Suspense>
-        </div>
-    );
-};
+                <Float {...FLOAT_OUTER}>
+                    <CoreShape />
+                </Float>
+
+                <OrbitControls {...ORBIT_PROPS} />
+                <Preload all />
+            </Canvas>
+        </Suspense>
+    </div>
+);
 
 export default AboutCoreCanvas;
