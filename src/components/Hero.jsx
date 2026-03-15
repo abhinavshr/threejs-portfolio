@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Download, ChevronsRight } from "lucide-react";
+import DownloadButton from "./DownloadButton";
 
 // Lazy-load the heavy 3D canvas — only fetched after main content renders
 const GeometricCoreCanvas = lazy(() => import("./canvas/GeometricCore"));
@@ -120,16 +121,10 @@ const Hero = () => (
                             </span>
                         </a>
 
-                        <a
-                            href="/CV/Abhinav_Shrestha.html"
-                            download="Abhinav_Shrestha_Resume.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-slate-700 text-slate-200 font-bold rounded-lg transition-all hover:border-blue-500 hover:text-white hover:bg-slate-800"
-                        >
-                            <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
-                            Download Resume
-                        </a>
+                        <DownloadButton 
+                            href="/CV/Abhinav_Shrestha.html" 
+                            fileName="Abhinav_Shrestha_Resume.html" 
+                        />
                     </motion.div>
                 </motion.div>
             </div>
