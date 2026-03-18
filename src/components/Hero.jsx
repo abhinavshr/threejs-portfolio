@@ -3,11 +3,10 @@ import { motion } from "framer-motion";
 import { Download, ChevronsRight } from "lucide-react";
 import DownloadButton from "./DownloadButton";
 
-// Lazy-load the heavy 3D canvas — only fetched after main content renders
+// Lazy loading the 3D canvas component to optimize initial page load
 const GeometricCoreCanvas = lazy(() => import("./canvas/GeometricCore"));
 
-// Static data lives outside the component: never re-created on re-render,
-// never needs useMemo.
+// Static background tech stack elements
 const BACKGROUND_TECHS = [
     { name: "Laravel", x: "10%", y: "20%", duration: "9.5s", delay: "0.5s" },
     { name: "MySQL", x: "85%", y: "15%", duration: "11.2s", delay: "1.2s" },
@@ -19,7 +18,7 @@ const BACKGROUND_TECHS = [
     { name: "System Architecture", x: "15%", y: "50%", duration: "8.5s", delay: "1.1s" },
 ];
 
-// Entry animation variants — defined once, shared across elements
+// Framer Motion animation variants for entry effects
 const fadeSlideLeft = {
     hidden: { opacity: 0, x: -50 },
     show: { opacity: 1, x: 0 },
@@ -35,11 +34,7 @@ const Hero = () => (
         id="hero"
         className="relative w-full min-h-screen mx-auto overflow-hidden bg-slate-950 text-white flex items-center pt-32 sm:pt-40 lg:pt-20 pb-10"
     >
-        {/*
-         * Background floaters — pure CSS keyframe animation.
-         * Zero JS overhead vs the previous Framer Motion approach.
-         * The keyframes are injected once via a <style> tag.
-         */}
+        {/* Background floating text animation styles defined purely in CSS for performance */}
         <style>{`
             @keyframes floatText {
                 0%, 100% { transform: translateY(0);    opacity: 0.1; }
@@ -137,10 +132,7 @@ const Hero = () => (
                 transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
             >
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
-                {/*
-                 * Suspense lets the rest of the page render immediately while
-                 * the heavy GeometricCoreCanvas bundle is fetched in the background.
-                 */}
+                {/* Show a loading pulse animation while the 3D scene finishes loading */}
                 <Suspense fallback={<div className="w-32 h-32 rounded-full bg-slate-800 animate-pulse" />}>
                     <GeometricCoreCanvas />
                 </Suspense>

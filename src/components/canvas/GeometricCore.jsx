@@ -2,40 +2,34 @@ import { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Float, Sphere, MeshDistortMaterial, Edges, Preload } from "@react-three/drei";
 
-// ── Canvas config constants — stable R3F references ───────────────────────────
-// The original used useState + useEffect + resize listener to switch camera
-// position between 3 breakpoints. But R3F's camera.position is only read on
-// mount — updating it via setState after mount doesn't actually move the camera
-// without manually calling camera.updateProjectionMatrix(). The resize approach
-// was broken AND expensive. CSS already handles the canvas container size;
-// a single mid-range fov value covers all viewports fine.
+// Global canvas configuration for React Three Fiber
 const CAMERA = { position: [0, 0, 8], fov: 45 };
 const GL = { antialias: true, alpha: true, powerPreference: "high-performance" };
 const DPR = [1, 2];
 const PERF = { min: 0.5 };
 
-// ── Light positions — stable arrays ──────────────────────────────────────────
+// 3D Scene lighting positions
 const DIR_LIGHT_POS = [10, 10, 5];
 const POINT_LIGHT_1_POS = [-10, -10, -5];
 const POINT_LIGHT_2_POS = [0, -5, 5];
 
-// ── Geometry args — stable, defined once ─────────────────────────────────────
+// Parameters for 3D geometries
 const SPHERE_ARGS = [1.2, 24, 24];
 const ICO_ARGS = [2.2, 1];
 const TORUS_A_ARGS = [3, 0.05, 12, 64];
 const TORUS_B_ARGS = [3.2, 0.02, 12, 64];
 
-// ── Rotation constants ────────────────────────────────────────────────────────
+// Initial rotations for specific meshes
 const TORUS_A_ROTATION = [Math.PI / 4, 0, 0];
 const TORUS_B_ROTATION = [0, Math.PI / 3, 0];
 
-// ── Float props — stable object ───────────────────────────────────────────────
+// Hover floating animation properties
 const FLOAT_PROPS = { speed: 2, rotationIntensity: 1.5, floatIntensity: 2 };
 
-// ── OrbitControls props — stable object ──────────────────────────────────────
+// Camera interaction configuration
 const ORBIT_PROPS = { enableZoom: false, enablePan: false, autoRotate: true, autoRotateSpeed: 0.5 };
 
-// ── CoreShape ─────────────────────────────────────────────────────────────────
+// Component for the central interactive 3D object
 
 const CoreShape = () => {
     const groupRef = useRef();
@@ -81,7 +75,7 @@ const CoreShape = () => {
     );
 };
 
-// ── GeometricCoreCanvas ───────────────────────────────────────────────────────
+// Main Canvas container that renders the 3D scene
 
 const GeometricCoreCanvas = () => (
     <div className="w-full h-full z-10 relative">
