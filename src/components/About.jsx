@@ -2,10 +2,10 @@ import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Server, Database, Code, Cpu } from "lucide-react";
 
-// Lazy-load heavy 3D canvas — fetched only after main content paints
+// Lazy loading the 3D canvas component to optimize initial page load
 const AboutCoreCanvas = lazy(() => import("./canvas/AboutCore"));
 
-// Static data and variants outside component — never re-created on re-render
+// Data for the Core Strengths section
 const CORE_STRENGTHS = [
     { icon: <Cpu className="w-5 h-5 text-blue-400" />, label: "Backend Architecture" },
     { icon: <Database className="w-5 h-5 text-purple-400" />, label: "Database Design" },
@@ -23,7 +23,7 @@ const stagger = {
     visible: { transition: { staggerChildren: 0.2 } },
 };
 
-// Shared viewport config — defined once, not inline on every render
+// Viewport configurations for scroll animations
 const VIEWPORT_100 = { once: true, margin: "-100px" };
 const VIEWPORT_50 = { once: true, margin: "-50px" };
 
@@ -32,7 +32,7 @@ const About = () => (
         id="about"
         className="relative w-full min-h-screen bg-slate-950 text-white flex flex-col justify-center py-16 md:py-24 overflow-hidden"
     >
-        {/* Radial gradient glows — no JS, no blur filter cost */}
+        {/* Background radial gradient glows */}
         <div className="absolute top-1/4 left-1/4 w-[40rem] h-[40rem] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,rgba(30,58,138,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-[50rem] h-[50rem] translate-x-1/4 translate-y-1/4 bg-[radial-gradient(circle,rgba(88,28,135,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
 
