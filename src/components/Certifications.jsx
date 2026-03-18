@@ -75,14 +75,20 @@ const VIEWPORT_DEF = { once: true };
 
 // ── Certifications ────────────────────────────────────────────────────────────
 
+/**
+ * Certifications Component
+ * The main section that renders professional certificates and awards.
+ * Organizes certifications into categories (Cloud, Backend, etc.).
+ */
 const Certifications = () => (
     <section
         id="certifications"
         className="relative w-full min-h-screen bg-slate-950 py-20 md:py-24 overflow-hidden flex flex-col justify-center"
     >
+        {/* The 3D background with floating distorted badges */}
         <CertificationsCanvas />
 
-        {/* Section heading */}
+        {/* Section Heading Container */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full mb-16">
             <motion.div
                 initial="hidden"
@@ -104,7 +110,7 @@ const Certifications = () => (
             </motion.div>
         </div>
 
-        {/* Category cards */}
+        {/* Category Cards Container */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 {CERTIFICATION_CATEGORIES.map((category, catIndex) => (
@@ -116,6 +122,7 @@ const Certifications = () => (
                         transition={{ duration: 0.8 }}
                         className="bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl"
                     >
+                        {/* Category Header: Displays title and category icon */}
                         <div className="flex items-center gap-4 mb-6 md:mb-8">
                             <div className="bg-slate-800 p-2.5 md:p-3 rounded-2xl ring-1 ring-slate-700 shadow-inner shrink-0">
                                 <span className="[&>svg]:w-5 [&>svg]:h-5 md:[&>svg]:w-6 md:[&>svg]:h-6">
@@ -127,6 +134,7 @@ const Certifications = () => (
                             </h3>
                         </div>
 
+                        {/* Certificate List: Maps through certificates in the specific category */}
                         <div className="space-y-6">
                             {category.certs.map((cert) => (
                                 <div
@@ -137,6 +145,7 @@ const Certifications = () => (
                                         <h4 className="text-slate-100 font-bold text-base md:text-lg group-hover:text-blue-400 transition-colors">
                                             {cert.name}
                                         </h4>
+                                        {/* External link to credential verification if available */}
                                         {cert.url && (
                                             <a
                                                 href={cert.url}
@@ -151,6 +160,7 @@ const Certifications = () => (
                                     <p className="text-slate-400 text-sm leading-relaxed mb-2">
                                         {cert.description}
                                     </p>
+                                    {/* Displays Credential ID if present in the data */}
                                     {cert.id && (
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg">
                                             <Award className="w-3 h-3 text-indigo-400" />
@@ -167,7 +177,7 @@ const Certifications = () => (
             </div>
         </div>
 
-        {/* Footer quote */}
+        {/* Footer Reflection Quote */}
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
