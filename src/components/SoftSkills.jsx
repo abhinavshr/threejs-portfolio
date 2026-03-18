@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import SoftSkillsCanvas from "./canvas/SoftSkillsCanvas";
 import { BrainCircuit, RefreshCw, ShieldCheck, MessageSquareText, Lightbulb, Users } from "lucide-react";
 
-// ── Static data & variants outside component ──────────────────────────────────
+// Soft skills data including icons and descriptions
 
 const SOFT_SKILLS = [
     {
@@ -48,11 +48,11 @@ const fadeUp = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-// Shared viewport configs — stable object references, never inline
+// Viewport configurations for scroll animations
 const VIEWPORT_100 = { once: true, margin: "-100px" };
 const VIEWPORT_50 = { once: true, margin: "-50px" };
 
-// ── SoftSkills ────────────────────────────────────────────────────────────────
+// Main Soft Skills section component highlighting professional mindset
 
 const SoftSkills = () => (
     <section
