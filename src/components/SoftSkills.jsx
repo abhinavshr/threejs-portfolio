@@ -91,10 +91,13 @@ const SoftSkills = () => (
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={VIEWPORT_50}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
+                        /* Interactive Card: Uses a combination of glassmorphism and pointer-based hover effects. */
                         className="group relative bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-2xl p-6 md:p-8 flex flex-col items-center text-center transition-all duration-300 hover:border-indigo-500/50 hover:bg-slate-900/80 shadow-lg hover:shadow-[0_0_30px_rgba(99,102,241,0.1)] overflow-hidden cursor-default"
                     >
+                        {/* Dynamic Radial Gradient: Visibility toggled via group-hover for a soft lighting effect */}
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.1)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
+                        {/* Icon Container: Uses negative translation on hover for a floating effect */}
                         <div className="bg-slate-800/80 p-5 rounded-2xl mb-5 shadow-inner relative z-10 transition-transform duration-300 group-hover:-translate-y-2 group-hover:bg-slate-800 ring-1 ring-slate-700">
                             {skill.icon}
                         </div>
@@ -103,6 +106,11 @@ const SoftSkills = () => (
                             {skill.title}
                         </h3>
 
+                        {/* 
+                          * Collapsible Description: 
+                          * Hidden on desktop by default (max-h-0/opacity-0) and expands on hover.
+                          * On mobile, it remains visible for accessibility and ease of reading.
+                        */}
                         <div className="relative z-10 md:max-h-0 md:opacity-0 group-hover:max-h-60 group-hover:opacity-100 transition-all duration-500 ease-in-out md:overflow-hidden text-slate-400 text-sm md:text-base leading-relaxed md:mt-0 group-hover:mt-4">
                             <p className="pt-4 md:pt-0 border-t border-slate-800 md:border-transparent group-hover:border-slate-800 transition-colors duration-300">
                                 {skill.description}
