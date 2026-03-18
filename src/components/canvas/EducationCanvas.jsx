@@ -34,25 +34,37 @@ const PILLARS = [
 
 const GROUP_POSITION = [0, 0, -3];
 
-// ── AcademicPillar ────────────────────────────────────────────────────────────
-
+/**
+ * AcademicPillar Component
+ * Renders a complex 3D shape consisting of a central wireframe cylinder 
+ * and two solid rotating rings (toruses).
+ */
 const AcademicPillar = ({ position, color, scale, speed }) => {
     const nodeRef = useRef();
 
+    /**
+     * Animation Loop (useFrame)
+     * Rotates the pillar group on its axes at a constant rate.
+     */
     useFrame((_, delta) => {
+        // Continuous rotation for visual dynamicism
         nodeRef.current.rotation.y += delta * 0.4 * speed;
         nodeRef.current.rotation.x += delta * 0.1 * speed;
     });
 
     return (
+        /* Float: A wrapper from '@react-three/drei' that adds an automatic floating animation */
         <Float {...FLOAT_PROPS} position={position}>
             <group ref={nodeRef} scale={scale}>
+                {/* Main Pillar Body: A low-opacity wireframe cylinder */}
                 <Cylinder args={CYLINDER_ARGS} rotation={CYLINDER_ROTATION}>
                     <meshStandardMaterial color={color} transparent opacity={0.15} wireframe />
                 </Cylinder>
+                {/* Decorative Ring A: Fast-rotating torus */}
                 <Torus args={TORUS_A_ARGS} rotation={TORUS_A_ROTATION}>
                     <meshBasicMaterial color={color} transparent opacity={0.6} />
                 </Torus>
+                {/* Decorative Ring B: Slow-rotating outer torus at a different angle */}
                 <Torus args={TORUS_B_ARGS} rotation={TORUS_B_ROTATION}>
                     <meshBasicMaterial color={color} transparent opacity={0.3} />
                 </Torus>
@@ -61,17 +73,24 @@ const AcademicPillar = ({ position, color, scale, speed }) => {
     );
 };
 
-// ── EducationTimelineGroup ────────────────────────────────────────────────────
-
+/**
+ * EducationTimelineGroup Component
+ * Manages the layout and slow rotation of the entire pillar cluster.
+ */
 const EducationTimelineGroup = () => {
     const groupRef = useRef();
 
+    /**
+     * Animation Loop (useFrame)
+     * Rotates the entire scene group slowly for a cinematic effect.
+     */
     useFrame((_, delta) => {
         groupRef.current.rotation.y += delta * 0.05;
     });
 
     return (
         <group ref={groupRef} position={GROUP_POSITION}>
+            {/* Map through the static pillar data to render individual floating nodes */}
             {PILLARS.map((p) => (
                 <AcademicPillar key={p.color} {...p} />
             ))}
@@ -79,18 +98,30 @@ const EducationTimelineGroup = () => {
     );
 };
 
-// ── EducationCanvas ───────────────────────────────────────────────────────────
-
+/**
+ * EducationCanvas Component
+ * Sets up the 3D environment including lights and the main timeline group.
+ */
 const EducationCanvas = () => (
     <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
         <Suspense fallback={null}>
             <Canvas camera={CAMERA} gl={GL} dpr={DPR} performance={PERF}>
+                {/* 
+                  * Scene Lighting:
+                  * ambientLight for base visibility, directionalLight for shadows/depth
+                */}
                 <ambientLight intensity={1} />
                 <directionalLight position={DIR_LIGHT_POS} intensity={1.5} color="#ffffff" />
+                
                 <EducationTimelineGroup />
                 <Preload all />
             </Canvas>
         </Suspense>
+        
+        {/*
+          * Background Overlays:
+          * These gradients help the 3D scene integrate into the rest of the dark UI.
+        */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-transparent to-slate-950" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,6,23,0.9)_100%)]" />
     </div>
