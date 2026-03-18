@@ -2,26 +2,27 @@ import { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Grid, Preload } from "@react-three/drei";
 
-// ── Camera config outside component — stable object reference ─────────────────
+// Global camera configuration for the 3D grid scene
 const CAMERA = { position: [0, 2, 5], fov: 60 };
 
-// ── GL config outside component — never recreated ─────────────────────────────
+// WebGL renderer configuration
 const GL = {
     antialias: false,       // Off — massive saving on a grid background
     alpha: true,
     powerPreference: "high-performance",
 };
 
-// ── DPR bounds — low ceiling for a background canvas ─────────────────────────
+// Device Pixel Ratio settings for performance
 const DPR = [1, 1.5];
 
-// ── Performance hint ──────────────────────────────────────────────────────────
+// Performance optimization threshold
 const PERF = { min: 0.5 };
 
-// ── Grid group rotation — computed once, not inline ──────────────────────────
+// Initial position and rotation for the grid plane
 const GRID_ROTATION = [-Math.PI / 2.5, 0, 0];
 const GRID_POSITION = [0, -3, -10];
 
+// Component for the animated scrolling technical grid
 const DataGridBackground = () => {
     const gridRef = useRef();
 
@@ -35,13 +36,17 @@ const DataGridBackground = () => {
         <group rotation={GRID_ROTATION} position={GRID_POSITION}>
             <Grid
                 ref={gridRef}
+                /* Grid Dimensions: 60x60 units is large enough to cover the view comfortably */
                 args={[60, 60]}
+                /* Cell size (inner squares) and thickness of the lines */
                 cellSize={1}
                 cellThickness={0.5}
                 cellColor="#1e3a8a"
+                /* Section size (larger grid squares, groups of 4x4 cells) */
                 sectionSize={4}
                 sectionThickness={1}
                 sectionColor="#3b82f6"
+                /* Fading properties: The grid softly fades as it gets further from the camera */
                 fadeDistance={25}
                 fadeStrength={1}
             />
@@ -58,8 +63,10 @@ const SkillsCanvas = () => (
                 dpr={DPR}
                 performance={PERF}
             >
+                {/* Global soft light to illuminate the grid evenly */}
                 <ambientLight intensity={0.5} />
                 <DataGridBackground />
+                {/* Pre-fetches all assets to prevent stuttering during initial interaction */}
                 <Preload all />
             </Canvas>
         </Suspense>
