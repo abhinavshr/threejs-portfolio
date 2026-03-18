@@ -45,18 +45,25 @@ const VIEWPORT_DEF = { once: true };
 
 // ── Experience ────────────────────────────────────────────────────────────────
 
+/**
+ * Experience Component
+ * The main section that renders the professional timeline.
+ * It uses an alternating layout (left/right) for wide screens and 
+ * a single column for smaller devices.
+ */
 const Experience = () => (
     <section
         id="experience"
         className="relative w-full py-20 md:py-24 bg-slate-950 overflow-hidden flex flex-col items-center"
     >
+        {/* The 3D background with floating green particles */}
         <ExperienceCanvas />
 
-        {/* Ambient glows — pure CSS, zero JS */}
+        {/* Ambient glows — pure CSS radial gradients for mood lighting */}
         <div className="absolute top-1/3 left-10 w-[40rem] h-[40rem] bg-[radial-gradient(circle,rgba(30,58,138,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
         <div className="absolute bottom-1/3 right-10 w-[40rem] h-[40rem] bg-[radial-gradient(circle,rgba(6,95,70,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
 
-        {/* Section heading */}
+        {/* Section heading container */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full mb-16">
             <motion.div
                 initial="hidden"
@@ -78,8 +85,9 @@ const Experience = () => (
             </motion.div>
         </div>
 
-        {/* Timeline */}
+        {/* Timeline container */}
         <div className="max-w-4xl mx-auto px-6 lg:px-12 w-full relative z-10">
+            {/* The vertical line in the middle of the timeline */}
             <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-slate-700 to-transparent transform -translate-x-1/2" />
 
             <div className="space-y-16">
@@ -90,12 +98,14 @@ const Experience = () => (
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={VIEWPORT_50}
                         transition={{ duration: 0.8, delay: index * 0.2 }}
+                        /* Alternates flex order using index % 2 */
                         className={`group relative flex flex-col md:flex-row items-start md:items-center justify-between w-full${index % 2 === 0 ? " md:flex-row-reverse" : ""
                             }`}
                     >
-                        {/* Timeline node */}
+                        {/* Timeline node icon */}
                         <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center">
                             <span className={`relative flex h-14 w-14 items-center justify-center rounded-full bg-slate-900 border-2 border-slate-700 z-10 ${exp.borderFocus} transition-colors duration-500`}>
+                                {/* Pulse animation on hover */}
                                 <span className={`absolute inline-flex h-full w-full rounded-full bg-gradient-to-r ${exp.color} opacity-20 group-hover:animate-ping`} />
                                 <span className={`relative inline-flex rounded-full h-10 w-10 items-center justify-center bg-slate-800 ${exp.shadow}`}>
                                     {exp.icon}
@@ -103,7 +113,7 @@ const Experience = () => (
                             </span>
                         </div>
 
-                        {/* Content card */}
+                        {/* Experience Card Content */}
                         <div className={`w-full md:w-5/12 pl-20 md:pl-0${index % 2 === 0
                             ? " md:pl-10 text-left md:text-left"
                             : " md:pr-10 text-left md:text-right"
@@ -127,7 +137,7 @@ const Experience = () => (
                                         {exp.keyProject}
                                     </p>
                                 </div>
-                                {/* Arrow connecting to timeline */}
+                                {/* The small arrow tip connecting the card to the central timeline node */}
                                 <div className={`hidden md:block absolute top-1/2 transform -translate-y-1/2 w-0 h-0 border-y-8 border-y-transparent border-slate-800 transition-colors duration-500 ${exp.arrowColor}${index % 2 === 0
                                     ? " left-0 -translate-x-full border-r-8"
                                     : " right-0 translate-x-full border-l-8"
@@ -137,7 +147,7 @@ const Experience = () => (
                     </motion.div>
                 ))}
 
-                {/* Footer badge */}
+                {/* Closing decorative badge */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
