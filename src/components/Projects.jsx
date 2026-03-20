@@ -62,7 +62,14 @@ const cardVariant = {
     visible: { opacity: 1, scale: 1 },
 };
 
-// Small pure components to avoid inline re-renders
+/**
+ * GithubLinks Component
+ * Dynamically renders GitHub links based on the input type.
+ * Supports both a single URL string or an array of repository objects.
+ * 
+ * @param {string|Array} github - The GitHub URL or an array of {label, url} objects.
+ * @param {string} className - Optional CSS classes for the links.
+ */
 const GithubLinks = ({ github, className = "" }) =>
     Array.isArray(github) ? (
         github.map((repo, i) => (
@@ -77,13 +84,30 @@ const GithubLinks = ({ github, className = "" }) =>
         </a>
     ) : null;
 
+/**
+ * TechBadge Component
+ * Renders a small badge for individual technologies in the tech stack.
+ * 
+ * @param {string} tech - The technology name to display.
+ */
 const TechBadge = ({ tech }) => (
     <span className="px-3 py-1 bg-slate-800 border border-slate-700 rounded-full text-xs font-mono text-slate-300">
         {tech}
     </span>
 );
 
+/**
+ * Projects Component
+ * The main section that renders the portfolio projects.
+ * It separates projects into a "featured" layout (larger cards) 
+ * and a "rest" layout (grid of smaller cards).
+ */
 const Projects = () => {
+    /**
+     * useMemo Hook
+     * Segregates the projectsList into featured and non-featured arrays.
+     * This avoids re-filtering on every component render.
+     */
     const [featured, rest] = useMemo(() => {
         const f = projectsList.filter(p => p.featured);
         const r = projectsList.filter(p => !p.featured);
@@ -95,9 +119,10 @@ const Projects = () => {
             id="projects"
             className="relative w-full min-h-screen bg-slate-950 py-16 md:py-24 overflow-hidden flex flex-col justify-center"
         >
+            {/* The 3D constellation background scene */}
             <ProjectsCanvas />
 
-            {/* Header */}
+            {/* Header Section */}
             <div className="max-w-7xl mx-auto px-4 md:px-12 xl:px-20 relative z-10 w-full mb-10 md:mb-16">
                 <motion.div
                     initial="hidden" whileInView="visible"
@@ -121,7 +146,7 @@ const Projects = () => {
             </div>
 
             <div className="max-w-7xl mx-auto px-4 md:px-12 xl:px-20 relative z-10 w-full">
-                {/* Featured */}
+                {/* Featured Projects: Displayed in a semi-row layout with blue glow effects */}
                 {featured.map((project) => (
                     <motion.div
                         key={project.id}
@@ -131,6 +156,7 @@ const Projects = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="group flex flex-col lg:flex-row gap-8 lg:gap-12 bg-slate-900/60 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 md:p-12 shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-400/60 transition-colors mb-10 overflow-hidden relative"
                     >
+                        {/* Decorative radial glow */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] rounded-full pointer-events-none" />
 
                         <div className="flex-1 flex flex-col justify-center relative z-10">
@@ -158,7 +184,7 @@ const Projects = () => {
                     </motion.div>
                 ))}
 
-                {/* Grid */}
+                {/* Secondary Projects Grid: Standard grid of smaller cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch pt-6">
                     {rest.map((project, index) => (
                         <motion.div
@@ -167,7 +193,7 @@ const Projects = () => {
                             viewport={{ once: true, margin: "-50px" }}
                             variants={cardVariant}
                             transition={{ duration: 0.6, delay: index * 0.15 }}
-                            // CSS hover translate — no JS listener per card
+                            /* Hover effect: Translates card upwards slightly */
                             className="hover:-translate-y-1.5 transition-transform bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 md:p-8 flex flex-col relative overflow-hidden group hover:bg-slate-900/70 hover:border-slate-700 hover:shadow-[0_20px_40px_-20px_rgba(99,102,241,0.2)] shadow-lg"
                         >
                             <div className="absolute top-0 right-0 w-48 h-48 bg-[radial-gradient(circle,rgba(168,85,247,0.1)_0%,transparent_70%)] rounded-full pointer-events-none" />
@@ -177,6 +203,7 @@ const Projects = () => {
                                     {project.title}
                                 </h3>
                                 <div className="flex gap-3 text-slate-400">
+                                    {/* Action links: Lock for confidential, ExternalLink for live, and custom GitHub helper */}
                                     {project.confidential && <Lock className="w-6 h-6 text-red-400" />}
                                     {project.live && (
                                         <a href={project.live} target="_blank" rel="noopener noreferrer"
