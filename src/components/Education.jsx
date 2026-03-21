@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import EducationCanvas from "./canvas/EducationCanvas";
-import { GraduationCap, BookOpen, ScrollText } from "lucide-react";
+import { GraduationCap, BookOpen, ScrollText, SearchX } from "lucide-react";
 
 // ── Static data & variants outside component ──────────────────────────────────
 
@@ -84,55 +84,71 @@ const Education = () => (
         {/* Timeline Cards Container */}
         <div className="max-w-5xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full mb-16">
             <div className="flex flex-col gap-12">
-                {EDUCATION_DETAILS.map((edu, index) => (
+                {EDUCATION_DETAILS.length > 0 ? (
+                    EDUCATION_DETAILS.map((edu, index) => (
+                        <motion.div
+                            key={edu.id}
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={VIEWPORT_50}
+                            transition={{ duration: 0.8, delay: index * 0.2 }}
+                            className="relative flex flex-row gap-4 md:gap-10 items-start group"
+                        >
+                            {/* Timeline connector: A vertical line that stops at the last element */}
+                            {index !== LAST_EDU_IDX && (
+                                <div className="absolute left-8 md:left-[3.25rem] top-20 md:top-24 bottom-[-3.5rem] md:bottom-[-3rem] w-0.5 bg-gradient-to-b from-slate-700 to-transparent" />
+                            )}
+
+                            {/* Icon Pillar: A container for the graduation/book icons with a floating hover effect */}
+                            <div className="relative z-10 flex shrink-0 w-16 md:w-28 flex-col items-center">
+                                <div className="w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-slate-900 border border-slate-800 shadow-lg flex items-center justify-center shrink-0 group-hover:bg-slate-800 transition-colors group-hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] group-hover:-translate-y-1 transform duration-500 [&>svg]:w-6 [&>svg]:h-6 md:[&>svg]:w-8 md:[&>svg]:h-8">
+                                    {edu.icon}
+                                </div>
+                            </div>
+
+                            {/* High-level Content Panel using Glassmorphism */}
+                            <div className={`flex-1 bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-6 md:p-8 ${edu.borderHoverClass} transition-all shadow-lg relative overflow-hidden group-hover:shadow-[0_10px_30px_-15px_rgba(99,102,241,0.2)] w-full`}>
+                                {/* Inner radial glow that enhances on hover */}
+                                <div className="absolute -top-24 -right-24 w-64 h-64 bg-[radial-gradient(circle,rgba(59,130,246,0.1)_0%,transparent_70%)] rounded-full pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] transition-colors duration-700" />
+
+                                <div className="flex items-start justify-between mb-4 flex-col sm:flex-row sm:items-center gap-4">
+                                    <div>
+                                        <span className={`${edu.highlightClass} font-bold tracking-wider uppercase text-xs md:text-sm mb-2 block`}>
+                                            {edu.highlight}
+                                        </span>
+                                        <h3 className="text-xl md:text-2xl font-bold text-slate-100">{edu.degree}</h3>
+                                    </div>
+                                    <div className="bg-slate-800/80 px-4 py-1.5 rounded-full border border-slate-700 text-slate-300 text-sm whitespace-nowrap md:ml-auto font-mono">
+                                        {edu.period}
+                                    </div>
+                                </div>
+
+                                <div className="mb-6 pb-6 border-b border-slate-800/60">
+                                    <h4 className="text-lg font-semibold text-slate-300">{edu.institution}</h4>
+                                    <p className="text-indigo-300/80 text-sm mt-1">{edu.affiliation}</p>
+                                </div>
+
+                                <p className="text-slate-400 leading-relaxed text-sm md:text-base relative z-10">
+                                    {edu.description}
+                                </p>
+                            </div>
+                        </motion.div>
+                    ))
+                ) : (
                     <motion.div
-                        key={edu.id}
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={VIEWPORT_50}
-                        transition={{ duration: 0.8, delay: index * 0.2 }}
-                        className="relative flex flex-row gap-4 md:gap-10 items-start group"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl text-center"
                     >
-                        {/* Timeline connector: A vertical line that stops at the last element */}
-                        {index !== LAST_EDU_IDX && (
-                            <div className="absolute left-8 md:left-[3.25rem] top-20 md:top-24 bottom-[-3.5rem] md:bottom-[-3rem] w-0.5 bg-gradient-to-b from-slate-700 to-transparent" />
-                        )}
-
-                        {/* Icon Pillar: A container for the graduation/book icons with a floating hover effect */}
-                        <div className="relative z-10 flex shrink-0 w-16 md:w-28 flex-col items-center">
-                            <div className="w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-slate-900 border border-slate-800 shadow-lg flex items-center justify-center shrink-0 group-hover:bg-slate-800 transition-colors group-hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] group-hover:-translate-y-1 transform duration-500 [&>svg]:w-6 [&>svg]:h-6 md:[&>svg]:w-8 md:[&>svg]:h-8">
-                                {edu.icon}
-                            </div>
+                        <div className="p-6 bg-slate-800/50 rounded-full mb-6 border border-slate-700/50 text-slate-400">
+                            <SearchX className="w-12 h-12" />
                         </div>
-
-                        {/* High-level Content Panel using Glassmorphism */}
-                        <div className={`flex-1 bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-6 md:p-8 ${edu.borderHoverClass} transition-all shadow-lg relative overflow-hidden group-hover:shadow-[0_10px_30px_-15px_rgba(99,102,241,0.2)] w-full`}>
-                            {/* Inner radial glow that enhances on hover */}
-                            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[radial-gradient(circle,rgba(59,130,246,0.1)_0%,transparent_70%)] rounded-full pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] transition-colors duration-700" />
-
-                            <div className="flex items-start justify-between mb-4 flex-col sm:flex-row sm:items-center gap-4">
-                                <div>
-                                    <span className={`${edu.highlightClass} font-bold tracking-wider uppercase text-xs md:text-sm mb-2 block`}>
-                                        {edu.highlight}
-                                    </span>
-                                    <h3 className="text-xl md:text-2xl font-bold text-slate-100">{edu.degree}</h3>
-                                </div>
-                                <div className="bg-slate-800/80 px-4 py-1.5 rounded-full border border-slate-700 text-slate-300 text-sm whitespace-nowrap md:ml-auto font-mono">
-                                    {edu.period}
-                                </div>
-                            </div>
-
-                            <div className="mb-6 pb-6 border-b border-slate-800/60">
-                                <h4 className="text-lg font-semibold text-slate-300">{edu.institution}</h4>
-                                <p className="text-indigo-300/80 text-sm mt-1">{edu.affiliation}</p>
-                            </div>
-
-                            <p className="text-slate-400 leading-relaxed text-sm md:text-base relative z-10">
-                                {edu.description}
-                            </p>
-                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-3">Academic Records Unavailable</h3>
+                        <p className="text-slate-400 max-w-md">
+                            It looks like there aren't any academic journey details to display at the moment.
+                        </p>
                     </motion.div>
-                ))}
+                )}
             </div>
         </div>
 
