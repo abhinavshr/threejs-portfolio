@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import CertificationsCanvas from "./canvas/CertificationsCanvas";
-import { ExternalLink, Award } from "lucide-react";
-import { Cloud, Code } from "lucide-react";
+import { ExternalLink, Award, SearchX, Cloud, Code } from "lucide-react";
 
 // ── Static data & variants outside component ──────────────────────────────────
 
@@ -113,67 +112,83 @@ const Certifications = () => (
         {/* Category Cards Container */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                {CERTIFICATION_CATEGORIES.map((category, catIndex) => (
-                    <motion.div
-                        key={category.title}
-                        initial={{ opacity: 0, x: CAT_INITIAL_X[catIndex] }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={VIEWPORT_50}
-                        transition={{ duration: 0.8 }}
-                        className="bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl"
-                    >
-                        {/* Category Header: Displays title and category icon */}
-                        <div className="flex items-center gap-4 mb-6 md:mb-8">
-                            <div className="bg-slate-800 p-2.5 md:p-3 rounded-2xl ring-1 ring-slate-700 shadow-inner shrink-0">
-                                <span className="[&>svg]:w-5 [&>svg]:h-5 md:[&>svg]:w-6 md:[&>svg]:h-6">
-                                    {category.icon}
-                                </span>
+                {CERTIFICATION_CATEGORIES.length > 0 ? (
+                    CERTIFICATION_CATEGORIES.map((category, catIndex) => (
+                        <motion.div
+                            key={category.title}
+                            initial={{ opacity: 0, x: CAT_INITIAL_X[catIndex] }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={VIEWPORT_50}
+                            transition={{ duration: 0.8 }}
+                            className="bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl"
+                        >
+                            {/* Category Header: Displays title and category icon */}
+                            <div className="flex items-center gap-4 mb-6 md:mb-8">
+                                <div className="bg-slate-800 p-2.5 md:p-3 rounded-2xl ring-1 ring-slate-700 shadow-inner shrink-0">
+                                    <span className="[&>svg]:w-5 [&>svg]:h-5 md:[&>svg]:w-6 md:[&>svg]:h-6">
+                                        {category.icon}
+                                    </span>
+                                </div>
+                                <h3 className="text-lg md:text-2xl font-bold text-white tracking-tight leading-tight">
+                                    {category.title}
+                                </h3>
                             </div>
-                            <h3 className="text-lg md:text-2xl font-bold text-white tracking-tight leading-tight">
-                                {category.title}
-                            </h3>
-                        </div>
 
-                        {/* Certificate List: Maps through certificates in the specific category */}
-                        <div className="space-y-6">
-                            {category.certs.map((cert) => (
-                                <div
-                                    key={cert.name}
-                                    className="group relative bg-slate-800/20 border border-slate-800/50 rounded-2xl p-5 md:p-6 hover:border-blue-500/30 transition-all duration-300"
-                                >
-                                    <div className="flex justify-between items-start mb-2">
-                                        <h4 className="text-slate-100 font-bold text-base md:text-lg group-hover:text-blue-400 transition-colors">
-                                            {cert.name}
-                                        </h4>
-                                        {/* External link to credential verification if available */}
-                                        {cert.url && (
-                                            <a
-                                                href={cert.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-slate-500 hover:text-white transition-colors p-1 shrink-0"
-                                            >
-                                                <ExternalLink className="w-4 h-4 md:w-5 md:h-5" />
-                                            </a>
+                            {/* Certificate List: Maps through certificates in the specific category */}
+                            <div className="space-y-6">
+                                {category.certs.map((cert) => (
+                                    <div
+                                        key={cert.name}
+                                        className="group relative bg-slate-800/20 border border-slate-800/50 rounded-2xl p-5 md:p-6 hover:border-blue-500/30 transition-all duration-300"
+                                    >
+                                        <div className="flex justify-between items-start mb-2">
+                                            <h4 className="text-slate-100 font-bold text-base md:text-lg group-hover:text-blue-400 transition-colors">
+                                                {cert.name}
+                                            </h4>
+                                            {/* External link to credential verification if available */}
+                                            {cert.url && (
+                                                <a
+                                                    href={cert.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-slate-500 hover:text-white transition-colors p-1 shrink-0"
+                                                >
+                                                    <ExternalLink className="w-4 h-4 md:w-5 md:h-5" />
+                                                </a>
+                                            )}
+                                        </div>
+                                        <p className="text-slate-400 text-sm leading-relaxed mb-2">
+                                            {cert.description}
+                                        </p>
+                                        {/* Displays Credential ID if present in the data */}
+                                        {cert.id && (
+                                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg">
+                                                <Award className="w-3 h-3 text-indigo-400" />
+                                                <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">
+                                                    ID: {cert.id.substring(0, 12)}...
+                                                </span>
+                                            </div>
                                         )}
                                     </div>
-                                    <p className="text-slate-400 text-sm leading-relaxed mb-2">
-                                        {cert.description}
-                                    </p>
-                                    {/* Displays Credential ID if present in the data */}
-                                    {cert.id && (
-                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg">
-                                            <Award className="w-3 h-3 text-indigo-400" />
-                                            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">
-                                                ID: {cert.id.substring(0, 12)}...
-                                            </span>
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
+                                ))}
+                            </div>
+                        </motion.div>
+                    ))
+                ) : (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl text-center"
+                    >
+                        <div className="p-6 bg-slate-800/50 rounded-full mb-6 border border-slate-700/50 text-slate-400">
+                            <SearchX className="w-12 h-12" />
                         </div>
+                        <h3 className="text-2xl font-bold text-white mb-3">No Certifications Yet</h3>
+                        <p className="text-slate-400 max-w-md">
+                            It looks like there aren't any certifications or awards to display at the moment.
+                        </p>
                     </motion.div>
-                ))}
+                )}
             </div>
         </div>
 
