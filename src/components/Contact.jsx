@@ -47,14 +47,21 @@ const VIEWPORT_DEF = { once: true };
 
 // ── Contact ───────────────────────────────────────────────────────────────────
 
+/**
+ * Contact Component
+ * The final section of the portfolio that handles outreach and social links.
+ * It features a split layout: a textual invitation on the left and 
+ * an interactive grid of contact cards on the right.
+ */
 const Contact = () => (
     <section
         id="contact"
         className="relative w-full py-16 md:py-24 bg-slate-950 overflow-hidden flex flex-col justify-center"
     >
+        {/* The 3D background with floating distorted 'connection' spheres */}
         <ContactCanvas />
 
-        {/* Section heading */}
+        {/* Section Heading Container */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full mb-10 md:mb-16">
             <motion.div
                 initial="hidden"
@@ -79,7 +86,7 @@ const Contact = () => (
         <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
 
-                {/* Outreach content */}
+                {/* Left Panel: Outreach & Availability */}
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -88,6 +95,7 @@ const Contact = () => (
                     className="flex flex-col justify-center space-y-6 md:space-y-8"
                 >
                     <div className="bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-3xl p-6 md:p-10 shadow-xl relative overflow-hidden group">
+                        {/* Dynamic radial glow that highlights on hover */}
                         <div className="absolute top-0 left-0 w-32 h-32 bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] rounded-full pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(59,130,246,0.2)_0%,transparent_70%)] transition-colors duration-700" />
 
                         <h3 className="text-xl md:text-2xl font-bold text-white mb-6 flex items-center gap-3">
@@ -112,7 +120,7 @@ const Contact = () => (
                         </div>
                     </div>
 
-                    {/* Availability badge */}
+                    {/* Status Badge: Pulse animation to indicate active status */}
                     <div className="bg-slate-900/30 border border-slate-800 rounded-2xl p-4 md:p-6 flex items-center gap-4">
                         <div className="w-2.5 h-2.5 md:w-3 md:h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
                         <p className="text-slate-400 text-xs md:text-sm font-medium">
@@ -121,7 +129,7 @@ const Contact = () => (
                     </div>
                 </motion.div>
 
-                {/* Contact links grid */}
+                {/* Right Panel: Interactive Contact Grid */}
                 <motion.div
                     initial={{ opacity: 0, x: 30 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -137,6 +145,7 @@ const Contact = () => (
                             rel="noopener noreferrer"
                             className="group relative bg-slate-900/40 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-3xl hover:border-blue-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 flex flex-col justify-between overflow-hidden"
                         >
+                            {/* Inner radial glow specific to individual contact cards */}
                             <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle,rgba(59,130,246,0.1)_0%,transparent_70%)] rounded-full pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] transition-colors" />
 
                             <div className="flex justify-between items-start relative z-10">
