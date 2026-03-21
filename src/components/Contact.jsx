@@ -169,6 +169,70 @@ const Contact = () => (
 
             </div>
         </div>
+
+        {/* 
+          * Professional Footer Component
+          * Acts as the final visual anchor for the entire portfolio.
+          * It incorporates branding, technical credits, and legal information in a 
+          * responsive, high-fidelity layout.
+          */}
+        <footer className="mt-20 md:mt-32 pt-10 border-t border-slate-900/50 w-full relative z-10">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                {/* 
+                  * Branding Section
+                  * Consists of a symbolic initial badge ('AS') and full-name attribution.
+                  * Uses a high-contrast gradient to maintain visual hierarchy.
+                  */}
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/10">
+                        <span className="text-white font-black text-xl italic select-none">AS</span>
+                    </div>
+                    <div>
+                        <p className="text-slate-100 font-bold tracking-tight leading-none">Abhinav Shrestha</p>
+                        <p className="text-slate-500 text-[10px] uppercase font-black tracking-widest mt-1">Full Stack Developer</p>
+                    </div>
+                </div>
+
+                {/* 
+                  * Technical Stack Credits
+                  * Explains the core frameworks and libraries that power the site.
+                  * This sections humanizes the development effort and serves as a dev-to-dev nod.
+                  */}
+                <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 text-slate-500 text-xs md:text-sm font-medium">
+                    {/* Built with Three.js: Highlights the 3D graphics capability */}
+                    <span className="flex items-center gap-2 hover:text-blue-400 transition-colors cursor-default">
+                        Built with <span className="text-blue-400">Three.js</span>
+                    </span>
+                    <span className="w-1 h-1 bg-slate-800 rounded-full hidden sm:block" />
+                    {/* Powered by React: Highlights the robust component architecture */}
+                    <span className="flex items-center gap-2 hover:text-indigo-400 transition-colors cursor-default">
+                        Powered by <span className="text-indigo-400">React</span>
+                    </span>
+                    <span className="w-1 h-1 bg-slate-800 rounded-full hidden sm:block" />
+                    {/* Styled with Tailwind: Highlights the modern styling utility */}
+                    <span className="flex items-center gap-2 hover:text-purple-400 transition-colors cursor-default">
+                        Styled with <span className="text-purple-400">Tailwind</span>
+                    </span>
+                </div>
+
+                {/* 
+                  * Legal & Copyright Section
+                  * Uses standard JS Date() to ensure the year is always current.
+                  * Positions at the end of the flex container for visual balance.
+                  */}
+                <div className="text-slate-500 text-xs md:text-sm text-right">
+                    <p>© {new Date().getFullYear()} All Rights Reserved.</p>
+                </div>
+            </div>
+            
+            {/* 
+              * Finishing Decorative Glow
+              * A subtle horizontal line with a radial fade that ensures the 
+              * 3D background doesn't appear as a 'hard cut' at the very bottom.
+              */}
+            <div className="w-full h-1 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
+        </footer>
     </section>
 );
 
