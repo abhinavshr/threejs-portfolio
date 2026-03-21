@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import SkillsCanvas from "./canvas/SkillsCanvas";
-import { Server, Layout, Database, Smartphone, Wrench } from "lucide-react";
+import { Server, Layout, Database, Smartphone, Wrench, SearchX } from "lucide-react";
 
 // Technical skill categories and their proficiency levels
 
@@ -128,46 +128,62 @@ const Skills = () => (
 
         <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full text-left">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start">
-                {SKILL_CATEGORIES.map((category, catIdx) => (
-                    <motion.div
-                        key={category.title}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={VIEWPORT_50}
-                        transition={{ duration: 0.8, delay: catIdx * 0.1 }}
-                        whileHover={cardHover}
-                        // Stylistic Card Container: Uses glassmorphism effects (backdrop-blur) and custom hovers.
-                        className="bg-slate-900/40 backdrop-blur-md border border-slate-800/50 rounded-2xl p-6 md:p-8 flex flex-col relative overflow-hidden group shadow-xl hover:shadow-[0_20px_50px_-15px_rgba(79,70,229,0.3)] hover:border-indigo-500/50 transition-all duration-500"
-                    >
-                        {/* 
-                          * Radial Glows: These absolute elements create the glowing corners on hover.
-                          * The transition is handled via the 'group-hover' class.
-                        */}
-                        <div className="absolute -top-16 -right-16 w-48 h-48 bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] rounded-full group-hover:bg-[radial-gradient(circle,rgba(99,102,241,0.25)_0%,transparent_70%)] transition-all duration-700 pointer-events-none z-0" />
-                        <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-[radial-gradient(circle,rgba(168,85,247,0.1)_0%,transparent_70%)] rounded-full group-hover:bg-[radial-gradient(circle,rgba(168,85,247,0.2)_0%,transparent_70%)] transition-all duration-700 pointer-events-none z-0" />
+                {SKILL_CATEGORIES.length > 0 ? (
+                    SKILL_CATEGORIES.map((category, catIdx) => (
+                        <motion.div
+                            key={category.title}
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={VIEWPORT_50}
+                            transition={{ duration: 0.8, delay: catIdx * 0.1 }}
+                            whileHover={cardHover}
+                            // Stylistic Card Container: Uses glassmorphism effects (backdrop-blur) and custom hovers.
+                            className="bg-slate-900/40 backdrop-blur-md border border-slate-800/50 rounded-2xl p-6 md:p-8 flex flex-col relative overflow-hidden group shadow-xl hover:shadow-[0_20px_50px_-15px_rgba(79,70,229,0.3)] hover:border-indigo-500/50 transition-all duration-500"
+                        >
+                            {/* 
+                              * Radial Glows: These absolute elements create the glowing corners on hover.
+                              * The transition is handled via the 'group-hover' class.
+                            */}
+                            <div className="absolute -top-16 -right-16 w-48 h-48 bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] rounded-full group-hover:bg-[radial-gradient(circle,rgba(99,102,241,0.25)_0%,transparent_70%)] transition-all duration-700 pointer-events-none z-0" />
+                            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-[radial-gradient(circle,rgba(168,85,247,0.1)_0%,transparent_70%)] rounded-full group-hover:bg-[radial-gradient(circle,rgba(168,85,247,0.2)_0%,transparent_70%)] transition-all duration-700 pointer-events-none z-0" />
 
-                        <h3 className="text-xl md:text-2xl font-bold text-white mb-8 flex items-center gap-4 relative z-10">
-                            {/* Icon Wrapper: High contrast background with ring-effect on hover */}
-                            <div className="flex-shrink-0 p-2.5 bg-slate-800/90 rounded-xl border border-slate-700/50 shadow-lg group-hover:scale-110 group-hover:border-indigo-500/50 transition-all duration-500">
-                                {category.icon}
+                            <h3 className="text-xl md:text-2xl font-bold text-white mb-8 flex items-center gap-4 relative z-10">
+                                {/* Icon Wrapper: High contrast background with ring-effect on hover */}
+                                <div className="flex-shrink-0 p-2.5 bg-slate-800/90 rounded-xl border border-slate-700/50 shadow-lg group-hover:scale-110 group-hover:border-indigo-500/50 transition-all duration-500">
+                                    {category.icon}
+                                </div>
+                                <span className="tracking-tight">{category.title}</span>
+                            </h3>
+
+                            <div className="flex flex-col relative z-10">
+                                {category.skills.map((skill, skillIdx) => (
+                                    <SkillBar
+                                        key={skill.name}
+                                        index={skillIdx}
+                                        name={skill.name}
+                                        level={skill.level}
+                                    />
+                                ))}
                             </div>
-                            <span className="tracking-tight">{category.title}</span>
-                        </h3>
 
-                        <div className="flex flex-col relative z-10">
-                            {category.skills.map((skill, skillIdx) => (
-                                <SkillBar
-                                    key={skill.name}
-                                    index={skillIdx}
-                                    name={skill.name}
-                                    level={skill.level}
-                                />
-                            ))}
+                            <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-slate-900/80 to-transparent pointer-events-none z-0" />
+                        </motion.div>
+                    ))
+                ) : (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-900/40 backdrop-blur-md border border-slate-800/50 rounded-3xl text-center"
+                    >
+                        <div className="p-6 bg-slate-800/50 rounded-full mb-6 border border-slate-700/50 text-slate-400">
+                            <SearchX className="w-12 h-12" />
                         </div>
-
-                        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-slate-900/80 to-transparent pointer-events-none z-0" />
+                        <h3 className="text-2xl font-bold text-white mb-3">No Skills Found</h3>
+                        <p className="text-slate-400 max-w-md">
+                            It looks like there aren't any skill categories to display at the moment. Please check back later or contact me for more information.
+                        </p>
                     </motion.div>
-                ))}
+                )}
             </div>
         </div>
     </section>
