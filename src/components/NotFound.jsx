@@ -89,7 +89,7 @@ function Scene() {
 
 const NotFound = () => {
     return (
-        <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-slate-100 relative overflow-hidden">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center text-slate-900 dark:text-slate-100 relative overflow-hidden">
             {/* 3D Background */}
             <div className="absolute inset-0 z-0 opacity-80 w-full h-full pointer-events-none">
                 <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
@@ -115,7 +115,7 @@ const NotFound = () => {
                     <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600 drop-shadow-sm">
                         Lost in Space
                     </h2>
-                    <p className="text-slate-300 text-lg md:text-xl max-w-md mx-auto font-light">
+                    <p className="text-slate-700 dark:text-slate-300 text-lg md:text-xl max-w-md mx-auto font-light">
                         The page you're looking for has drifted off into another dimension.
                     </p>
                 </motion.div>
@@ -136,7 +136,7 @@ const NotFound = () => {
 
                     <button
                         onClick={() => window.history.back()}
-                        className="group px-8 py-4 text-slate-300 hover:text-white border border-slate-800 hover:border-slate-600 rounded-full font-medium text-lg flex items-center justify-center gap-2 transition-all hover:bg-slate-900/50 backdrop-blur-sm"
+                        className="group px-8 py-4 text-slate-700 dark:text-slate-300 hover:text-white border border-slate-200 dark:border-slate-800 hover:border-slate-600 rounded-full font-medium text-lg flex items-center justify-center gap-2 transition-all hover:bg-slate-100 dark:bg-slate-900/50 backdrop-blur-sm"
                     >
                         <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
                         <span>Go Back</span>

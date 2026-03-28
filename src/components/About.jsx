@@ -30,7 +30,7 @@ const VIEWPORT_50 = { once: true, margin: "-50px" };
 const About = () => (
     <section
         id="about"
-        className="relative w-full min-h-screen bg-slate-950 text-white flex flex-col justify-center py-16 md:py-24 overflow-hidden"
+        className="relative w-full min-h-screen bg-slate-50 dark:bg-slate-950 text-white flex flex-col justify-center py-16 md:py-24 overflow-hidden"
     >
         {/* Background radial gradient glows */}
         <div className="absolute top-1/4 left-1/4 w-[40rem] h-[40rem] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,rgba(30,58,138,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
@@ -62,7 +62,7 @@ const About = () => (
                     whileInView="visible"
                     viewport={VIEWPORT_50}
                     variants={stagger}
-                    className="flex flex-col space-y-6 text-slate-300 order-2 lg:order-1 text-base md:text-lg leading-relaxed px-2 md:px-0"
+                    className="flex flex-col space-y-6 text-slate-700 dark:text-slate-300 order-2 lg:order-1 text-base md:text-lg leading-relaxed px-2 md:px-0"
                 >
                     <motion.p variants={fadeUp} className="text-center lg:text-left">
                         I am a full stack developer, having completed my college degree in 2025, with a strong focus on backend systems and robust applications. Rather than just experimenting with code, I am passionate about building real-world software that solves practical problems—like my Laravel-based College Finder platform focused on Nepal. My approach is rooted in turning ideas into structured systems with proper database design, clean code architecture, and secure backend logic.
@@ -78,19 +78,19 @@ const About = () => (
 
                     {/* Core Strengths */}
                     <motion.div variants={fadeUp} className="pt-6">
-                        <h3 className="text-xl font-bold text-slate-100 mb-4 tracking-wide text-center lg:text-left">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4 tracking-wide text-center lg:text-left">
                             Core Strengths
                         </h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {CORE_STRENGTHS.map((strength) => (
                                 <div
                                     key={strength.label}
-                                    className="flex items-center gap-3 bg-slate-900/50 border border-slate-800 rounded-lg p-3 shadow-sm hover:border-slate-700 transition-colors"
+                                    className="flex items-center gap-3 bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-lg p-3 shadow-sm hover:border-slate-300 dark:border-slate-700 transition-colors"
                                 >
-                                    <div className="bg-slate-800/80 p-2 rounded-md shrink-0">
+                                    <div className="bg-slate-200 dark:bg-slate-800/80 p-2 rounded-md shrink-0">
                                         {strength.icon}
                                     </div>
-                                    <span className="font-medium text-slate-200 text-sm md:text-base">
+                                    <span className="font-medium text-slate-800 dark:text-slate-200 text-sm md:text-base">
                                         {strength.label}
                                     </span>
                                 </div>
@@ -108,7 +108,7 @@ const About = () => (
                     className="w-full h-full order-1 lg:order-2 flex justify-center items-center relative"
                 >
                     <Suspense fallback={
-                        <div className="w-64 h-64 rounded-full bg-slate-800 animate-pulse" />
+                        <div className="w-64 h-64 rounded-full bg-slate-200 dark:bg-slate-800 animate-pulse" />
                     }>
                         <AboutCoreCanvas />
                     </Suspense>

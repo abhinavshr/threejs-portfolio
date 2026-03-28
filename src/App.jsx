@@ -80,7 +80,7 @@ function Home() {
   }, []);
 
   return (
-    <main className="bg-slate-950 min-h-screen text-slate-100 font-sans relative">
+    <main className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-900 dark:text-slate-100 font-sans relative">
       <AnimatePresence mode="wait">
         {!loadingComplete && (
           <LoadingScreen key="loading" onComplete={() => setLoadingComplete(true)} />

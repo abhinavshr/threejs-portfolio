@@ -57,7 +57,7 @@ const VIEWPORT_50 = { once: true, margin: "-50px" };
 const SoftSkills = () => (
     <section
         id="soft-skills"
-        className="relative w-full min-h-screen bg-slate-950 py-24 overflow-hidden flex flex-col justify-center"
+        className="relative w-full min-h-screen bg-slate-50 dark:bg-slate-950 py-24 overflow-hidden flex flex-col justify-center"
     >
         <SoftSkillsCanvas />
 
@@ -69,13 +69,13 @@ const SoftSkills = () => (
                 variants={fadeUp}
                 className="text-center"
             >
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-white px-4">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white px-4">
                     Professional{" "}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
                         Mindset
                     </span>
                 </h2>
-                <p className="text-slate-400 max-w-3xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed mb-8 px-6">
+                <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed mb-8 px-6">
                     Technical skills demonstrate what I can build, but soft skills define how I build it. I approach full stack development methodically, prioritizing architecture, adaptability, and clear communication.
                 </p>
                 <div className="w-20 md:w-24 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
@@ -93,17 +93,17 @@ const SoftSkills = () => (
                             viewport={VIEWPORT_50}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             /* Interactive Card: Uses a combination of glassmorphism and pointer-based hover effects. */
-                            className="group relative bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-2xl p-6 md:p-8 flex flex-col items-center text-center transition-all duration-300 hover:border-indigo-500/50 hover:bg-slate-900/80 shadow-lg hover:shadow-[0_0_30px_rgba(99,102,241,0.1)] overflow-hidden cursor-default"
+                            className="group relative bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 flex flex-col items-center text-center transition-all duration-300 hover:border-indigo-500/50 hover:bg-slate-100 dark:bg-slate-900/80 shadow-lg hover:shadow-[0_0_30px_rgba(99,102,241,0.1)] overflow-hidden cursor-default"
                         >
                             {/* Dynamic Radial Gradient: Visibility toggled via group-hover for a soft lighting effect */}
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.1)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
                             {/* Icon Container: Uses negative translation on hover for a floating effect */}
-                            <div className="bg-slate-800/80 p-5 rounded-2xl mb-5 shadow-inner relative z-10 transition-transform duration-300 group-hover:-translate-y-2 group-hover:bg-slate-800 ring-1 ring-slate-700">
+                            <div className="bg-slate-200 dark:bg-slate-800/80 p-5 rounded-2xl mb-5 shadow-inner relative z-10 transition-transform duration-300 group-hover:-translate-y-2 group-hover:bg-slate-200 dark:bg-slate-800 ring-1 ring-slate-700">
                                 {skill.icon}
                             </div>
 
-                            <h3 className="text-lg md:text-xl font-bold text-slate-200 mb-2 relative z-10 transition-colors duration-300 group-hover:text-white group-hover:drop-shadow-md">
+                            <h3 className="text-lg md:text-xl font-bold text-slate-800 dark:text-slate-200 mb-2 relative z-10 transition-colors duration-300 group-hover:text-white group-hover:drop-shadow-md">
                                 {skill.title}
                             </h3>
 
@@ -112,8 +112,8 @@ const SoftSkills = () => (
                               * Hidden on desktop by default (max-h-0/opacity-0) and expands on hover.
                               * On mobile, it remains visible for accessibility and ease of reading.
                             */}
-                            <div className="relative z-10 md:max-h-0 md:opacity-0 group-hover:max-h-60 group-hover:opacity-100 transition-all duration-500 ease-in-out md:overflow-hidden text-slate-400 text-sm md:text-base leading-relaxed md:mt-0 group-hover:mt-4">
-                                <p className="pt-4 md:pt-0 border-t border-slate-800 md:border-transparent group-hover:border-slate-800 transition-colors duration-300">
+                            <div className="relative z-10 md:max-h-0 md:opacity-0 group-hover:max-h-60 group-hover:opacity-100 transition-all duration-500 ease-in-out md:overflow-hidden text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed md:mt-0 group-hover:mt-4">
+                                <p className="pt-4 md:pt-0 border-t border-slate-200 dark:border-slate-800 md:border-transparent group-hover:border-slate-200 dark:border-slate-800 transition-colors duration-300">
                                     {skill.description}
                                 </p>
                             </div>
@@ -123,13 +123,13 @@ const SoftSkills = () => (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl text-center"
+                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-3xl text-center"
                     >
-                        <div className="p-6 bg-slate-800/50 rounded-full mb-6 border border-slate-700/50 text-slate-400">
+                        <div className="p-6 bg-slate-200 dark:bg-slate-800/50 rounded-full mb-6 border border-slate-300 dark:border-slate-700/50 text-slate-600 dark:text-slate-400">
                             <SearchX className="w-12 h-12" />
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-3">No Insights Found</h3>
-                        <p className="text-slate-400 max-w-md">
+                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">No Insights Found</h3>
+                        <p className="text-slate-600 dark:text-slate-400 max-w-md">
                             It looks like there aren't any soft skills or professional insights to display at the moment.
                         </p>
                     </motion.div>

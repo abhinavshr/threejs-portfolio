@@ -32,7 +32,7 @@ const Offline = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-slate-950 flex flex-col items-center justify-center overflow-hidden font-sans">
+    <div className="relative w-full h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center overflow-hidden font-sans">
       {/* Three.js Backgrounds */}
       <AnimatePresence mode="wait">
         {!isPlaying ? (
@@ -72,7 +72,7 @@ const Offline = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, y: -20 }}
-              className="bg-slate-900/40 backdrop-blur-xl p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl inline-block"
+              className="bg-slate-100 dark:bg-slate-900/40 backdrop-blur-xl p-8 md:p-12 rounded-3xl border border-slate-200 dark:border-white/10 shadow-2xl inline-block"
             >
               <div className="flex justify-center mb-6">
                 <div className="w-20 h-20 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-500/30">
@@ -84,7 +84,7 @@ const Offline = () => {
                 Off the Grid
               </h1>
 
-              <p className="text-slate-400 text-lg mb-8 max-w-md mx-auto">
+              <p className="text-slate-600 dark:text-slate-400 text-lg mb-8 max-w-md mx-auto">
                 No internet? No problem. While you wait to reconnect, why not beat your high score?
               </p>
 
@@ -93,7 +93,7 @@ const Offline = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleRetry}
-                  className="flex items-center justify-center gap-2 px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-full font-medium transition-colors border border-white/10 group"
+                  className="flex items-center justify-center gap-2 px-8 py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-700 text-white rounded-full font-medium transition-colors border border-slate-200 dark:border-white/10 group"
                 >
                   <RefreshCcw className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
                   Retry Connection
@@ -126,13 +126,13 @@ const Offline = () => {
               animate={{ opacity: 1, y: 0 }}
               className="fixed top-12 left-0 right-0 pointer-events-none"
             >
-              <div className="inline-block bg-slate-900/60 backdrop-blur-md px-8 py-4 rounded-2xl border border-white/10">
-                <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Current Score</p>
-                <p className="text-4xl font-bold text-white tabular-nums">{score}</p>
+              <div className="inline-block bg-slate-100 dark:bg-slate-900/60 backdrop-blur-md px-8 py-4 rounded-2xl border border-slate-200 dark:border-white/10">
+                <p className="text-slate-600 dark:text-slate-400 text-xs uppercase tracking-widest mb-1">Current Score</p>
+                <p className="text-4xl font-bold text-slate-900 dark:text-white tabular-nums">{score}</p>
               </div>
               
               <div className="fixed bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4 text-slate-500 text-sm">
-                <div className="flex items-center gap-2 bg-slate-900/40 px-3 py-1.5 rounded-lg border border-white/5">
+                <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-900/40 px-3 py-1.5 rounded-lg border border-white/5">
                   <Keyboard className="w-4 h-4" />
                   <span>Use Arrows to Move</span>
                 </div>
@@ -145,10 +145,10 @@ const Offline = () => {
               key="game-over"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-slate-900/60 backdrop-blur-xl p-10 rounded-3xl border border-red-500/20 shadow-2xl inline-block"
+              className="bg-slate-100 dark:bg-slate-900/60 backdrop-blur-xl p-10 rounded-3xl border border-red-500/20 shadow-2xl inline-block"
             >
-              <h2 className="text-5xl font-extrabold text-white mb-2">Game Over</h2>
-              <p className="text-slate-400 mb-8">You managed to dodge {score} obstacles!</p>
+              <h2 className="text-5xl font-extrabold text-slate-900 dark:text-white mb-2">Game Over</h2>
+              <p className="text-slate-600 dark:text-slate-400 mb-8">You managed to dodge {score} obstacles!</p>
               
               <div className="flex flex-col gap-4">
                 <motion.button
@@ -181,9 +181,9 @@ const Offline = () => {
           className="absolute bottom-8 left-0 right-0 text-center"
         >
           <p className="text-slate-600 text-sm uppercase tracking-widest flex items-center justify-center gap-4">
-            <span className="w-8 h-px bg-slate-800"></span>
+            <span className="w-8 h-px bg-slate-200 dark:bg-slate-800"></span>
             Offline Mode
-            <span className="w-8 h-px bg-slate-800"></span>
+            <span className="w-8 h-px bg-slate-200 dark:bg-slate-800"></span>
           </p>
         </motion.div>
       )}

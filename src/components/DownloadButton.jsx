@@ -37,7 +37,7 @@ const DownloadButton = ({ href, fileName }) => {
             disabled={status !== "idle"}
             className={`group relative flex items-center justify-center gap-3 px-8 py-4 bg-transparent border-2 font-bold rounded-lg transition-all duration-300 overflow-hidden min-w-[240px] ${
                 status === "idle" 
-                ? "border-slate-700 text-slate-200 hover:border-blue-500 hover:text-white hover:bg-slate-800" 
+                ? "border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-blue-500 hover:text-white hover:bg-slate-200 dark:bg-slate-800" 
                 : status === "downloading"
                 ? "border-blue-500 text-blue-400 cursor-wait"
                 : "border-emerald-500 text-emerald-400"
