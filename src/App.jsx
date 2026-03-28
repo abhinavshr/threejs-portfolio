@@ -12,6 +12,7 @@ import "./App.css";
 // Lazy load components that are not immediately visible
 const About = lazy(() => import("./components/About"));
 const Skills = lazy(() => import("./components/Skills"));
+const Story = lazy(() => import("./components/Story"));
 const SoftSkills = lazy(() => import("./components/SoftSkills"));
 const Experience = lazy(() => import("./components/Experience"));
 const Education = lazy(() => import("./components/Education"));
@@ -96,6 +97,7 @@ function Home() {
       <Hero />
       <Suspense fallback={<SectionLoader />}>
         <RevealSection><About /></RevealSection>
+        <RevealSection><Story /></RevealSection>
         <RevealSection><Skills /></RevealSection>
         <RevealSection><SoftSkills /></RevealSection>
         <RevealSection><Experience /></RevealSection>
