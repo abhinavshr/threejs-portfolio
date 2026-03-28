@@ -1,24 +1,17 @@
-import { useRef, Suspense } from "react";
+import { useRef, Suspense, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Icosahedron, MeshDistortMaterial, Preload } from "@react-three/drei";
+import { useTheme } from "../../context/ThemeContext";
 
-// ── Canvas config constants — stable R3F references ───────────────────────────
 const CAMERA   = { position: [0, 0, 10], fov: 60 };
 const GL       = { antialias: false, alpha: true, powerPreference: "high-performance" };
 const DPR      = [1, 1.5];
 const PERF     = { min: 0.5 };
 
-// ── Directional light position — stable array ─────────────────────────────────
 const DIR_LIGHT_POS = [10, 10, 5];
-
-// ── Icosahedron geometry args — stable, shared across all badges ──────────────
-// All badges use the same args [1, 0] so one array reference works for all.
 const ICO_ARGS = [1, 0];
-
-// ── Float props — stable per-badge objects (defined once) ─────────────────────
 const FLOAT_BASE = { rotationIntensity: 0.5, floatIntensity: 1 };
 
-// ── Badge layout data ─────────────────────────────────────────────────────────
 const BADGES = [
     { position: [-6,  3, -2], color: "#ff9900", distort: 0.3, speed: 2   },
     { position: [ 6, -3, -1], color: "#3b82f6", distort: 0.5, speed: 1.5 },
@@ -26,78 +19,76 @@ const BADGES = [
     { position: [-5, -4, -3], color: "#10b981", distort: 0.2, speed: 2.5 },
 ];
 
-/**
- * FloatingBadge Component
- * Renders an icosahedron (abstract badge) with a distortion effect.
- * The shape and color vary per instance defined in the BADGES data.
- */
-const FloatingBadge = ({ position, color, distort, speed }) => {
+const FloatingBadge = ({ position, color, distort, speed, mousePos }) => {
     const meshRef = useRef();
+    const floatRef = useRef();
 
-    /**
-     * Animation Loop (useFrame)
-     * Slowly rotates each individual badge on its axes.
-     */
     useFrame((_, delta) => {
-        // Slow constant rotation
-        meshRef.current.rotation.y += delta * 0.2;
-        meshRef.current.rotation.x += delta * 0.1;
+        if (meshRef.current) {
+            meshRef.current.rotation.y += delta * 0.2;
+            meshRef.current.rotation.x += delta * 0.1;
+        }
+
+        if (floatRef.current && mousePos) {
+            const targetX = mousePos.current.y * 0.2;
+            const targetY = mousePos.current.x * 0.2;
+            floatRef.current.rotation.x += (targetX - floatRef.current.rotation.x) * 0.05;
+            floatRef.current.rotation.y += (targetY - floatRef.current.rotation.y) * 0.05;
+        }
     });
 
     return (
-        /* Float: Adds sinusoidal movement (up/down/rotate) to the badge */
-        <Float {...FLOAT_BASE} speed={speed} position={position}>
-            <Icosahedron ref={meshRef} args={ICO_ARGS}>
-                {/* 
-                  * MeshDistortMaterial: Creates a 'shimmering' or 'wobbly' effect 
-                  * to make the certificate badges feel alive and premium.
-                */}
-                <MeshDistortMaterial
-                    color={color}
-                    distort={distort}
-                    speed={speed}
-                    roughness={0.2}
-                    metalness={0.8}
-                    transparent
-                    opacity={0.4}
-                />
-            </Icosahedron>
-        </Float>
+        <group ref={floatRef}>
+            <Float {...FLOAT_BASE} speed={speed} position={position}>
+                <Icosahedron ref={meshRef} args={ICO_ARGS}>
+                    <MeshDistortMaterial
+                        color={color}
+                        distort={distort}
+                        speed={speed}
+                        roughness={0.2}
+                        metalness={0.8}
+                        transparent
+                        opacity={0.4}
+                    />
+                </Icosahedron>
+            </Float>
+        </group>
     );
 };
 
-/**
- * CertificationsCanvas Component
- * The high-level R3F wrapper that renders the cluster of distorted 3D badges.
- */
-const CertificationsCanvas = () => (
-    <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-        <Suspense fallback={null}>
-            <Canvas camera={CAMERA} gl={GL} dpr={DPR} performance={PERF}>
-                {/* 
-                  * Lighting setup: 
-                  * ambientLight for constant brightness, directionalLight for highlights 
-                */}
-                <ambientLight intensity={0.5} />
-                <directionalLight position={DIR_LIGHT_POS} intensity={1} />
-                
-                {/* Map through Badge layout data to render individual floating nodes */}
-                {BADGES.map((b) => (
-                    <FloatingBadge key={b.color} {...b} />
-                ))}
-                
-                {/* Forces R3F to pre-compile materials to prevent jank on first scroll */}
-                <Preload all />
-            </Canvas>
-        </Suspense>
-        
-        {/*
-          * Background Overlays:
-          * Smoothly transitions the 3D scene into the page background.
-        */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-transparent to-slate-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,6,23,0.9)_100%)]" />
-    </div>
-);
+const CertificationsCanvas = () => {
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
+
+    const mousePos = useRef({ x: 0, y: 0 });
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            mousePos.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+            mousePos.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
+    return (
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-50 md:opacity-70 transition-opacity duration-1000">
+            <Suspense fallback={null}>
+                <Canvas camera={CAMERA} gl={GL} dpr={DPR} performance={PERF}>
+                    <ambientLight intensity={0.5} />
+                    <directionalLight position={DIR_LIGHT_POS} intensity={1} color={isDark ? "#ffffff" : "#e2e8f0"} />
+                    
+                    {BADGES.map((b) => (
+                        <FloatingBadge key={b.color} {...b} mousePos={mousePos} />
+                    ))}
+                    
+                    <Preload all />
+                </Canvas>
+            </Suspense>
+            
+            <div className={`absolute inset-0 bg-gradient-to-b ${isDark ? 'from-slate-950 to-slate-950' : 'from-slate-50 to-slate-50'} via-transparent transition-colors duration-700`} />
+            <div className={`absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,${isDark ? 'rgba(2,6,23,0.9)' : 'rgba(248,250,252,0.9)'}_100%)] transition-colors duration-700`} />
+        </div>
+    );
+};
 
 export default CertificationsCanvas;

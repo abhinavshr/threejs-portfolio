@@ -1,7 +1,8 @@
 // ProjectsCanvas.jsx  ─────────────────────────────────────────────
 import { useRef, useMemo, useEffect } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { useTheme } from "../../context/ThemeContext";
 
 // Geometry + material created ONCE outside component (module scope)
 const sphereGeo = new THREE.SphereGeometry(1, 8, 8); // 8×8 is plenty for bg blobs
@@ -30,10 +31,9 @@ const LINE_PAIRS = [
  * Manages the logic for a 3D animated star-constellation background.
  * Uses an instanced mesh for the star nodes and line segments for the connections.
  */
-const ConstellationNodes = () => {
+const ConstellationNodes = ({ isDark }) => {
     const groupRef = useRef();
     const meshRef = useRef();
-    const { invalidate } = useThree();
 
     /**
      * Side Effect: Matrix & Color initialization
@@ -49,11 +49,11 @@ const ConstellationNodes = () => {
             m.makeScale(scale, scale, scale);
             m.setPosition(...pos);
             mesh.setMatrixAt(i, m);
-            mesh.setColorAt(i, c.set(color));
+            mesh.setColorAt(i, c.set(isDark ? color : "#1d4ed8"));
         });
         mesh.instanceMatrix.needsUpdate = true;
         mesh.instanceColor.needsUpdate = true;
-    }, []);
+    }, [isDark]);
 
     /**
      * useMemo Side Effect (Geometry)
@@ -71,30 +71,45 @@ const ConstellationNodes = () => {
      * Builds the shared material for the constellation lines.
      */
     const linesMat = useMemo(() =>
-        new THREE.LineBasicMaterial({ color: "#3b82f6", transparent: true, opacity: 0.25 }),
-        []);
+        new THREE.LineBasicMaterial({ color: isDark ? "#3b82f6" : "#2563eb", transparent: true, opacity: 0.25 }),
+        [isDark]);
+
+    // Track mouse on the window so we don't need pointer events on the canvas wrapper
+    const mousePos = useRef({ x: 0, y: 0 });
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            mousePos.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+            mousePos.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
 
     /**
      * Animation Loop (useFrame)
-     * Handles the slow systemic rotation of the constellation.
-     * Uses 'demand' rendering (invalidate()) to save CPU/GPU cycles.
+     * Handles the slow systemic rotation and continuous interactive mouse tracking.
      */
     useFrame((_, delta) => {
         if (!groupRef.current) return;
-        // Apply slow constant rotation on two axes
+        
+        // Base auto-rotation
         groupRef.current.rotation.y += delta * 0.05;
         groupRef.current.rotation.x += delta * 0.02;
-        // Inform the Canvas that a re-render is needed
-        invalidate();
+
+        // Interactive mouse tracking offset
+        const targetX = mousePos.current.y * 0.3;
+        const targetY = mousePos.current.x * 0.3;
+
+        // Smoothly interpolate current rotation towards target mouse offset
+        groupRef.current.rotation.x += (targetX - groupRef.current.rotation.x) * 0.05;
+        groupRef.current.rotation.y += (targetY - groupRef.current.rotation.y) * 0.05;
     });
 
     return (
         <group ref={groupRef} position={[0, 0, -5]}>
-            {/* The nodes (stars) using InstancedMesh for performance */}
             <instancedMesh ref={meshRef} args={[sphereGeo, sphereMat, NODE_DATA.length]}>
                 <meshBasicMaterial vertexColors />
             </instancedMesh>
-            {/* The connections (constellation lines) */}
             <lineSegments geometry={linesGeo} material={linesMat} />
         </group>
     );
@@ -103,26 +118,26 @@ const ConstellationNodes = () => {
 /**
  * ProjectsCanvas Component
  * Sets up the base R3F environment for the constellation background.
- * Optimized for performance using 'demand' frameloop and fixed DPR.
  */
-const ProjectsCanvas = () => (
-    <div className="absolute inset-0 z-0 pointer-events-none opacity-20 md:opacity-40">
-        <Canvas
-            frameloop="demand"          // Dramatically reduces energy/resource usage
-            camera={{ position: [0, 0, 8], fov: 60 }}
-            gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
-            dpr={1}                     // No high-DPI scaling needed for background aesthetics
-        >
-            <ConstellationNodes />
-        </Canvas>
-        
-        {/*
-          * Thematic Gradients:
-          * Smoothly fade the 3D scene into the page's background colors.
-        */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,6,23,0.9)_100%)]" />
-    </div>
-);
+const ProjectsCanvas = () => {
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
+
+    return (
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-30 md:opacity-50 transition-opacity duration-1000">
+            <Canvas
+                camera={{ position: [0, 0, 8], fov: 60 }}
+                gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
+                dpr={1}
+            >
+                <ConstellationNodes isDark={isDark} />
+            </Canvas>
+            
+            {/* Thematic Gradients */}
+            <div className={`absolute inset-0 bg-gradient-to-t ${isDark ? 'from-slate-950 to-slate-950' : 'from-slate-50 to-slate-50'} via-transparent transition-colors duration-700`} />
+            <div className={`absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,${isDark ? 'rgba(2,6,23,0.9)' : 'rgba(248,250,252,0.9)'}_100%)] transition-colors duration-700`} />
+        </div>
+    );
+};
 
 export default ProjectsCanvas;
