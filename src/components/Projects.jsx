@@ -91,7 +91,7 @@ const GithubLinks = ({ github, className = "" }) =>
  * @param {string} tech - The technology name to display.
  */
 const TechBadge = ({ tech }) => (
-    <span className="px-3 py-1 bg-slate-800 border border-slate-700 rounded-full text-xs font-mono text-slate-300">
+    <span className="px-3 py-1 bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-full text-xs font-mono text-slate-700 dark:text-slate-300">
         {tech}
     </span>
 );
@@ -117,7 +117,7 @@ const Projects = () => {
     return (
         <section
             id="projects"
-            className="relative w-full min-h-screen bg-slate-950 py-16 md:py-24 overflow-hidden flex flex-col justify-center"
+            className="relative w-full min-h-screen bg-slate-50 dark:bg-slate-950 py-16 md:py-24 overflow-hidden flex flex-col justify-center"
         >
             {/* The 3D constellation background scene */}
             <ProjectsCanvas />
@@ -130,13 +130,13 @@ const Projects = () => {
                     variants={fadeUp}
                     className="text-center"
                 >
-                    <h2 className="text-2xl md:text-5xl font-extrabold tracking-tight mb-4 md:mb-6 text-white text-balance">
+                    <h2 className="text-2xl md:text-5xl font-extrabold tracking-tight mb-4 md:mb-6 text-slate-900 dark:text-white text-balance">
                         Production &amp;{" "}
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
                             Live Architecture
                         </span>
                     </h2>
-                    <p className="text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">
+                    <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">
                         I build structured systems, live industry applications, and scalable backends.
                         Here is a curated showcase demonstrating my capability in taking projects from
                         database schema to real-world deployment.
@@ -156,7 +156,7 @@ const Projects = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.8, delay: 0.2 }}
-                                className="group flex flex-col lg:flex-row gap-8 lg:gap-12 bg-slate-900/60 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 md:p-12 shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-400/60 transition-colors mb-10 overflow-hidden relative"
+                                className="group flex flex-col lg:flex-row gap-8 lg:gap-12 bg-slate-100 dark:bg-slate-900/60 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 md:p-12 shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-400/60 transition-colors mb-10 overflow-hidden relative"
                             >
                                 {/* Decorative radial glow */}
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] rounded-full pointer-events-none" />
@@ -165,21 +165,21 @@ const Projects = () => {
                                     <span className="text-blue-400 font-bold tracking-wider uppercase text-sm mb-2">
                                         Primary Highlight
                                     </span>
-                                    <h3 className="text-xl md:text-4xl font-bold text-white mb-4">{project.title}</h3>
+                                    <h3 className="text-xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">{project.title}</h3>
 
                                     <div className="flex flex-wrap gap-2 mb-6">
                                         {project.techStack.map((t, i) => <TechBadge key={i} tech={t} />)}
                                     </div>
 
                                     <h4 className="text-indigo-300 font-semibold mb-3">Role: {project.role}</h4>
-                                    <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-8">
+                                    <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed mb-8">
                                         {project.description}
                                     </p>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mt-auto">
                                         <GithubLinks
                                             github={project.github}
-                                            className="flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white py-2 md:py-3 px-4 md:px-6 rounded-lg transition-colors font-semibold border border-slate-700 hover:border-slate-500 text-xs md:text-sm"
+                                            className="flex items-center justify-center gap-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-700 text-white py-2 md:py-3 px-4 md:px-6 rounded-lg transition-colors font-semibold border border-slate-300 dark:border-slate-700 hover:border-slate-500 text-xs md:text-sm"
                                         />
                                     </div>
                                 </div>
@@ -196,15 +196,15 @@ const Projects = () => {
                                     variants={cardVariant}
                                     transition={{ duration: 0.6, delay: index * 0.15 }}
                                     /* Hover effect: Translates card upwards slightly */
-                                    className="hover:-translate-y-1.5 transition-transform bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 md:p-8 flex flex-col relative overflow-hidden group hover:bg-slate-900/70 hover:border-slate-700 hover:shadow-[0_20px_40px_-20px_rgba(99,102,241,0.2)] shadow-lg"
+                                    className="hover:-translate-y-1.5 transition-transform bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200 dark:border-slate-800/80 rounded-2xl p-6 md:p-8 flex flex-col relative overflow-hidden group hover:bg-slate-100 dark:bg-slate-900/70 hover:border-slate-300 dark:border-slate-700 hover:shadow-[0_20px_40px_-20px_rgba(99,102,241,0.2)] shadow-lg"
                                 >
                                     <div className="absolute top-0 right-0 w-48 h-48 bg-[radial-gradient(circle,rgba(168,85,247,0.1)_0%,transparent_70%)] rounded-full pointer-events-none" />
 
                                     <div className="flex justify-between items-start mb-4 relative z-10">
-                                        <h3 className="text-lg md:text-2xl font-bold text-slate-100 group-hover:text-blue-300 transition-colors">
+                                        <h3 className="text-lg md:text-2xl font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-300 transition-colors">
                                             {project.title}
                                         </h3>
-                                        <div className="flex gap-3 text-slate-400">
+                                        <div className="flex gap-3 text-slate-600 dark:text-slate-400">
                                             {/* Action links: Lock for confidential, ExternalLink for live, and custom GitHub helper */}
                                             {project.confidential && <Lock className="w-6 h-6 text-red-400" />}
                                             {project.live && (
@@ -220,17 +220,17 @@ const Projects = () => {
                                         </div>
                                     </div>
 
-                                    <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-6 flex-1 relative z-10 line-clamp-4 group-hover:line-clamp-none">
+                                    <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed mb-6 flex-1 relative z-10 line-clamp-4 group-hover:line-clamp-none">
                                         {project.description}
                                     </p>
 
                                     <div className="mt-auto relative z-10">
-                                        <h4 className="text-slate-300 font-semibold mb-3 text-sm">
+                                        <h4 className="text-slate-700 dark:text-slate-300 font-semibold mb-3 text-sm">
                                             Role: <span className="text-purple-300 font-normal">{project.role}</span>
                                         </h4>
                                         <div className="flex flex-wrap gap-2">
                                             {project.techStack.map((t, i) => (
-                                                <span key={i} className="text-xs font-mono text-slate-500 bg-slate-950/50 px-2 py-1 rounded border border-slate-800/50">
+                                                <span key={i} className="text-xs font-mono text-slate-500 bg-slate-50 dark:bg-slate-950/50 px-2 py-1 rounded border border-slate-200 dark:border-slate-800/50">
                                                     {t}
                                                 </span>
                                             ))}
@@ -244,13 +244,13 @@ const Projects = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl text-center"
+                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-3xl text-center"
                     >
-                        <div className="p-6 bg-slate-800/50 rounded-full mb-6 border border-slate-700/50 text-slate-400">
+                        <div className="p-6 bg-slate-200 dark:bg-slate-800/50 rounded-full mb-6 border border-slate-300 dark:border-slate-700/50 text-slate-600 dark:text-slate-400">
                             <SearchX className="w-12 h-12" />
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-3">No Projects Showcase</h3>
-                        <p className="text-slate-400 max-w-md">
+                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">No Projects Showcase</h3>
+                        <p className="text-slate-600 dark:text-slate-400 max-w-md">
                             It looks like there aren't any projects to display at the moment.
                         </p>
                     </motion.div>

@@ -32,7 +32,7 @@ const fadeUp = {
 const Hero = () => (
     <section
         id="hero"
-        className="relative w-full min-h-screen mx-auto overflow-hidden bg-slate-950 text-white flex items-center pt-32 sm:pt-40 lg:pt-20 pb-10"
+        className="relative w-full min-h-screen mx-auto overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white flex items-center pt-32 sm:pt-40 lg:pt-20 pb-10"
     >
         {/* Background floating text animation styles defined purely in CSS for performance */}
         <style>{`
@@ -74,7 +74,7 @@ const Hero = () => (
                     <motion.h1
                         variants={fadeSlideLeft}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-white mb-4"
+                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-slate-900 dark:text-white mb-4"
                     >
                         Hi, I'm <br className="hidden lg:block" />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
@@ -85,7 +85,7 @@ const Hero = () => (
                     <motion.h2
                         variants={fadeSlideLeft}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-300 mb-6 max-w-xl lg:max-w-none"
+                        className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-700 dark:text-slate-300 mb-6 max-w-xl lg:max-w-none"
                     >
                         Full Stack Developer Specializing in{" "}
                         <span className="text-blue-400">Laravel</span> and{" "}
@@ -95,7 +95,7 @@ const Hero = () => (
                     <motion.p
                         variants={fadeSlideLeft}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="mt-2 text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed mb-8"
+                        className="mt-2 text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-8"
                     >
                         I build secure, scalable, and user-focused web applications using Laravel, MySQL, Flutter, and modern backend technologies.
                     </motion.p>
@@ -133,7 +133,7 @@ const Hero = () => (
             >
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
                 {/* Show a loading pulse animation while the 3D scene finishes loading */}
-                <Suspense fallback={<div className="w-32 h-32 rounded-full bg-slate-800 animate-pulse" />}>
+                <Suspense fallback={<div className="w-32 h-32 rounded-full bg-slate-200 dark:bg-slate-800 animate-pulse" />}>
                     <GeometricCoreCanvas />
                 </Suspense>
             </motion.div>

@@ -54,7 +54,7 @@ const VIEWPORT_50 = { once: true, margin: "-50px" };
 const Education = () => (
     <section
         id="education"
-        className="relative w-full min-h-screen bg-slate-950 py-20 md:py-24 overflow-hidden flex flex-col justify-center"
+        className="relative w-full min-h-screen bg-slate-50 dark:bg-slate-950 py-20 md:py-24 overflow-hidden flex flex-col justify-center"
     >
         {/* The 3D background with floating abstract academic pillars */}
         <EducationCanvas />
@@ -68,13 +68,13 @@ const Education = () => (
                 variants={fadeUp}
                 className="text-center"
             >
-                <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-white">
+                <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white">
                     Academic{" "}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
                         Journey
                     </span>
                 </h2>
-                <p className="text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">
+                <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">
                     My academic journey reflects a clear progression from foundational IT and management studies to specialized training in mobile application architecture and backend integration.
                 </p>
                 <div className="w-24 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
@@ -101,13 +101,13 @@ const Education = () => (
 
                             {/* Icon Pillar: A container for the graduation/book icons with a floating hover effect */}
                             <div className="relative z-10 flex shrink-0 w-16 md:w-28 flex-col items-center">
-                                <div className="w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-slate-900 border border-slate-800 shadow-lg flex items-center justify-center shrink-0 group-hover:bg-slate-800 transition-colors group-hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] group-hover:-translate-y-1 transform duration-500 [&>svg]:w-6 [&>svg]:h-6 md:[&>svg]:w-8 md:[&>svg]:h-8">
+                                <div className="w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg flex items-center justify-center shrink-0 group-hover:bg-slate-200 dark:bg-slate-800 transition-colors group-hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] group-hover:-translate-y-1 transform duration-500 [&>svg]:w-6 [&>svg]:h-6 md:[&>svg]:w-8 md:[&>svg]:h-8">
                                     {edu.icon}
                                 </div>
                             </div>
 
                             {/* High-level Content Panel using Glassmorphism */}
-                            <div className={`flex-1 bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-6 md:p-8 ${edu.borderHoverClass} transition-all shadow-lg relative overflow-hidden group-hover:shadow-[0_10px_30px_-15px_rgba(99,102,241,0.2)] w-full`}>
+                            <div className={`flex-1 bg-slate-100 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 ${edu.borderHoverClass} transition-all shadow-lg relative overflow-hidden group-hover:shadow-[0_10px_30px_-15px_rgba(99,102,241,0.2)] w-full`}>
                                 {/* Inner radial glow that enhances on hover */}
                                 <div className="absolute -top-24 -right-24 w-64 h-64 bg-[radial-gradient(circle,rgba(59,130,246,0.1)_0%,transparent_70%)] rounded-full pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] transition-colors duration-700" />
 
@@ -116,19 +116,19 @@ const Education = () => (
                                         <span className={`${edu.highlightClass} font-bold tracking-wider uppercase text-xs md:text-sm mb-2 block`}>
                                             {edu.highlight}
                                         </span>
-                                        <h3 className="text-xl md:text-2xl font-bold text-slate-100">{edu.degree}</h3>
+                                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-slate-100">{edu.degree}</h3>
                                     </div>
-                                    <div className="bg-slate-800/80 px-4 py-1.5 rounded-full border border-slate-700 text-slate-300 text-sm whitespace-nowrap md:ml-auto font-mono">
+                                    <div className="bg-slate-200 dark:bg-slate-800/80 px-4 py-1.5 rounded-full border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-sm whitespace-nowrap md:ml-auto font-mono">
                                         {edu.period}
                                     </div>
                                 </div>
 
-                                <div className="mb-6 pb-6 border-b border-slate-800/60">
-                                    <h4 className="text-lg font-semibold text-slate-300">{edu.institution}</h4>
+                                <div className="mb-6 pb-6 border-b border-slate-200 dark:border-slate-800/60">
+                                    <h4 className="text-lg font-semibold text-slate-700 dark:text-slate-300">{edu.institution}</h4>
                                     <p className="text-indigo-300/80 text-sm mt-1">{edu.affiliation}</p>
                                 </div>
 
-                                <p className="text-slate-400 leading-relaxed text-sm md:text-base relative z-10">
+                                <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base relative z-10">
                                     {edu.description}
                                 </p>
                             </div>
@@ -138,13 +138,13 @@ const Education = () => (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl text-center"
+                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-3xl text-center"
                     >
-                        <div className="p-6 bg-slate-800/50 rounded-full mb-6 border border-slate-700/50 text-slate-400">
+                        <div className="p-6 bg-slate-200 dark:bg-slate-800/50 rounded-full mb-6 border border-slate-300 dark:border-slate-700/50 text-slate-600 dark:text-slate-400">
                             <SearchX className="w-12 h-12" />
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-3">Academic Records Unavailable</h3>
-                        <p className="text-slate-400 max-w-md">
+                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Academic Records Unavailable</h3>
+                        <p className="text-slate-600 dark:text-slate-400 max-w-md">
                             It looks like there aren't any academic journey details to display at the moment.
                         </p>
                     </motion.div>
@@ -161,10 +161,10 @@ const Education = () => (
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-indigo-500/20 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6 backdrop-blur-sm"
             >
-                <div className="shrink-0 bg-slate-900 p-3 rounded-full hidden sm:block border border-slate-800">
+                <div className="shrink-0 bg-slate-100 dark:bg-slate-900 p-3 rounded-full hidden sm:block border border-slate-200 dark:border-slate-800">
                     <ScrollText className="w-6 h-6 text-purple-400" />
                 </div>
-                <p className="text-slate-300 italic leading-relaxed text-sm md:text-base">
+                <p className="text-slate-700 dark:text-slate-300 italic leading-relaxed text-sm md:text-base">
                     "This educational background, combined with hands-on industry experience, has shaped me into a well-rounded developer with both technical depth and practical implementation skills."
                 </p>
             </motion.div>

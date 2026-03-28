@@ -54,7 +54,7 @@ const VIEWPORT_DEF = { once: true };
 const Experience = () => (
     <section
         id="experience"
-        className="relative w-full py-20 md:py-24 bg-slate-950 overflow-hidden flex flex-col items-center"
+        className="relative w-full py-20 md:py-24 bg-slate-50 dark:bg-slate-950 overflow-hidden flex flex-col items-center"
     >
         {/* The 3D background with floating green particles */}
         <ExperienceCanvas />
@@ -72,13 +72,13 @@ const Experience = () => (
                 variants={fadeUp}
                 className="text-center"
             >
-                <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-white">
+                <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white">
                     Professional{" "}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-blue-400 to-indigo-500">
                         Journey
                     </span>
                 </h2>
-                <p className="text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">
+                <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">
                     My evolution from a backend-focused developer into a versatile full-stack and mobile developer, demonstrating adaptability, continuous learning, and modern stack expertise.
                 </p>
                 <div className="w-24 h-1.5 bg-gradient-to-r from-emerald-500 to-blue-500 mx-auto rounded-full" />
@@ -105,10 +105,10 @@ const Experience = () => (
                         >
                             {/* Timeline node icon */}
                             <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-                                <span className={`relative flex h-14 w-14 items-center justify-center rounded-full bg-slate-900 border-2 border-slate-700 z-10 ${exp.borderFocus} transition-colors duration-500`}>
+                                <span className={`relative flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 z-10 ${exp.borderFocus} transition-colors duration-500`}>
                                     {/* Pulse animation on hover */}
                                     <span className={`absolute inline-flex h-full w-full rounded-full bg-gradient-to-r ${exp.color} opacity-20 group-hover:animate-ping`} />
-                                    <span className={`relative inline-flex rounded-full h-10 w-10 items-center justify-center bg-slate-800 ${exp.shadow}`}>
+                                    <span className={`relative inline-flex rounded-full h-10 w-10 items-center justify-center bg-slate-200 dark:bg-slate-800 ${exp.shadow}`}>
                                         {exp.icon}
                                     </span>
                                 </span>
@@ -119,9 +119,9 @@ const Experience = () => (
                                 ? " md:pl-10 text-left md:text-left"
                                 : " md:pr-10 text-left md:text-right"
                                 }`}>
-                                <div className={`relative bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-2xl p-6 md:p-8 hover:bg-slate-900/80 transition-all duration-500 hover:shadow-lg ${exp.borderFocus}`}>
-                                    <h3 className="text-xl md:text-2xl font-bold text-white mb-1">{exp.role}</h3>
-                                    <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 mb-4 text-sm font-medium text-slate-400${index % 2 === 0 ? " md:justify-start" : " md:justify-end"
+                                <div className={`relative bg-slate-100 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 hover:bg-slate-100 dark:bg-slate-900/80 transition-all duration-500 hover:shadow-lg ${exp.borderFocus}`}>
+                                    <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-1">{exp.role}</h3>
+                                    <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 mb-4 text-sm font-medium text-slate-600 dark:text-slate-400${index % 2 === 0 ? " md:justify-start" : " md:justify-end"
                                         }`}>
                                         <span className={`text-transparent bg-clip-text bg-gradient-to-r ${exp.color} uppercase tracking-wider font-bold`}>
                                             {exp.company}
@@ -129,17 +129,17 @@ const Experience = () => (
                                         <span className="hidden sm:inline opacity-50">•</span>
                                         <span className="text-slate-500">{exp.date}</span>
                                     </div>
-                                    <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-4 text-left">
+                                    <p className="text-slate-700 dark:text-slate-300 text-sm md:text-base leading-relaxed mb-4 text-left">
                                         {exp.description}
                                     </p>
-                                    <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50 text-left">
-                                        <p className="text-slate-400 text-sm italic">
-                                            <strong className="text-slate-300 not-italic block mb-1">Highlight:</strong>
+                                    <div className="bg-slate-200 dark:bg-slate-800/50 rounded-lg p-4 border border-slate-300 dark:border-slate-700/50 text-left">
+                                        <p className="text-slate-600 dark:text-slate-400 text-sm italic">
+                                            <strong className="text-slate-700 dark:text-slate-300 not-italic block mb-1">Highlight:</strong>
                                             {exp.keyProject}
                                         </p>
                                     </div>
                                     {/* The small arrow tip connecting the card to the central timeline node */}
-                                    <div className={`hidden md:block absolute top-1/2 transform -translate-y-1/2 w-0 h-0 border-y-8 border-y-transparent border-slate-800 transition-colors duration-500 ${exp.arrowColor}${index % 2 === 0
+                                    <div className={`hidden md:block absolute top-1/2 transform -translate-y-1/2 w-0 h-0 border-y-8 border-y-transparent border-slate-200 dark:border-slate-800 transition-colors duration-500 ${exp.arrowColor}${index % 2 === 0
                                         ? " left-0 -translate-x-full border-r-8"
                                         : " right-0 translate-x-full border-l-8"
                                         }`} />
@@ -151,13 +151,13 @@ const Experience = () => (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl text-center"
+                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-3xl text-center"
                     >
-                        <div className="p-6 bg-slate-800/50 rounded-full mb-6 border border-slate-700/50 text-slate-400">
+                        <div className="p-6 bg-slate-200 dark:bg-slate-800/50 rounded-full mb-6 border border-slate-300 dark:border-slate-700/50 text-slate-600 dark:text-slate-400">
                             <SearchX className="w-12 h-12" />
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-3">Professional Path TBD</h3>
-                        <p className="text-slate-400 max-w-md">
+                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Professional Path TBD</h3>
+                        <p className="text-slate-600 dark:text-slate-400 max-w-md">
                             It looks like there aren't any professional journey details to display at the moment.
                         </p>
                     </motion.div>
@@ -171,9 +171,9 @@ const Experience = () => (
                     transition={{ duration: 0.8, delay: 0.6 }}
                     className="relative flex justify-center w-full mt-10"
                 >
-                    <div className="bg-slate-900 border border-slate-700 rounded-full px-6 py-2 shadow-[0_0_15px_rgba(99,102,241,0.3)] z-10 flex items-center gap-2 group cursor-default">
+                    <div className="bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-full px-6 py-2 shadow-[0_0_15px_rgba(99,102,241,0.3)] z-10 flex items-center gap-2 group cursor-default">
                         <Layers className="w-5 h-5 text-indigo-400 group-hover:rotate-12 transition-transform" />
-                        <span className="text-slate-300 font-medium text-sm">Full Stack • Mobile • 3D Web</span>
+                        <span className="text-slate-700 dark:text-slate-300 font-medium text-sm">Full Stack • Mobile • 3D Web</span>
                     </div>
                 </motion.div>
             </div>

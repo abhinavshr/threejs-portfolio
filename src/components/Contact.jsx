@@ -25,7 +25,7 @@ const CONTACT_LINKS = [
         label: "GitHub",
         value: "abhinavshr",
         href: "https://github.com/abhinavshr",
-        iconColorClass: "text-slate-400",
+        iconColorClass: "text-slate-600 dark:text-slate-400",
     },
     {
         icon: <MapPin   className="w-6 h-6" />,
@@ -56,7 +56,7 @@ const VIEWPORT_DEF = { once: true };
 const Contact = () => (
     <section
         id="contact"
-        className="relative w-full py-16 md:py-24 bg-slate-950 overflow-hidden flex flex-col justify-center"
+        className="relative w-full py-16 md:py-24 bg-slate-50 dark:bg-slate-950 overflow-hidden flex flex-col justify-center"
     >
         {/* The 3D background with floating distorted 'connection' spheres */}
         <ContactCanvas />
@@ -70,13 +70,13 @@ const Contact = () => (
                 variants={fadeUp}
                 className="text-center"
             >
-                <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 md:mb-6 text-white">
+                <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 md:mb-6 text-slate-900 dark:text-white">
                     Let's Create{" "}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
                         Something Amazing
                     </span>
                 </h2>
-                <p className="text-slate-400 max-w-3xl mx-auto text-sm md:text-lg leading-relaxed mb-6">
+                <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto text-sm md:text-lg leading-relaxed mb-6">
                     I am always open to new opportunities, collaborations, and innovative projects that challenge my skills and allow me to grow as a developer.
                 </p>
                 <div className="w-20 md:w-24 h-1 md:h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
@@ -94,16 +94,16 @@ const Contact = () => (
                     transition={{ duration: 0.8 }}
                     className="flex flex-col justify-center space-y-6 md:space-y-8"
                 >
-                    <div className="bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-3xl p-6 md:p-10 shadow-xl relative overflow-hidden group">
+                    <div className="bg-slate-100 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-10 shadow-xl relative overflow-hidden group">
                         {/* Dynamic radial glow that highlights on hover */}
                         <div className="absolute top-0 left-0 w-32 h-32 bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] rounded-full pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(59,130,246,0.2)_0%,transparent_70%)] transition-colors duration-700" />
 
-                        <h3 className="text-xl md:text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
                             <MessageSquare className="w-6 h-6 text-blue-400" />
                             Professional Outreach
                         </h3>
 
-                        <div className="space-y-4 md:space-y-6 text-slate-300 leading-relaxed text-sm md:text-base">
+                        <div className="space-y-4 md:space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed text-sm md:text-base">
                             <p>
                                 Whether you are looking for a dedicated{" "}
                                 <span className="text-blue-400 font-semibold">mobile application developer</span>, a{" "}
@@ -112,18 +112,18 @@ const Contact = () => (
                             </p>
                             <p>
                                 I am particularly interested in roles involving{" "}
-                                <span className="text-slate-100 italic">Flutter development, scalable backend systems, cloud-integrated applications, and interactive 3D web experiences</span>. I enjoy solving complex problems, working in collaborative environments, and turning ideas into functional, user-friendly digital solutions.
+                                <span className="text-slate-900 dark:text-slate-100 italic">Flutter development, scalable backend systems, cloud-integrated applications, and interactive 3D web experiences</span>. I enjoy solving complex problems, working in collaborative environments, and turning ideas into functional, user-friendly digital solutions.
                             </p>
-                            <p className="font-medium text-slate-200">
+                            <p className="font-medium text-slate-800 dark:text-slate-200">
                                 If you have a project in mind, a job opportunity, or simply want to connect professionally, feel free to reach out. I am always ready to learn, innovate, and build impactful technology.
                             </p>
                         </div>
                     </div>
 
                     {/* Status Badge: Pulse animation to indicate active status */}
-                    <div className="bg-slate-900/30 border border-slate-800 rounded-2xl p-4 md:p-6 flex items-center gap-4">
+                    <div className="bg-slate-100 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 md:p-6 flex items-center gap-4">
                         <div className="w-2.5 h-2.5 md:w-3 md:h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-                        <p className="text-slate-400 text-xs md:text-sm font-medium">
+                        <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm font-medium">
                             Available for new opportunities and collaborations
                         </p>
                     </div>
@@ -143,23 +143,23 @@ const Contact = () => (
                             href={link.href}
                             target={link.href.startsWith("http") ? "_blank" : "_self"}
                             rel="noopener noreferrer"
-                            className="group relative bg-slate-900/40 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-3xl hover:border-blue-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 flex flex-col justify-between overflow-hidden"
+                            className="group relative bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 p-6 md:p-8 rounded-3xl hover:border-blue-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 flex flex-col justify-between overflow-hidden"
                         >
                             {/* Inner radial glow specific to individual contact cards */}
                             <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle,rgba(59,130,246,0.1)_0%,transparent_70%)] rounded-full pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(59,130,246,0.15)_0%,transparent_70%)] transition-colors" />
 
                             <div className="flex justify-between items-start relative z-10">
-                                <div className={`p-3 md:p-4 rounded-xl md:rounded-2xl bg-slate-800 group-hover:bg-slate-700 ${link.iconColorClass} group-hover:scale-110 transition-all duration-300`}>
+                                <div className={`p-3 md:p-4 rounded-xl md:rounded-2xl bg-slate-200 dark:bg-slate-800 group-hover:bg-slate-700 ${link.iconColorClass} group-hover:scale-110 transition-all duration-300`}>
                                     {link.icon}
                                 </div>
-                                <ExternalLink className="w-5 h-5 text-slate-600 group-hover:text-slate-300 transition-colors" />
+                                <ExternalLink className="w-5 h-5 text-slate-600 group-hover:text-slate-700 dark:text-slate-300 transition-colors" />
                             </div>
 
                             <div className="mt-6 md:mt-8 relative z-10">
                                 <p className="text-slate-500 text-[10px] md:text-xs uppercase tracking-widest font-extrabold mb-1">
                                     {link.label}
                                 </p>
-                                <p className="text-base md:text-xl font-bold text-white group-hover:text-blue-400 transition-colors break-words line-clamp-2">
+                                <p className="text-base md:text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors break-words line-clamp-2">
                                     {link.value}
                                 </p>
                             </div>
@@ -186,10 +186,10 @@ const Contact = () => (
                   */}
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/10">
-                        <span className="text-white font-black text-xl italic select-none">AS</span>
+                        <span className="text-slate-900 dark:text-white font-black text-xl italic select-none">AS</span>
                     </div>
                     <div>
-                        <p className="text-slate-100 font-bold tracking-tight leading-none">Abhinav Shrestha</p>
+                        <p className="text-slate-900 dark:text-slate-100 font-bold tracking-tight leading-none">Abhinav Shrestha</p>
                         <p className="text-slate-500 text-[10px] uppercase font-black tracking-widest mt-1">Full Stack Developer</p>
                     </div>
                 </div>
@@ -204,12 +204,12 @@ const Contact = () => (
                     <span className="flex items-center gap-2 hover:text-blue-400 transition-colors cursor-default">
                         Built with <span className="text-blue-400">Three.js</span>
                     </span>
-                    <span className="w-1 h-1 bg-slate-800 rounded-full hidden sm:block" />
+                    <span className="w-1 h-1 bg-slate-200 dark:bg-slate-800 rounded-full hidden sm:block" />
                     {/* Powered by React: Highlights the robust component architecture */}
                     <span className="flex items-center gap-2 hover:text-indigo-400 transition-colors cursor-default">
                         Powered by <span className="text-indigo-400">React</span>
                     </span>
-                    <span className="w-1 h-1 bg-slate-800 rounded-full hidden sm:block" />
+                    <span className="w-1 h-1 bg-slate-200 dark:bg-slate-800 rounded-full hidden sm:block" />
                     {/* Styled with Tailwind: Highlights the modern styling utility */}
                     <span className="flex items-center gap-2 hover:text-purple-400 transition-colors cursor-default">
                         Styled with <span className="text-purple-400">Tailwind</span>

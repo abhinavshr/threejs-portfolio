@@ -82,7 +82,7 @@ const VIEWPORT_DEF = { once: true };
 const Certifications = () => (
     <section
         id="certifications"
-        className="relative w-full min-h-screen bg-slate-950 py-20 md:py-24 overflow-hidden flex flex-col justify-center"
+        className="relative w-full min-h-screen bg-slate-50 dark:bg-slate-950 py-20 md:py-24 overflow-hidden flex flex-col justify-center"
     >
         {/* The 3D background with floating distorted badges */}
         <CertificationsCanvas />
@@ -96,13 +96,13 @@ const Certifications = () => (
                 variants={fadeUp}
                 className="text-center"
             >
-                <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-white">
+                <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white">
                     Professional{" "}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
                         Certifications
                     </span>
                 </h2>
-                <p className="text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">
+                <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">
                     Validating technical proficiency across cloud infrastructure, backend engineering, and modern web architectures to complement my formal degree.
                 </p>
                 <div className="w-24 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
@@ -120,16 +120,16 @@ const Certifications = () => (
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={VIEWPORT_50}
                             transition={{ duration: 0.8 }}
-                            className="bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl"
+                            className="bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl"
                         >
                             {/* Category Header: Displays title and category icon */}
                             <div className="flex items-center gap-4 mb-6 md:mb-8">
-                                <div className="bg-slate-800 p-2.5 md:p-3 rounded-2xl ring-1 ring-slate-700 shadow-inner shrink-0">
+                                <div className="bg-slate-200 dark:bg-slate-800 p-2.5 md:p-3 rounded-2xl ring-1 ring-slate-700 shadow-inner shrink-0">
                                     <span className="[&>svg]:w-5 [&>svg]:h-5 md:[&>svg]:w-6 md:[&>svg]:h-6">
                                         {category.icon}
                                     </span>
                                 </div>
-                                <h3 className="text-lg md:text-2xl font-bold text-white tracking-tight leading-tight">
+                                <h3 className="text-lg md:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
                                     {category.title}
                                 </h3>
                             </div>
@@ -139,10 +139,10 @@ const Certifications = () => (
                                 {category.certs.map((cert) => (
                                     <div
                                         key={cert.name}
-                                        className="group relative bg-slate-800/20 border border-slate-800/50 rounded-2xl p-5 md:p-6 hover:border-blue-500/30 transition-all duration-300"
+                                        className="group relative bg-slate-200 dark:bg-slate-800/20 border border-slate-200 dark:border-slate-800/50 rounded-2xl p-5 md:p-6 hover:border-blue-500/30 transition-all duration-300"
                                     >
                                         <div className="flex justify-between items-start mb-2">
-                                            <h4 className="text-slate-100 font-bold text-base md:text-lg group-hover:text-blue-400 transition-colors">
+                                            <h4 className="text-slate-900 dark:text-slate-100 font-bold text-base md:text-lg group-hover:text-blue-400 transition-colors">
                                                 {cert.name}
                                             </h4>
                                             {/* External link to credential verification if available */}
@@ -157,12 +157,12 @@ const Certifications = () => (
                                                 </a>
                                             )}
                                         </div>
-                                        <p className="text-slate-400 text-sm leading-relaxed mb-2">
+                                        <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-2">
                                             {cert.description}
                                         </p>
                                         {/* Displays Credential ID if present in the data */}
                                         {cert.id && (
-                                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg">
+                                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg">
                                                 <Award className="w-3 h-3 text-indigo-400" />
                                                 <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">
                                                     ID: {cert.id.substring(0, 12)}...
@@ -178,13 +178,13 @@ const Certifications = () => (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-3xl text-center"
+                        className="col-span-full flex flex-col items-center justify-center p-12 bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-3xl text-center"
                     >
-                        <div className="p-6 bg-slate-800/50 rounded-full mb-6 border border-slate-700/50 text-slate-400">
+                        <div className="p-6 bg-slate-200 dark:bg-slate-800/50 rounded-full mb-6 border border-slate-300 dark:border-slate-700/50 text-slate-600 dark:text-slate-400">
                             <SearchX className="w-12 h-12" />
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-3">No Certifications Yet</h3>
-                        <p className="text-slate-400 max-w-md">
+                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">No Certifications Yet</h3>
+                        <p className="text-slate-600 dark:text-slate-400 max-w-md">
                             It looks like there aren't any certifications or awards to display at the moment.
                         </p>
                     </motion.div>
@@ -200,8 +200,8 @@ const Certifications = () => (
             transition={{ duration: 0.8, delay: 0.4 }}
             className="max-w-4xl mx-auto px-6 text-center mt-16 z-10"
         >
-            <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm">
-                <p className="text-slate-300 italic text-sm md:text-base leading-relaxed">
+            <div className="bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 backdrop-blur-sm">
+                <p className="text-slate-700 dark:text-slate-300 italic text-sm md:text-base leading-relaxed">
                     "Collectively, these certifications validate my technical proficiency across cloud computing, backend engineering, and web technologies, complementing my professional experience in Laravel, Flutter, and Three.js."
                 </p>
             </div>

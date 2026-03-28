@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Download, Github, Linkedin, ExternalLink } from "lucide-react";
+import { Menu, X, Download, Github, Linkedin, ExternalLink, Sun, Moon } from "lucide-react";
 import NavbarLogoCanvas from "./canvas/NavbarLogoCanvas";
 import NavbarBackgroundCanvas from "./canvas/NavbarBackground";
+import { useTheme } from "../context/ThemeContext";
 
 const navLinks = [
     { id: "hero", title: "Home" },
@@ -19,6 +20,7 @@ const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [toggle, setToggle] = useState(false);
     const [active, setActive] = useState("hero");
+    const { theme, toggleTheme } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -54,7 +56,7 @@ const Navbar = () => {
             <div
                 className={`max-w-7xl w-full flex items-center justify-between px-4 sm:px-8 py-2 sm:py-3 rounded-2xl sm:rounded-[3rem] transition-all duration-700 border relative overflow-hidden
                     ${scrolled
-                        ? "bg-slate-950/40 backdrop-blur-2xl border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-2 sm:py-2.5 scale-[0.97] md:scale-100"
+                        ? "bg-slate-50 dark:bg-slate-950/40 backdrop-blur-2xl border-slate-200 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-2 sm:py-2.5 scale-[0.97] md:scale-100"
                         : "bg-transparent border-transparent"}`}
             >
                 {/* Three.js Background inside Navbar */}
@@ -71,14 +73,14 @@ const Navbar = () => {
 
                     <div className="hidden md:flex flex-col">
                         <div className="flex gap-1.5 items-baseline">
-                            <span className="text-white text-xl font-black tracking-tighter uppercase transition-all group-hover:tracking-normal">
+                            <span className="text-slate-900 dark:text-white text-xl font-black tracking-tighter uppercase transition-all group-hover:tracking-normal">
                                 Abhinav
                             </span>
                             <span className="text-blue-500 text-xl font-black tracking-tighter uppercase">
                                 Shrestha
                             </span>
                         </div>
-                        <span className="text-[9px] text-slate-400 font-bold uppercase tracking-[0.4em] mt-0.5 group-hover:text-blue-400 transition-colors">
+                        <span className="text-[9px] text-slate-600 dark:text-slate-400 font-bold uppercase tracking-[0.4em] mt-0.5 group-hover:text-blue-400 transition-colors">
                             Portfolio • 2026
                         </span>
                     </div>
@@ -86,7 +88,7 @@ const Navbar = () => {
 
                 {/* Center: Navigation Links */}
                 <div className="hidden lg:flex items-center gap-1.5 z-10">
-                    <ul className="flex items-center gap-0.5 bg-white/5 backdrop-blur-md rounded-full p-1 border border-white/5">
+                    <ul className="flex items-center gap-0.5 bg-slate-200/50 dark:bg-white/5 backdrop-blur-md rounded-full p-1 border border-white/5">
                         {navLinks.map((link) => (
                             <li key={link.id}>
                                 <a
@@ -96,7 +98,7 @@ const Navbar = () => {
                                         handleNavClick(link.id);
                                     }}
                                     className={`relative px-3 xl:px-5 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.1em] transition-all duration-500 rounded-full flex items-center gap-2
-                                        ${active === link.id ? "text-white" : "text-slate-400 hover:text-white hover:bg-white/5"}
+                                        ${active === link.id ? "text-white" : "text-slate-600 dark:text-slate-400 hover:text-white hover:bg-slate-200/50 dark:bg-white/5"}
                                     `}
                                 >
                                     <span className="relative z-10">{link.title}</span>
@@ -117,11 +119,18 @@ const Navbar = () => {
                 {/* Right Side: Socials & CTA */}
                 <div className="hidden lg:flex items-center gap-6 z-10">
                     <div className="flex items-center gap-3">
+                        <motion.button
+                            onClick={toggleTheme}
+                            whileHover={{ y: -2, scale: 1.1 }}
+                            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 hover:border-blue-500/50 dark:hover:text-white transition-all"
+                        >
+                            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                        </motion.button>
                         <motion.a
                             whileHover={{ y: -2, scale: 1.1 }}
                             href="https://github.com/abhinavshr"
                             target="_blank"
-                            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/50 border border-white/5 text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
+                            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-white/5 text-slate-600 dark:text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
                         >
                             <Github className="w-5 h-5" />
                         </motion.a>
@@ -129,7 +138,7 @@ const Navbar = () => {
                             whileHover={{ y: -2, scale: 1.1 }}
                             href="https://www.linkedin.com/in/abhinav-shrestha-9a8786255/"
                             target="_blank"
-                            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/50 border border-white/5 text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
+                            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-white/5 text-slate-600 dark:text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
                         >
                             <Linkedin className="w-5 h-5" />
                         </motion.a>
@@ -153,19 +162,27 @@ const Navbar = () => {
                     </motion.a>
                 </div>
 
-                {/* Mobile Menu Trigger */}
-                <button
-                    onClick={() => setToggle(!toggle)}
-                    className="lg:hidden z-20 w-10 h-10 flex items-center justify-center bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl text-white group overflow-hidden"
-                >
-                    <AnimatePresence mode="wait">
-                        {toggle ? (
-                            <motion.div key="x" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }}><X className="w-6 h-6" /></motion.div>
-                        ) : (
-                            <motion.div key="menu" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }}><Menu className="w-6 h-6" /></motion.div>
-                        )}
-                    </AnimatePresence>
-                </button>
+                {/* Mobile Menu & Theme Toggle */}
+                <div className="lg:hidden flex items-center gap-3 z-20">
+                    <button
+                        onClick={toggleTheme}
+                        className="w-10 h-10 flex items-center justify-center bg-slate-200/50 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-xl text-slate-800 dark:text-white transition-colors"
+                    >
+                        {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                    </button>
+                    <button
+                        onClick={() => setToggle(!toggle)}
+                        className="w-10 h-10 flex items-center justify-center bg-slate-200/50 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-xl text-slate-800 dark:text-white group overflow-hidden"
+                    >
+                        <AnimatePresence mode="wait">
+                            {toggle ? (
+                                <motion.div key="x" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }}><X className="w-6 h-6" /></motion.div>
+                            ) : (
+                                <motion.div key="menu" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }}><Menu className="w-6 h-6" /></motion.div>
+                            )}
+                        </AnimatePresence>
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Immersive Menu */}
@@ -176,7 +193,7 @@ const Navbar = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 bg-slate-950/90 backdrop-blur-3xl z-40"
+                            className="fixed inset-0 bg-slate-50 dark:bg-slate-950/90 backdrop-blur-3xl z-40"
                             onClick={() => setToggle(false)}
                         />
                         <motion.div
@@ -184,12 +201,12 @@ const Navbar = () => {
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: "100%", opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 150 }}
-                            className="fixed top-0 bottom-0 right-0 w-full sm:w-[400px] bg-slate-900/60 backdrop-blur-3xl border-l border-white/10 p-6 sm:p-10 pt-24 sm:pt-32 z-50 flex flex-col justify-between shadow-2xl"
+                            className="fixed top-0 bottom-0 right-0 w-full sm:w-[400px] bg-slate-100 dark:bg-slate-900/60 backdrop-blur-3xl border-l border-slate-200 dark:border-white/10 p-6 sm:p-10 pt-24 sm:pt-32 z-50 flex flex-col justify-between shadow-2xl"
                         >
                             {/* Close Button Inside Menu */}
                             <button
                                 onClick={() => setToggle(false)}
-                                className="absolute top-8 right-8 w-12 h-12 flex items-center justify-center bg-white/5 border border-white/10 rounded-2xl text-white hover:bg-white/10 transition-colors"
+                                className="absolute top-8 right-8 w-12 h-12 flex items-center justify-center bg-slate-200/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-white hover:bg-white/10 transition-colors"
                             >
                                 <X className="w-6 h-6" />
                             </button>
@@ -234,7 +251,7 @@ const Navbar = () => {
                                             href="https://github.com/abhinavshr"
                                             target="_blank"
                                             onClick={() => setToggle(false)}
-                                            className="p-4 bg-white/5 border border-white/10 rounded-2xl text-white hover:bg-blue-600 transition-colors"
+                                            className="p-4 bg-slate-200/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-white hover:bg-blue-600 transition-colors"
                                         >
                                             <Github className="w-6 h-6" />
                                         </a>
@@ -242,7 +259,7 @@ const Navbar = () => {
                                             href="https://www.linkedin.com/in/abhinav-shrestha-9a8786255/"
                                             target="_blank"
                                             onClick={() => setToggle(false)}
-                                            className="p-4 bg-white/5 border border-white/10 rounded-2xl text-white hover:bg-blue-600 transition-colors"
+                                            className="p-4 bg-slate-200/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-white hover:bg-blue-600 transition-colors"
                                         >
                                             <Linkedin className="w-6 h-6" />
                                         </a>
