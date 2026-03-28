@@ -12,7 +12,7 @@ const navLinks = [
     { id: "skills", title: "Skills" },
     { id: "experience", title: "Experience" },
     { id: "education", title: "Education" },
-    { id: "certifications", title: "Cert" },
+    { id: "certifications", title: "Certifications" },
     { id: "projects", title: "Projects" },
     { id: "contact", title: "Contact" },
 ];
@@ -98,7 +98,7 @@ const Navbar = () => {
                                         e.preventDefault();
                                         handleNavClick(link.id);
                                     }}
-                                    className={`relative px-3 xl:px-5 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.1em] transition-all duration-500 rounded-full flex items-center gap-2
+                                    className={`relative px-2.5 xl:px-3.5 py-2 text-[10px] xl:text-[11px] font-bold uppercase tracking-[0.07em] transition-all duration-500 rounded-full flex items-center gap-2
                                         ${active === link.id ? "text-white" : "text-slate-600 dark:text-slate-400 hover:text-white hover:bg-slate-200/50 dark:bg-white/5"}
                                     `}
                                 >
@@ -118,30 +118,30 @@ const Navbar = () => {
                 </div>
 
                 {/* Right Side: Socials & CTA */}
-                <div className="hidden lg:flex items-center gap-6 z-10">
-                    <div className="flex items-center gap-3">
+                <div className="hidden lg:flex items-center gap-4 z-10">
+                    <div className="flex items-center gap-1.5">
                         <motion.button
                             onClick={toggleTheme}
                             whileHover={{ y: -2, scale: 1.1 }}
-                            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 hover:border-blue-500/50 dark:hover:text-white transition-all"
+                            className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 hover:border-blue-500/50 dark:hover:text-white transition-all"
                         >
-                            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                         </motion.button>
                         <motion.a
                             whileHover={{ y: -2, scale: 1.1 }}
                             href="https://github.com/abhinavshr"
                             target="_blank"
-                            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-white/5 text-slate-600 dark:text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
+                            className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-white/5 text-slate-600 dark:text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
                         >
-                            <Github className="w-5 h-5" />
+                            <Github className="w-4 h-4" />
                         </motion.a>
                         <motion.a
                             whileHover={{ y: -2, scale: 1.1 }}
                             href="https://www.linkedin.com/in/abhinav-shrestha-9a8786255/"
                             target="_blank"
-                            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-white/5 text-slate-600 dark:text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
+                            className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-white/5 text-slate-600 dark:text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
                         >
-                            <Linkedin className="w-5 h-5" />
+                            <Linkedin className="w-4 h-4" />
                         </motion.a>
                     </div>
 
