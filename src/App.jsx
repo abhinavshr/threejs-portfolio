@@ -6,6 +6,7 @@ import 'lenis/dist/lenis.css';
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import LoadingScreen from "./components/LoadingScreen";
+import AnimatedCursor from "react-animated-cursor";
 import "./App.css";
 
 // Lazy load components that are not immediately visible
@@ -126,19 +127,51 @@ function App() {
 
   if (!isOnline) {
     return (
-      <Suspense fallback={<SectionLoader />}>
-        <Offline />
-      </Suspense>
+      <>
+        <AnimatedCursor
+          innerSize={8}
+          outerSize={35}
+          innerScale={1}
+          outerScale={2}
+          outerAlpha={0}
+          hasBlendMode={true}
+          innerStyle={{
+            backgroundColor: '#3b82f6'
+          }}
+          outerStyle={{
+            border: '3px solid #3b82f6'
+          }}
+        />
+        <Suspense fallback={<SectionLoader />}>
+          <Offline />
+        </Suspense>
+      </>
     );
   }
 
   return (
-    <Suspense fallback={<SectionLoader />}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Suspense>
+    <>
+      <AnimatedCursor
+        innerSize={8}
+        outerSize={35}
+        innerScale={1}
+        outerScale={2}
+        outerAlpha={0}
+        hasBlendMode={true}
+        innerStyle={{
+          backgroundColor: '#3b82f6'
+        }}
+        outerStyle={{
+          border: '3px solid #3b82f6'
+        }}
+      />
+      <Suspense fallback={<SectionLoader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </>
   );
 }
 
