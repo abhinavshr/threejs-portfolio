@@ -8,6 +8,7 @@ import { useTheme } from "../context/ThemeContext";
 const navLinks = [
     { id: "hero", title: "Home" },
     { id: "about", title: "About" },
+    { id: "story", title: "Story" },
     { id: "skills", title: "Skills" },
     { id: "experience", title: "Experience" },
     { id: "education", title: "Education" },
