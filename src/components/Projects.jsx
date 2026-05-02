@@ -24,9 +24,9 @@ const projectsList = [
     },
     {
         id: "confidential",
-        title: "Confidential Production Application",
-        description: "Currently contributing to a high-stake upcoming application as a dedicated frontend developer. Architecting and building the entire mobile experience using Flutter, integrating with secure production APIs, and implementing scalable state management.",
-        techStack: ["Flutter", "Dart", "API Integration", "State Management"],
+        title: "Fix My Ride",
+        description: "A comprehensive platform with separate User and Mechanic applications. Users can book mechanics for vehicle repairs, add up to 3 vehicles, use emergency contacts, and report issues. Mechanics can manage their workforce by adding workers. Features include profile management, service history, and real-time Firebase notifications.",
+        techStack: ["Flutter", "Dart", "API Integration", "Firebase"],
         role: "Frontend Mobile Engineer",
         confidential: true,
     },
