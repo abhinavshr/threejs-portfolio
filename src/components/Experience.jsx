@@ -60,8 +60,8 @@ const Experience = () => (
         <ExperienceCanvas />
 
         {/* Ambient glows — pure CSS radial gradients for mood lighting */}
-        <div className="absolute top-1/3 left-10 w-[40rem] h-[40rem] bg-[radial-gradient(circle,rgba(30,58,138,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/3 right-10 w-[40rem] h-[40rem] bg-[radial-gradient(circle,rgba(6,95,70,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
+        <div className="absolute top-1/3 left-10 w-160 h-160 bg-[radial-gradient(circle,rgba(30,58,138,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/3 right-10 w-160 h-160 bg-[radial-gradient(circle,rgba(6,95,70,0.15)_0%,transparent_60%)] rounded-full pointer-events-none" />
 
         {/* Section heading container */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 relative z-10 w-full mb-16">
@@ -74,21 +74,21 @@ const Experience = () => (
             >
                 <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white">
                     Professional{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-blue-400 to-indigo-500">
+                    <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 via-blue-400 to-indigo-500">
                         Journey
                     </span>
                 </h2>
                 <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">
                     My evolution from a backend-focused developer into a versatile full-stack and mobile developer, demonstrating adaptability, continuous learning, and modern stack expertise.
                 </p>
-                <div className="w-24 h-1.5 bg-gradient-to-r from-emerald-500 to-blue-500 mx-auto rounded-full" />
+                <div className="w-24 h-1.5 bg-linear-to-r from-emerald-500 to-blue-500 mx-auto rounded-full" />
             </motion.div>
         </div>
 
         {/* Timeline container */}
         <div className="max-w-4xl mx-auto px-6 lg:px-12 w-full relative z-10">
             {/* The vertical line in the middle of the timeline */}
-            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-slate-700 to-transparent transform -translate-x-1/2" />
+            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-transparent via-slate-700 to-transparent transform -translate-x-1/2" />
 
             <div className="space-y-16">
                 {EXPERIENCE_DATA.length > 0 ? (
@@ -107,7 +107,7 @@ const Experience = () => (
                             <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center">
                                 <span className={`relative flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 z-10 ${exp.borderFocus} transition-colors duration-500`}>
                                     {/* Pulse animation on hover */}
-                                    <span className={`absolute inline-flex h-full w-full rounded-full bg-gradient-to-r ${exp.color} opacity-20 group-hover:animate-ping`} />
+                                    <span className={`absolute inline-flex h-full w-full rounded-full bg-linear-to-r ${exp.color} opacity-20 group-hover:animate-ping`} />
                                     <span className={`relative inline-flex rounded-full h-10 w-10 items-center justify-center bg-slate-200 dark:bg-slate-800 ${exp.shadow}`}>
                                         {exp.icon}
                                     </span>
@@ -119,11 +119,11 @@ const Experience = () => (
                                 ? " md:pl-10 text-left md:text-left"
                                 : " md:pr-10 text-left md:text-right"
                                 }`}>
-                                <div className={`relative bg-slate-100 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 hover:bg-slate-100 dark:bg-slate-900/80 transition-all duration-500 hover:shadow-lg ${exp.borderFocus}`}>
+                                <div className={`relative bg-slate-100 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 hover:bg-slate-100 dark:hover:bg-indigo-950/60 transition-all duration-500 hover:shadow-lg ${exp.borderFocus}`}>
                                     <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-1">{exp.role}</h3>
                                     <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 mb-4 text-sm font-medium text-slate-600 dark:text-slate-400${index % 2 === 0 ? " md:justify-start" : " md:justify-end"
                                         }`}>
-                                        <span className={`text-transparent bg-clip-text bg-gradient-to-r ${exp.color} uppercase tracking-wider font-bold`}>
+                                        <span className={`text-transparent bg-clip-text bg-linear-to-r ${exp.color} uppercase tracking-wider font-bold`}>
                                             {exp.company}
                                         </span>
                                         <span className="hidden sm:inline opacity-50">•</span>
