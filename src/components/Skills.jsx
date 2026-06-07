@@ -9,44 +9,44 @@ const SKILL_CATEGORIES = [
         title: "Backend Development",
         icon: <Server className="w-5 h-5 text-blue-400" />,
         skills: [
-            { name: "Laravel", level: 90 },
-            { name: "Node.js", level: 75 },
-            { name: "PHP", level: 85 },
+            { name: "Laravel", level: 60 },
+            { name: "Node.js", level: 50 },
+            { name: "PHP", level: 55 },
         ],
     },
     {
         title: "Frontend Development",
         icon: <Layout className="w-5 h-5 text-indigo-400" />,
         skills: [
-            { name: "React", level: 85 },
-            { name: "Three.js", level: 65 },
-            { name: "JavaScript", level: 85 },
-            { name: "HTML & CSS", level: 90 },
+            { name: "React", level: 60 },
+            { name: "Three.js", level: 40 },
+            { name: "JavaScript", level: 65 },
+            { name: "HTML & CSS", level: 75 },
         ],
     },
     {
         title: "Databases",
         icon: <Database className="w-5 h-5 text-purple-400" />,
         skills: [
-            { name: "Database Design", level: 95 },
-            { name: "MySQL", level: 90 },
+            { name: "Database Design", level: 55 },
+            { name: "MySQL", level: 60 },
         ],
     },
     {
         title: "Mobile Development",
         icon: <Smartphone className="w-5 h-5 text-pink-400" />,
         skills: [
-            { name: "Flutter", level: 80 },
+            { name: "Flutter", level: 50 },
         ],
     },
     {
         title: "Tools & Version Control",
         icon: <Wrench className="w-5 h-5 text-cyan-400" />,
         skills: [
-            { name: "Git & GitHub", level: 85 },
-            { name: "Visual Studio Code", level: 90 },
-            { name: "MySQL Workbench", level: 85 },
-            { name: "Figma & Draw.io", level: 75 },
+            { name: "Git & GitHub", level: 65 },
+            { name: "Visual Studio Code", level: 75 },
+            { name: "MySQL Workbench", level: 60 },
+            { name: "Figma & Draw.io", level: 50 },
         ],
     },
 ];
