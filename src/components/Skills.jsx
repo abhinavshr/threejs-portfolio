@@ -37,14 +37,17 @@ const SKILL_CATEGORIES = [
         icon: <Smartphone className="w-5 h-5 text-pink-400" />,
         skills: [
             { name: "Flutter", level: 50 },
+            { name: "Kotlin", level: 30 },
+            { name: "Swift", level: 30 },
         ],
     },
     {
-        title: "Tools & Version Control",
+        title: "Tools & Cloud",
         icon: <Wrench className="w-5 h-5 text-cyan-400" />,
         skills: [
             { name: "Git & GitHub", level: 65 },
             { name: "Visual Studio Code", level: 75 },
+            { name: "Microsoft Azure (VM)", level: 45 },
             { name: "MySQL Workbench", level: 60 },
             { name: "Figma & Draw.io", level: 50 },
         ],
