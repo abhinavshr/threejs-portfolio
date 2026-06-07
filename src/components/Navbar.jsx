@@ -123,7 +123,8 @@ const Navbar = () => {
                         <motion.button
                             onClick={toggleTheme}
                             whileHover={{ y: -2, scale: 1.1 }}
-                            className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 hover:border-blue-500/50 dark:hover:text-white transition-all"
+                            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 hover:border-blue-500/50 dark:hover:text-white transition-all"
                         >
                             {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                         </motion.button>
@@ -131,7 +132,8 @@ const Navbar = () => {
                             whileHover={{ y: -2, scale: 1.1 }}
                             href="https://github.com/abhinavshr"
                             target="_blank"
-                            className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-white/5 text-slate-600 dark:text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
+                            aria-label="GitHub Profile"
+                            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-white/5 text-slate-600 dark:text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
                         >
                             <Github className="w-4 h-4" />
                         </motion.a>
@@ -139,7 +141,8 @@ const Navbar = () => {
                             whileHover={{ y: -2, scale: 1.1 }}
                             href="https://www.linkedin.com/in/abhinav-shrestha-9a8786255/"
                             target="_blank"
-                            className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-white/5 text-slate-600 dark:text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
+                            aria-label="LinkedIn Profile"
+                            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-white/5 text-slate-600 dark:text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
                         >
                             <Linkedin className="w-4 h-4" />
                         </motion.a>
@@ -167,12 +170,14 @@ const Navbar = () => {
                 <div className="lg:hidden flex items-center gap-3 z-20">
                     <button
                         onClick={toggleTheme}
+                        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
                         className="w-10 h-10 flex items-center justify-center bg-slate-200/50 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-xl text-slate-800 dark:text-white transition-colors"
                     >
                         {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                     </button>
                     <button
                         onClick={() => setToggle(!toggle)}
+                        aria-label={toggle ? "Close menu" : "Open menu"}
                         className="w-10 h-10 flex items-center justify-center bg-slate-200/50 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-xl text-slate-800 dark:text-white group overflow-hidden"
                     >
                         <AnimatePresence mode="wait">

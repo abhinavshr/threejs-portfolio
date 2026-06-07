@@ -1,5 +1,6 @@
 import { useRef, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
+import Canvas from "./LazyCanvas";;
 import { Float, Sphere, MeshDistortMaterial, Preload } from "@react-three/drei";
 
 // ── Canvas config constants — stable R3F references ───────────────────────────

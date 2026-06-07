@@ -1,6 +1,7 @@
 // ProjectsCanvas.jsx  ─────────────────────────────────────────────
 import { useRef, useMemo, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
+import Canvas from "./LazyCanvas";;
 import * as THREE from "three";
 import { useTheme } from "../../context/ThemeContext";
 
