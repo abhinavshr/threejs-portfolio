@@ -48,7 +48,7 @@ const About = () => (
             >
                 <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400">
-                        About Me
+                        About Abhinav Shrestha
                     </span>
                 </h2>
                 <div className="w-16 md:w-20 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
