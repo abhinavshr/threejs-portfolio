@@ -24,7 +24,7 @@ function getSiteUrl() {
     env.VITE_SITE_URL ||
     (env.VERCEL_URL ? `https://${env.VERCEL_URL}` : "")
 
-  return normalizeSiteUrl(fromEnv) || "http://localhost:5173"
+  return normalizeSiteUrl(fromEnv) || "https://shresthaabhinav.com.np"
 }
 
 function buildRobotsTxt(siteUrl) {
@@ -56,7 +56,8 @@ function buildJsonLd(siteUrl) {
         "@type": "WebSite",
         "@id": websiteId,
         url: homepageUrl,
-        name: "Abhinav Shrestha",
+        name: "Abhinav Shrestha | Full Stack Developer Portfolio",
+        description: "Portfolio of Abhinav Shrestha — a Junior Full Stack Developer skilled in React, Node.js, Laravel, Flutter, and Azure.",
         inLanguage: "en",
         publisher: { "@id": personId },
       },
@@ -79,7 +80,8 @@ function buildJsonLd(siteUrl) {
           "https://github.com/abhinavshr",
           "https://www.linkedin.com/in/abhinav-shrestha-9a8786255/",
         ],
-        knowsAbout: ["React", "Three.js", "Node.js", "Backend Development"],
+        knowsAbout: ["React", "Three.js", "Node.js", "Laravel", "Flutter", "Azure", "PHP", "MySQL", "Full Stack Development"],
+        jobTitle: "Junior Full Stack Developer",
       },
     ],
   }
