@@ -75,7 +75,18 @@ function buildJsonLd(siteUrl) {
         "@id": personId,
         name: "Abhinav Shrestha",
         url: homepageUrl,
+        image: `${siteUrl}/logo.png`,
         email: "mailto:abhinavshr002@gmail.com",
+        address: {
+          "@type": "PostalAddress",
+          "addressLocality": "Kathmandu",
+          "addressCountry": "Nepal"
+        },
+        alumniOf: {
+          "@type": "EducationalOrganization",
+          "name": "Islington College, Nepal",
+          "sameAs": "https://islington.edu.np/"
+        },
         sameAs: [
           "https://github.com/abhinavshr",
           "https://www.linkedin.com/in/abhinav-shrestha-9a8786255/",
