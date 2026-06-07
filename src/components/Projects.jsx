@@ -64,9 +64,9 @@ const projectsList = [
     {
         id: "mindleap",
         title: "Mindleap",
-        description: "A Wordle-inspired interactive word-guessing game. It features a standard strategic game mode, an adrenaline-pumping 60-second speed challenge, and a competitive leaderboard system, emphasizing fast-paced gameplay and a clean, responsive user interface.",
-        techStack: ["React", "Tailwind CSS", "JSX", "JavaScript"],
-        role: "Frontend Developer",
+        description: "A Wordle-inspired interactive word-guessing game. It features a standard strategic game mode, an adrenaline-pumping 60-second speed challenge, and a competitive leaderboard system. Developed both the responsive React frontend and a foundational Node.js backend to manage game data.",
+        techStack: ["React", "Node.js", "Tailwind CSS", "JavaScript"],
+        role: "Full Stack Developer",
         live: "https://mindleap.live/",
     },
 ];
