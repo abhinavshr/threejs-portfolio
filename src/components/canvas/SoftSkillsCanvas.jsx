@@ -1,5 +1,6 @@
 import { useRef, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
+import Canvas from "./LazyCanvas";;
 import { PointMaterial, Points, Preload } from "@react-three/drei";
 
 // Pre-compute initial particle positions for the 3D globe effect.

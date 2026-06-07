@@ -1,5 +1,6 @@
 import { useRef, Suspense, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
+import Canvas from "./LazyCanvas";;
 import { Grid, Preload } from "@react-three/drei";
 import { useTheme } from "../../context/ThemeContext";
 

@@ -120,6 +120,7 @@ const Footer = () => (
                     whileHover={{ y: -5 }}
                     viewport={VIEWPORT}
                     onClick={scrollToTop}
+                    aria-label="Scroll to top"
                     className="p-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-slate-600 dark:text-slate-400 hover:text-blue-400 hover:border-blue-500/30 transition-all shadow-lg"
                 >
                     <ChevronUp className="w-6 h-6" />

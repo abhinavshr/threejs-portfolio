@@ -1,5 +1,6 @@
 import { useRef, useState, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
+import Canvas from "./LazyCanvas";;
 import { Float, MeshDistortMaterial, Preload } from "@react-three/drei";
 
 const BackgroundEffect = () => {

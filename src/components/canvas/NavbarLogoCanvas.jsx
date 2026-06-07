@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
+import Canvas from "./LazyCanvas";;
 import { Float, MeshDistortMaterial, Text, Sparkles, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 

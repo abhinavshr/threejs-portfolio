@@ -1,5 +1,6 @@
 import { useRef, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
+import Canvas from "./LazyCanvas";;
 import { OrbitControls, Float, Sphere, MeshDistortMaterial, Text, Preload } from "@react-three/drei";
 
 // Global canvas configuration for React Three Fiber
