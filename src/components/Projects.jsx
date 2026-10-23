@@ -23,6 +23,14 @@ const projectsList = [
         live: "https://cosmitechinternational.com",
     },
     {
+        id: "eos-ticketing",
+        title: "EOS Ticketing Platform",
+        description: "A production-grade event ticketing and management web application. Features comprehensive event discovery, tier-based ticket booking, promo code discount management, and digital ticketing. Architected seamless multi-gateway payment processing integrating Stripe for international card transactions and eSewa for domestic digital payments across Nepal.",
+        techStack: ["React", "Stripe API", "eSewa", "Payment Integration", "REST API", "Tailwind CSS"],
+        role: "Frontend & Payment Integration Developer",
+        live: "https://ticketing.eoswebsolutions.com/",
+    },
+    {
         id: "fix-my-ride",
         title: "Fix My Ride",
         description: "A comprehensive platform with separate User and Mechanic applications. Users can book mechanics for vehicle repairs, add up to 3 vehicles, use emergency contacts, and report issues. Mechanics can manage their workforce by adding workers. Features include profile management, service history, and real-time Firebase notifications.",
