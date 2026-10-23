@@ -29,7 +29,7 @@ const TYPED_ROLES = [
 
 // Stats for the animated counter section
 const STATS = [
-    { label: "Projects Built", target: 5, suffix: "+" },
+    { label: "Projects Built", target: 7, suffix: "+" },
     { label: "Tech Skills", target: 14, suffix: "+" },
     { label: "Years Learning", target: 3, suffix: "+" },
 ];
