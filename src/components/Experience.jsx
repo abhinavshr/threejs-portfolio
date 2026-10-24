@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Briefcase, Smartphone, Layers, SearchX } from "lucide-react";
+import { Briefcase, Smartphone, Layers, SearchX, Code2 } from "lucide-react";
 import ExperienceCanvas from "./canvas/ExperienceCanvas";
 
 // ── Static data & variants outside component ──────────────────────────────────
@@ -7,28 +7,43 @@ import ExperienceCanvas from "./canvas/ExperienceCanvas";
 const EXPERIENCE_DATA = [
     {
         id: 1,
-        role: "Mobile Application Developer Intern",
+        role: "Junior Full Stack Engineer",
         company: "Eos Web Solutions",
-        date: "Current Role",
-        icon: <Smartphone className="w-6 h-6 text-emerald-400" />,
+        date: "November 2025 – Present",
+        tenure: "Junior Developer | September 2026 – Present",
+        icon: <Code2 className="w-6 h-6 text-emerald-400" />,
         color: "from-emerald-400 to-teal-500",
         shadow: "shadow-[0_0_15px_rgba(52,211,153,0.5)]",
         borderFocus: "group-hover:border-emerald-500/50",
         arrowColor: "group-hover:border-emerald-400",
-        description: "Currently developing cross-platform mobile applications using Flutter, focusing on performance, scalability, and clean architecture principles. Responsible for UI implementation, REST API integration, state management, debugging, and optimizing user experience across Android and iOS platforms.",
-        keyProject: "Cosmetic Store Mobile Application — Implemented product listing systems, cart functionality, order processing workflows, and backend API integration ensuring smooth performance.",
+        description: "Promoted to Junior Developer / Full Stack Engineer, actively developing full-stack web platforms and cross-platform mobile applications, building scalable APIs, and managing production and store deployments.",
+        responsibilities: [
+            "Develop and maintain responsive web applications using React, JavaScript, and modern frontend technologies.",
+            "Build and integrate RESTful APIs and backend services using Node.js and Express.js.",
+            "Develop cross-platform mobile applications using Flutter for Android and iOS platforms.",
+            "Deploy and maintain web applications and backend services in production environments.",
+            "Manage Android and iOS application deployment, including build preparation and app store submission processes.",
+            "Integrate third-party APIs and services to enhance application functionality and improve user experience.",
+            "Use Git and GitHub for version control, code management, and collaborative development.",
+        ],
+        keyProject: "Production Web & Mobile Delivery — Driving end-to-end execution across React/Node.js web services and Flutter mobile apps with integrated CI/CD, payment gateways, and app store releases.",
     },
     {
         id: 2,
         role: "Laravel Developer Intern",
         company: "Grafi Offshore",
-        date: "Previous Role",
+        date: "October 2024 – December 2024",
         icon: <Briefcase className="w-6 h-6 text-blue-400" />,
         color: "from-blue-400 to-indigo-500",
         shadow: "shadow-[0_0_15px_rgba(96,165,250,0.5)]",
         borderFocus: "group-hover:border-blue-500/50",
         arrowColor: "group-hover:border-blue-400",
         description: "Worked on developing robust and scalable web applications using PHP and the Laravel framework following MVC architecture. Responsible for building RESTful APIs, implementing secure authentication, role-based access control systems, and optimizing database queries.",
+        responsibilities: [
+            "Engineered modular backend web applications following MVC design patterns and clean architecture in Laravel.",
+            "Implemented secure RESTful APIs with token-based authentication and role-based access control (RBAC).",
+            "Optimized relational database queries in MySQL and collaborated with frontend teams on API integration.",
+        ],
         keyProject: "Explored interactive web technologies with Three.js to create dynamic 3D web experiences. Contributed to rendering 3D models, camera controls, lighting, and performance optimization.",
     },
 ];
@@ -120,6 +135,14 @@ const Experience = () => (
                                 : " md:pr-10 text-left md:text-right"
                                 }`}>
                                 <div className={`relative bg-slate-100 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 hover:bg-slate-100 dark:hover:bg-indigo-950/60 transition-all duration-500 hover:shadow-lg ${exp.borderFocus}`}>
+                                    {exp.tenure && (
+                                        <div className={`mb-2.5 flex ${index % 2 === 0 ? "md:justify-start" : "md:justify-end"}`}>
+                                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                                {exp.tenure}
+                                            </span>
+                                        </div>
+                                    )}
                                     <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-1">{exp.role}</h3>
                                     <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 mb-4 text-sm font-medium text-slate-600 dark:text-slate-400${index % 2 === 0 ? " md:justify-start" : " md:justify-end"
                                         }`}>
@@ -132,6 +155,16 @@ const Experience = () => (
                                     <p className="text-slate-700 dark:text-slate-300 text-sm md:text-base leading-relaxed mb-4 text-left">
                                         {exp.description}
                                     </p>
+                                    {exp.responsibilities && exp.responsibilities.length > 0 && (
+                                        <ul className="space-y-2 mb-4 text-left">
+                                            {exp.responsibilities.map((resp, i) => (
+                                                <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0" />
+                                                    <span>{resp}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
                                     <div className="bg-slate-200 dark:bg-slate-800/50 rounded-lg p-4 border border-slate-300 dark:border-slate-700/50 text-left">
                                         <p className="text-slate-600 dark:text-slate-400 text-sm italic">
                                             <strong className="text-slate-700 dark:text-slate-300 not-italic block mb-1">Highlight:</strong>
