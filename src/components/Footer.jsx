@@ -5,7 +5,7 @@ import { Github, Linkedin, Mail, ChevronUp } from "lucide-react";
 
 const SOCIALS = [
     { icon: <Github   className="w-5 h-5" />, href: "https://github.com/abhinavshr",                             label: "GitHub"   },
-    { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/in/abhinav-shrestha-9a8786255/",  label: "LinkedIn" },
+    { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/in/abhinav-shrestha-9a8786255/?isSelfProfile=true",  label: "LinkedIn" },
     { icon: <Mail     className="w-5 h-5" />, href: "mailto:abhinavshr002@gmail.com",                           label: "Email"    },
 ];
 
