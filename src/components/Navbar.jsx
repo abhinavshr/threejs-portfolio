@@ -139,7 +139,7 @@ const Navbar = () => {
                         </motion.a>
                         <motion.a
                             whileHover={{ y: -2, scale: 1.1 }}
-                            href="https://www.linkedin.com/in/abhinav-shrestha-9a8786255/"
+                            href="https://www.linkedin.com/in/abhinav-shrestha-9a8786255/?isSelfProfile=true"
                             target="_blank"
                             aria-label="LinkedIn Profile"
                             className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/50 border border-white/5 text-slate-600 dark:text-slate-400 hover:text-white hover:border-blue-500/50 transition-all"
@@ -262,7 +262,7 @@ const Navbar = () => {
                                             <Github className="w-6 h-6" />
                                         </a>
                                         <a
-                                            href="https://www.linkedin.com/in/abhinav-shrestha-9a8786255/"
+                                            href="https://www.linkedin.com/in/abhinav-shrestha-9a8786255/?isSelfProfile=true"
                                             target="_blank"
                                             onClick={() => setToggle(false)}
                                             className="p-4 bg-slate-200/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-white hover:bg-blue-600 transition-colors"

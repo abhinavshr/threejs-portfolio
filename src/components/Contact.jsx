@@ -17,7 +17,7 @@ const CONTACT_LINKS = [
         icon: <Linkedin className="w-6 h-6" />,
         label: "LinkedIn",
         value: "abhinavshr",
-        href: "https://www.linkedin.com/in/abhinav-shrestha-9a8786255/",
+        href: "https://www.linkedin.com/in/abhinav-shrestha-9a8786255/?isSelfProfile=true",
         iconColorClass: "text-indigo-400",
     },
     {
